@@ -1,1 +1,19 @@
-# Cron-metro-
+# Cronómetro de reunión
+
+Plantilla editable para la reunión de entre semana. Los títulos y minutos iniciales son orientativos: ajusta las intervenciones a la guía de actividades de cada semana mediante **Editar**.
+
+- Cada intervención tiene Inicio, Fin y Reinicio.
+- Al iniciar otra intervención se detiene la anterior y sigue el total de reunión.
+- El total cuenta también las transiciones entre partes. Fin del total detiene todos los relojes; su Reinicio pide confirmación y reinicia todos.
+- Los tiempos se conservan en el navegador del dispositivo. El cálculo usa la hora del dispositivo para recuperar el tiempo tras pasar a segundo plano. Evita cambiar la hora durante la reunión.
+- Diseño compacto para iPhone. Si añades muchas partes o usas texto ampliado, puedes desplazarte.
+
+## Subir a GitHub
+
+1. Descomprime el ZIP en Archivos.
+2. Abre tu repositorio y elige **Add file → Upload files**.
+3. Sube index.html, style.css y app.js a la raíz del repositorio, junto con este README si lo deseas, y confirma con **Commit changes**.
+4. Para publicarlo, abre **Settings → Pages** y selecciona **Deploy from a branch**, rama **main**, carpeta **/(root)**. Guarda y usa el enlace que muestre GitHub al terminar.
+5. En Safari abre ese enlace y usa **Compartir → Añadir a pantalla de inicio**.
+
+No necesita instalaciones, cuentas ni dependencias. La primera carga requiere conexión. Mantén la pantalla encendida durante el uso.
