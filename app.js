@@ -16,3 +16,26 @@ function tick(){const now=Date.now(),total=value(state.total,now),planned=state.
 function field(p){const d=document.createElement('div');d.className='field';const title=document.createElement('input');title.value=p.title;title.required=true;title.setAttribute('aria-label','Título');const min=document.createElement('input');min.type='number';min.min='0';min.max='180';min.step='1';min.value=p.min;min.required=true;min.setAttribute('aria-label','Minutos');const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Quitar intervención');del.onclick=()=>d.remove();d.dataset.section=p.section||'';d.append(title,min,del);$('fields').append(d);}
 $('edit').onclick=()=>{$('fields').replaceChildren();state.parts.forEach(field);$('editor').showModal();};$('cancel').onclick=()=>$('editor').close();$('add').onclick=()=>field({title:'Nueva intervención',min:5,section:''});$('form').onsubmit=e=>{e.preventDefault();const fields=[...$('fields').children];if(!fields.length){alert('Añade al menos una intervención.');return;}if(value(state.total)>0&&!confirm('Guardar la plantilla reinicia los cronómetros. ¿Continuar?'))return;state.parts=fields.map(d=>({title:d.children[0].value.trim()||'Intervención',min:Number(d.children[1].value),section:d.dataset.section,elapsed:0,started:null}));state.total={elapsed:0,started:null};save();render();$('editor').close();};
 render();setInterval(tick,250);document.addEventListener('visibilitychange',()=>{tick();save();});
+
+// Comprueba nuevas versiones al abrir o volver a la aplicación.
+const BUILD='3';
+let checkingUpdate=false;
+async function checkUpdate(){
+ if(checkingUpdate||!navigator.onLine||location.protocol==='file:')return;
+ checkingUpdate=true;
+ try{
+  const response=await fetch(new URL('version.json?check='+Date.now(),location.href),{cache:'no-store'});
+  if(!response.ok)return;
+  const latest=await response.json();
+  if(typeof latest.version!=='string'||latest.version===BUILD)return;
+  // Espera a que termine la asignación activa antes de recargar.
+  if(state.parts.some(p=>p.started!==null))return;
+  const url=new URL(location.href);
+  if(url.searchParams.get('version')===latest.version)return;
+  save();url.searchParams.set('version',latest.version);location.replace(url.href);
+ }catch(e){/* Sin conexión: conserva la sesión actual. */}
+ finally{checkingUpdate=false;}
+}
+checkUpdate();
+setInterval(checkUpdate,60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
