@@ -24,3 +24,5 @@ No necesita instalaciones, cuentas ni dependencias. La primera carga requiere co
 Esta versión comprueba version.json al abrirse, al volver a primer plano y cada minuto. Si hay una versión nueva, recarga automáticamente y conserva los tiempos y la plantilla. Mientras una asignación está en curso, espera para evitar interrumpirla. Para futuras versiones, cambia el número BUILD de app.js, la versión de version.json y los parámetros v de los archivos CSS y JS en index.html al mismo número nuevo. Sube todos los archivos juntos. La primera instalación de este mecanismo requiere cargar esta versión una vez en el acceso directo existente.
 
 La plantilla incluye cuatro intervenciones de Seamos mejores maestros. Quita la cuarta cuando no corresponda y ajusta sus minutos. Las filas y botones crecen según la altura y anchura de pantalla disponibles; con muchas asignaciones o texto ampliado se permite desplazamiento.
+
+La tarjeta de la asignación activa incluye Fin y Reiniciar. Fin detiene solo esa asignación; el total sigue contando. Reiniciar solicita confirmación, pone la asignación a cero y cierra la tarjeta. Puedes volver a iniciarla desde la lista.

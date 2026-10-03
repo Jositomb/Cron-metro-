@@ -20,7 +20,7 @@ $('edit').onclick=()=>{$('fields').replaceChildren();state.parts.forEach(field);
 render();setInterval(tick,250);document.addEventListener('visibilitychange',()=>{tick();save();});
 
 // Comprueba nuevas versiones al abrir o volver a la aplicación.
-const BUILD='5';
+const BUILD='6';
 let checkingUpdate=false;
 async function checkUpdate(){
  if(checkingUpdate||!navigator.onLine||location.protocol==='file:')return;
@@ -72,3 +72,12 @@ function updateActivePanel(){
  }
  if(changed)requestAnimationFrame(fitScreen);
 }
+
+function controlActive(command){
+ const active=state.parts.find(p=>p.started!==null);
+ if(!active)return;
+ if(command==='reset'&&!confirm('¿Reiniciar el tiempo de esta asignación?'))return;
+ action(active,command);save();tick();
+}
+$('activeStop').onclick=()=>controlActive('stop');
+$('activeReset').onclick=()=>controlActive('reset');
