@@ -2,7 +2,8 @@
 
 Plantilla editable para la reunión de entre semana. Los títulos y minutos iniciales son orientativos: ajusta las intervenciones a la guía de actividades de cada semana mediante **Editar**.
 
-- Cada intervención tiene Inicio, Fin y Reinicio.
+- Las canciones y oraciones no aparecen en la lista de asignaciones. El total de la reunión sigue contando durante ellas si está iniciado.
+- Cada intervención tiene Inicio, Fin y Reinicio. La activa se resalta en verde con borde luminoso y la indicación EN CURSO.
 - Al iniciar otra intervención se detiene la anterior y sigue el total de reunión.
 - El total cuenta también las transiciones entre partes. Fin del total detiene todos los relojes; su Reinicio pide confirmación y reinicia todos.
 - Los tiempos se conservan en el navegador del dispositivo. El cálculo usa la hora del dispositivo para recuperar el tiempo tras pasar a segundo plano. Evita cambiar la hora durante la reunión.
