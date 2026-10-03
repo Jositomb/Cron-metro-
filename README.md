@@ -26,3 +26,5 @@ Esta versión comprueba version.json al abrirse, al volver a primer plano y cada
 La plantilla incluye cuatro intervenciones de Seamos mejores maestros. Quita la cuarta cuando no corresponda y ajusta sus minutos. Las filas y botones crecen según la altura y anchura de pantalla disponibles; con muchas asignaciones o texto ampliado se permite desplazamiento.
 
 La tarjeta de la asignación activa incluye Fin y Reiniciar. Fin detiene solo esa asignación; el total sigue contando. Reiniciar solicita confirmación, pone la asignación a cero y cierra la tarjeta. Puedes volver a iniciarla desde la lista.
+
+Secciones diferenciadas con gris (Tesoros), dorado (Seamos mejores maestros) y rojo (Nuestra vida cristiana), tanto en el encabezado como en la franja lateral de las asignaciones.

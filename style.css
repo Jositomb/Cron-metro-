@@ -26,3 +26,10 @@ main{width:100%;max-width:700px;min-height:100dvh}
 .active-actions button{min-height:40px;padding:7px 10px;font-size:13px;background:#34597e}
 #activeStop{background:#e7f3ff;color:#12334f;font-weight:700}
 @media(max-width:360px){.active-actions button{padding:7px;font-size:12px}.active-panel{gap:7px}}
+
+/* Colores de las tres secciones, con texto claro sobre el fondo oscuro. */
+.treasures{--section-color:#929698;--section-bg:#252f38}
+.teaching{--section-color:#c69231;--section-bg:#343025}
+.living{--section-color:#b3474c;--section-bg:#362730}
+.section.treasures,.section.teaching,.section.living{color:#fff;background:var(--section-color);border-radius:6px;padding:4px 8px;letter-spacing:.6px;font-weight:700;margin:6px 0 3px}
+.row.treasures,.row.teaching,.row.living{background:var(--section-bg);border-left:3px solid var(--section-color)}
