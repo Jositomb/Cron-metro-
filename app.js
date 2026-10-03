@@ -1,11 +1,13 @@
 'use strict';
-const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
+const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const key='cronometro-reunion-v1';
 let state={parts:defaults.map(([title,min,section])=>({title,min,section,elapsed:0,started:null})),total:{elapsed:0,started:null}};
 try{const s=JSON.parse(localStorage.getItem(key));if(s&&Array.isArray(s.parts)&&s.parts.length&&s.total)state=s;}catch(e){}
 // Actualiza la plantilla anterior sin perder los tiempos de las asignaciones.
 state.parts=state.parts.filter(p=>!['Canción y oración','Canción','Canción y oración final'].includes(p.title));
 const life=state.parts.find(p=>p.title==='Parte de nuestra vida cristiana');if(life&&!life.section)life.section='NUESTRA VIDA CRISTIANA';
+// Añade la cuarta intervención una sola vez a las plantillas existentes.
+if(!state.templateRevision){const pos=state.parts.findIndex(p=>p.title==='Intervención 3');if(pos>=0&&!state.parts.some(p=>p.title==='Intervención 4'))state.parts.splice(pos+1,0,{title:'Intervención 4',min:5,section:'',elapsed:0,started:null});state.templateRevision=4;}
 const $=id=>document.getElementById(id), value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started)),fmt=ms=>{const s=Math.floor(ms/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
 function save(){try{localStorage.setItem(key,JSON.stringify(state));$('status').textContent='Guardado';}catch(e){$('status').textContent='Sin guardado local';}}
 function stop(t){t.elapsed=value(t);t.started=null;}
@@ -18,7 +20,7 @@ $('edit').onclick=()=>{$('fields').replaceChildren();state.parts.forEach(field);
 render();setInterval(tick,250);document.addEventListener('visibilitychange',()=>{tick();save();});
 
 // Comprueba nuevas versiones al abrir o volver a la aplicación.
-const BUILD='3';
+const BUILD='4';
 let checkingUpdate=false;
 async function checkUpdate(){
  if(checkingUpdate||!navigator.onLine||location.protocol==='file:')return;
@@ -39,3 +41,19 @@ async function checkUpdate(){
 checkUpdate();
 setInterval(checkUpdate,60000);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
+
+// Reparte la altura disponible entre las filas y ajusta el tamaño de los controles.
+function fitScreen(){
+ const main=document.querySelector('main'),rows=$('rows');
+ const cs=getComputedStyle(main);
+ const overhead=document.querySelector('header').getBoundingClientRect().height+document.querySelector('.total').getBoundingClientRect().height+document.querySelector('footer').getBoundingClientRect().height+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom)+32;
+ const sections=[...rows.querySelectorAll('.section')].reduce((sum,e)=>sum+e.getBoundingClientRect().height+10,0);
+ const height=Math.max(40,(window.innerHeight-overhead-sections)/state.parts.length-4);
+ main.style.setProperty('--row-height',height+'px');
+ main.style.setProperty('--button-size',Math.max(30,Math.min(44,height-10,window.innerWidth<370?34:44))+'px');
+ main.style.setProperty('--label-size',Math.max(11,Math.min(15,height*.25))+'px');
+ main.style.setProperty('--clock-size',Math.max(14,Math.min(20,height*.34))+'px');
+}
+window.addEventListener('resize',fitScreen);
+new ResizeObserver(fitScreen).observe($('rows'));
+fitScreen();
