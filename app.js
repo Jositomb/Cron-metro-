@@ -13,14 +13,14 @@ function save(){try{localStorage.setItem(key,JSON.stringify(state));$('status').
 function stop(t){t.elapsed=value(t);t.started=null;}
 function action(t,a){if(a==='start'){if(t.started===null)t.started=Date.now();}if(a==='stop')stop(t);if(a==='reset'){t.elapsed=0;t.started=null;}}
 function render(){const root=$('rows');root.replaceChildren();state.parts.forEach((p,i)=>{if(p.section){const s=document.createElement('div');s.className='section';s.textContent=p.section;root.append(s);}const row=document.createElement('div');row.className='row';row.id='row'+i;const label=document.createElement('div');label.className='label';label.textContent=p.title;const hint=document.createElement('small');hint.textContent=p.min+' min';hint.id='hint'+i;label.append(hint);const clock=document.createElement('div');clock.className='clock';clock.id='clock'+i;const controls=document.createElement('div');controls.className='controls';[['start','▶','Inicio'],['stop','■','Fin'],['reset','↺','Reinicio']].forEach(([a,s,title])=>{const b=document.createElement('button');b.textContent=s;b.setAttribute('aria-label',title+': '+p.title);b.onclick=()=>{if(a==='start'){state.parts.forEach(x=>{if(x!==p)stop(x);});action(state.total,'start');}action(p,a);save();tick();};controls.append(b);});row.append(label,clock,controls);root.append(row);});tick();}
-function tick(){const now=Date.now(),total=value(state.total,now),planned=state.parts.reduce((s,p)=>s+p.min*60000,0);$('total').textContent=fmt(total);$('progress').style.width=Math.min(100,planned?total/planned*100:0)+'%';$('totalInfo').textContent='Asignaciones: '+Math.round(planned/60000)+' min · '+(total>planned?'Exceso '+fmt(total-planned):'Restan '+fmt(planned-total));state.parts.forEach((p,i)=>{const t=value(p,now);$('clock'+i).textContent=fmt(t);$('row'+i).classList.toggle('active',p.started!==null);$('hint'+i).textContent=p.min+' min'+(p.started!==null?' · ● EN CURSO':'');$('row'+i).classList.toggle('over',t>p.min*60000);});}
+function tick(){updateActivePanel();const now=Date.now(),total=value(state.total,now),planned=state.parts.reduce((s,p)=>s+p.min*60000,0);$('total').textContent=fmt(total);$('progress').style.width=Math.min(100,planned?total/planned*100:0)+'%';$('totalInfo').textContent='Asignaciones: '+Math.round(planned/60000)+' min · '+(total>planned?'Exceso '+fmt(total-planned):'Restan '+fmt(planned-total));state.parts.forEach((p,i)=>{const t=value(p,now);$('clock'+i).textContent=fmt(t);$('row'+i).classList.toggle('active',p.started!==null);$('hint'+i).textContent=p.min+' min'+(p.started!==null?' · ● EN CURSO':'');$('row'+i).classList.toggle('over',t>p.min*60000);});}
 [['startTotal','start'],['stopTotal','stop'],['resetTotal','reset']].forEach(([id,a])=>{$(id).setAttribute('aria-label',a==='start'?'Iniciar reunión':a==='stop'?'Finalizar reunión':'Reiniciar reunión');$(id).onclick=()=>{if(a==='reset'&&!confirm('¿Reiniciar todos los cronómetros? La plantilla se conserva.'))return;if(a!=='start')state.parts.forEach(p=>a==='reset'?action(p,'reset'):stop(p));action(state.total,a);save();tick();};});
 function field(p){const d=document.createElement('div');d.className='field';const title=document.createElement('input');title.value=p.title;title.required=true;title.setAttribute('aria-label','Título');const min=document.createElement('input');min.type='number';min.min='0';min.max='180';min.step='1';min.value=p.min;min.required=true;min.setAttribute('aria-label','Minutos');const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Quitar intervención');del.onclick=()=>d.remove();d.dataset.section=p.section||'';d.append(title,min,del);$('fields').append(d);}
 $('edit').onclick=()=>{$('fields').replaceChildren();state.parts.forEach(field);$('editor').showModal();};$('cancel').onclick=()=>$('editor').close();$('add').onclick=()=>field({title:'Nueva intervención',min:5,section:''});$('form').onsubmit=e=>{e.preventDefault();const fields=[...$('fields').children];if(!fields.length){alert('Añade al menos una intervención.');return;}if(value(state.total)>0&&!confirm('Guardar la plantilla reinicia los cronómetros. ¿Continuar?'))return;state.parts=fields.map(d=>({title:d.children[0].value.trim()||'Intervención',min:Number(d.children[1].value),section:d.dataset.section,elapsed:0,started:null}));state.total={elapsed:0,started:null};save();render();$('editor').close();};
 render();setInterval(tick,250);document.addEventListener('visibilitychange',()=>{tick();save();});
 
 // Comprueba nuevas versiones al abrir o volver a la aplicación.
-const BUILD='4';
+const BUILD='5';
 let checkingUpdate=false;
 async function checkUpdate(){
  if(checkingUpdate||!navigator.onLine||location.protocol==='file:')return;
@@ -46,7 +46,8 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdat
 function fitScreen(){
  const main=document.querySelector('main'),rows=$('rows');
  const cs=getComputedStyle(main);
- const overhead=document.querySelector('header').getBoundingClientRect().height+document.querySelector('.total').getBoundingClientRect().height+document.querySelector('footer').getBoundingClientRect().height+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom)+32;
+ const panelHeight=$('activePanel').hidden?0:$('activePanel').getBoundingClientRect().height+8;
+ const overhead=panelHeight+document.querySelector('header').getBoundingClientRect().height+document.querySelector('.total').getBoundingClientRect().height+document.querySelector('footer').getBoundingClientRect().height+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom)+32;
  const sections=[...rows.querySelectorAll('.section')].reduce((sum,e)=>sum+e.getBoundingClientRect().height+10,0);
  const height=Math.max(40,(window.innerHeight-overhead-sections)/state.parts.length-4);
  main.style.setProperty('--row-height',height+'px');
@@ -57,3 +58,17 @@ function fitScreen(){
 window.addEventListener('resize',fitScreen);
 new ResizeObserver(fitScreen).observe($('rows'));
 fitScreen();
+
+function updateActivePanel(){
+ const active=state.parts.find(p=>p.started!==null),panel=$('activePanel');
+ const changed=panel.hidden===Boolean(active);
+ panel.hidden=!active;
+ if(active){
+  $('activeTitle').textContent=active.title;
+  $('activeTime').textContent=fmt(value(active));
+  const remaining=active.min*60000-value(active);
+  $('activeTarget').textContent=remaining<0?'Exceso '+fmt(-remaining):'Restan '+fmt(remaining)+' · '+active.min+' min';
+  panel.classList.toggle('over',remaining<0);
+ }
+ if(changed)requestAnimationFrame(fitScreen);
+}
