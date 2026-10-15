@@ -36,3 +36,13 @@ Solicita mantener la pantalla encendida cuando el navegador lo permite. Los cron
 - version.json: versión 8 para actualización.
 
 Se ha comprobado la sintaxis y la lógica de los controles mediante pruebas automatizadas. Falta verificar visualmente la distribución en un iPhone físico.
+
+## Versión 9 · vista compacta para iPad
+
+Pulsa «Vista compacta» para ver el total, la hora prevista, la intervención seleccionada y los botones Inicio/Fin, Reiniciar y Siguiente. «Ver intervenciones» despliega la lista con todos los controles individuales. «Vista completa» vuelve al diseño habitual. La elección se guarda en el navegador; el modo atril sigue disponible en la vista completa.
+
+En un iPad, sin una preferencia guardada, se activa al abrir en una ventana de 660 píxeles de ancho o menos. También puedes elegirla manualmente en cualquier dispositivo. Reducir la ventana no cambia los tiempos ni la plantilla.
+
+Para dejar el cronómetro sobre JW Library en iPadOS 27, abre su dirección en Safari y usa los controles de ventana del iPad para activar Slide Over. La página adapta su contenido; no puede activar Slide Over por sí sola. Después puedes ajustar el tamaño de la ventana. La lista cerrada deja más espacio para leer JW Library.
+
+La vista compacta no introduce sincronización entre iPhone e iPad: cada navegador conserva sus propios datos.
