@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='9',key='cronometro-reunion-v1';
+const BUILD='10',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -18,6 +18,7 @@ function acquireWake(){if(navigator.wakeLock&&!wake&&state.total.started!==null)
 function releaseWake(){if(wake)wake.release().catch(()=>{});wake=null}
 function startPart(i){const p=state.parts[i];if(!p)return;state.parts.forEach((x,j)=>{if(j!==i&&x.started!==null){stop(x);x.done=true}});if(p.started===null)p.started=Date.now();p.done=false;state.focusIndex=i;if(state.total.started===null)state.total.started=Date.now();state.endedAt=null;save();tick();acquireWake()}
 function finishPart(i){const p=state.parts[i];if(!p)return;stop(p);p.done=true;state.focusIndex=i;save();tick()}
+function pausePart(i){const p=state.parts[i];if(!p)return;stop(p);p.done=false;state.focusIndex=i;save();tick()}
 function resetPart(i){const p=state.parts[i];if(!p)return;if(value(p)>0&&!confirm('¿Reiniciar el tiempo de esta intervención? El total se conserva.'))return;resetTimer(p);state.focusIndex=i;save();tick()}
 function nextPart(){let i=state.focusIndex;if(i===null)i=-1;const next=i+1;if(next>=state.parts.length){if(i>=0)finishPart(i);announce('Has terminado la última intervención. El total sigue contando hasta que pulses Fin de reunión.');return;}if(i>=0)finishPart(i);startPart(next)}
 function announce(text){$('notice').textContent=text}
@@ -26,18 +27,41 @@ function statusFor(p,now){const remaining=p.min*60000-value(p,now);return {remai
 function tick(){const now=Date.now(),total=value(state.total,now),target=105*60000;$('total').textContent=fmt(total);$('progress').style.width=Math.min(100,total/target*100)+'%';$('totalInfo').textContent='Objetivo 105 min · '+(total>target?'Exceso '+fmt(total-target):'Restan '+fmt(target-total));const drift=state.parts.reduce((n,p)=>n+(p.min>0?(p.done?value(p,now)-p.min*60000:p.started!==null?Math.max(0,value(p,now)-p.min*60000):0):0),0);const offset=Math.max(0,total-target);if(state.endedAt){$('eta').textContent='Terminó a las '+timeOfDay(state.endedAt)+(offset?' · +'+fmt(offset):'');}else if(state.total.started!==null){$('eta').textContent=total>=target?'Objetivo superado · +'+fmt(offset):'Fin previsto '+timeOfDay(now+Math.max(0,target-total+drift))+(Math.abs(drift)>=1000?' · '+(drift>0?'+':'−')+fmt(Math.abs(drift)):'');}else{$('eta').textContent=total?'Total en pausa · al continuar: '+timeOfDay(now+Math.max(0,target-total)):'Hora de finalización al iniciar';}
 $('startTotal').disabled=state.total.started!==null;$('stopTotal').disabled=state.total.started===null;
 state.parts.forEach((p,i)=>{const t=value(p,now),s=statusFor(p,now),row=$('row'+i);$('clock'+i).textContent=fmt(t);row.classList.toggle('active',p.started!==null);row.classList.toggle('over',s.over);row.classList.toggle('warning',s.warning);row.classList.toggle('done',!!p.done);$('hint'+i).textContent=p.min+' min · '+(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining))+(p.done?' · ✓':'');row.querySelector('[data-action=start]').disabled=p.started!==null;row.querySelector('[data-action=stop]').disabled=p.started===null;});updateActivePanel(now);}
-function updateActivePanel(now=Date.now()){let i=state.focusIndex,p=i===null?null:state.parts[i],panel=$('activePanel');const changed=panel.hidden===Boolean(p);panel.hidden=!p;$('emptyAtril').hidden=!!p;if(p){const s=statusFor(p,now);$('activeState').textContent=p.started!==null?'EN CURSO':p.done?'FINALIZADA':'EN PAUSA';$('activeTitle').textContent=p.title;$('activeTime').textContent=fmt(value(p,now));$('activeTarget').textContent=p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min';panel.classList.toggle('over',s.over);panel.classList.toggle('warning',s.warning);$('activeStart').hidden=p.started!==null;$('activeStop').hidden=p.started===null;$('activeNext').disabled=i===state.parts.length-1;}$('next').disabled=state.focusIndex===state.parts.length-1;if(changed)requestAnimationFrame(fitScreen)}
+function updateActivePanel(now=Date.now()){
+ const i=state.focusIndex,p=i===null?null:state.parts[i],panel=$('activePanel');
+ const changed=panel.hidden===Boolean(p);panel.hidden=!p;$('emptyAtril').hidden=!!p;
+ if(p){
+  const s=statusFor(p,now),elapsed=value(p,now);
+  $('activeState').textContent=p.started!==null?'EN CURSO':p.done?'FINALIZADA':elapsed>0?'EN PAUSA':'PREPARADA';
+  $('activeTitle').textContent=p.title;
+  $('activeClockLabel').textContent=compact?(s.over?'EXCESO':p.min>0?'TIEMPO RESTANTE':'TRANSCURRIDO'):'Transcurrido';
+  $('activeTime').textContent=compact&&p.min>0?(s.over?'+':'')+fmt(Math.abs(s.remaining)):fmt(elapsed);
+  $('activeElapsed').textContent='Transcurrido '+fmt(elapsed)+' · previsto '+p.min+' min';
+  $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min');
+  panel.classList.toggle('over',s.over);panel.classList.toggle('warning',s.warning);
+  let group='';for(let j=0;j<=i;j++)if(state.parts[j].section)group=state.parts[j].section;
+  panel.classList.toggle('treasures',group==='TESOROS DE LA BIBLIA');panel.classList.toggle('teaching',group==='SEAMOS MEJORES MAESTROS');panel.classList.toggle('living',group==='NUESTRA VIDA CRISTIANA');
+  $('activeStart').hidden=p.started!==null;$('activeStart').textContent=elapsed>0?'▶ Continuar':'▶ Inicio';
+  $('activePause').hidden=p.started===null;$('activeStop').hidden=p.done;
+  $('activeNext').disabled=i===state.parts.length-1;
+  $('chairGap').hidden=!(p.done&&state.total.started!==null);
+  const next=state.parts[i+1];$('upNextLabel').textContent=next?'A CONTINUACIÓN':'FIN DEL PROGRAMA';$('upNextTitle').textContent=next?next.title:'Última intervención';$('upNextDuration').textContent=next?next.min+' min':'Finaliza el total después de la canción y la oración.';
+ }
+ $('next').disabled=state.focusIndex===state.parts.length-1;
+ if(changed)requestAnimationFrame(fitScreen);
+}
+
 $('startTotal').onclick=()=>{if(state.total.started===null)state.total.started=Date.now();state.endedAt=null;save();tick();acquireWake()};
 $('stopTotal').onclick=()=>{state.parts.forEach(p=>{if(p.started!==null){stop(p);p.done=true}});stop(state.total);state.endedAt=Date.now();save();tick();releaseWake();openSummary()};
 $('resetTotal').onclick=()=>{if(!confirm('¿Reiniciar todos los cronómetros? La plantilla se conserva.'))return;state.parts.forEach(resetTimer);resetTimer(state.total);state.focusIndex=null;state.endedAt=null;save();announce('Tiempos reiniciados.');tick();releaseWake()};
-$('next').onclick=nextPart;$('activeNext').onclick=nextPart;$('activeStart').onclick=()=>startPart(state.focusIndex);$('activeStop').onclick=()=>finishPart(state.focusIndex);$('activeReset').onclick=()=>resetPart(state.focusIndex);$('beginFirst').onclick=()=>startPart(0);
+$('next').onclick=nextPart;$('activeNext').onclick=nextPart;$('activeStart').onclick=()=>startPart(state.focusIndex);$('activeStop').onclick=()=>finishPart(state.focusIndex);$('activePause').onclick=()=>pausePart(state.focusIndex);$('activeReset').onclick=()=>resetPart(state.focusIndex);$('beginFirst').onclick=()=>startPart(0);
 let compact=false,compactPreference=null;
 let atril=false;function setAtril(on){if(on&&compact)setCompact(false);atril=on;document.body.classList.toggle('atril',on);$('atril').textContent=on?'Salir del atril':'Modo atril';$('atril').setAttribute('aria-pressed',String(on));requestAnimationFrame(fitScreen);if(on)acquireWake()}
 $('atril').onclick=()=>setAtril(!atril);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&atril)setAtril(false)});
 function openSummary(){const root=$('summaryRows');root.replaceChildren();let planned=0,real=0;state.parts.forEach(p=>{const t=value(p),target=p.min*60000;planned+=target;real+=t;const row=document.createElement('tr');[p.title,p.min?fmt(target):'—',fmt(t),p.min?(t>=target?'+':'−')+fmt(Math.abs(t-target)):'—'].forEach((text,i)=>{const cell=document.createElement(i===0?'th':'td');if(i===0)cell.scope='row';cell.textContent=text;row.append(cell)});root.append(row)});$('summaryTotal').textContent='Total de reunión: '+fmt(value(state.total))+' · objetivo 105:00';$('summaryParts').textContent='Intervenciones: '+fmt(real)+' · previstas '+fmt(planned)+'. El total incluye canciones, oraciones y transiciones que hayas cronometrado con el contador general.';$('summary').showModal()}
-$('summaryOpen').onclick=openSummary;$('summaryClose').onclick=()=>$('summary').close();
+$('summaryOpen').onclick=()=>{if(compact)$('toolsDisclosure').open=false;openSummary()};$('summaryClose').onclick=()=>$('summary').close();
 function field(p){const d=document.createElement('div');d.className='field';const title=document.createElement('input');title.value=p.title;title.required=true;title.maxLength=150;title.setAttribute('aria-label','Título');const min=document.createElement('input');min.type='number';min.min='0';min.max='180';min.step='0.5';min.value=p.min;min.required=true;min.setAttribute('aria-label','Minutos');const del=document.createElement('button');del.type='button';del.textContent='×';del.setAttribute('aria-label','Quitar intervención');del.onclick=()=>d.remove();const section=document.createElement('select');section.setAttribute('aria-label','Encabezado de sección');['','TESOROS DE LA BIBLIA','SEAMOS MEJORES MAESTROS','NUESTRA VIDA CRISTIANA'].forEach(g=>{const o=document.createElement('option');o.value=g;o.textContent=g||'Continuar sección anterior';section.append(o)});section.value=p.section||'';d.append(title,min,del,section);$('fields').append(d)}
-$('edit').onclick=()=>{$('fields').replaceChildren();state.parts.forEach(field);$('editor').showModal()};$('cancel').onclick=()=>$('editor').close();$('add').onclick=()=>field({title:'Nueva intervención',min:5,section:''});$('form').onsubmit=e=>{e.preventDefault();const fields=[...$('fields').children];if(!fields.length){alert('Añade al menos una intervención.');return;}const parts=fields.map(d=>({title:d.children[0].value.trim(),min:Number(d.children[1].value),section:d.children[3].value,elapsed:0,started:null,done:false}));if(parts.some(p=>!p.title||!Number.isFinite(p.min)||p.min<0||p.min>180)){alert('Revisa los títulos y los minutos.');return;}if((value(state.total)>0||state.parts.some(p=>value(p)>0))&&!confirm('Guardar la plantilla reinicia los cronómetros. ¿Continuar?'))return;state.parts=parts;state.total={elapsed:0,started:null};state.focusIndex=null;state.endedAt=null;save();releaseWake();render();$('editor').close()};
+$('edit').onclick=()=>{if(compact)$('toolsDisclosure').open=false;$('fields').replaceChildren();state.parts.forEach(field);$('editor').showModal()};$('cancel').onclick=()=>$('editor').close();$('add').onclick=()=>field({title:'Nueva intervención',min:5,section:''});$('form').onsubmit=e=>{e.preventDefault();const fields=[...$('fields').children];if(!fields.length){alert('Añade al menos una intervención.');return;}const parts=fields.map(d=>({title:d.children[0].value.trim(),min:Number(d.children[1].value),section:d.children[3].value,elapsed:0,started:null,done:false}));if(parts.some(p=>!p.title||!Number.isFinite(p.min)||p.min<0||p.min>180)){alert('Revisa los títulos y los minutos.');return;}if((value(state.total)>0||state.parts.some(p=>value(p)>0))&&!confirm('Guardar la plantilla reinicia los cronómetros. ¿Continuar?'))return;state.parts=parts;state.total={elapsed:0,started:null};state.focusIndex=null;state.endedAt=null;save();releaseWake();render();$('editor').close()};
 function fitScreen(){if(atril||compact)return;const main=document.querySelector('main'),rows=$('rows');const cs=getComputedStyle(main);const panel=$('activePanel').hidden?0:$('activePanel').getBoundingClientRect().height+6;const other=panel+document.querySelector('header').getBoundingClientRect().height+document.querySelector('.total').getBoundingClientRect().height+document.querySelector('footer').getBoundingClientRect().height+$('toolbar').getBoundingClientRect().height+$('notice').getBoundingClientRect().height+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom)+38;const sections=[...rows.querySelectorAll('.section')].reduce((sum,e)=>sum+e.getBoundingClientRect().height+6,0);const height=Math.max(32,(window.innerHeight-other-sections)/state.parts.length-4);main.style.setProperty('--row-height',height+'px');main.style.setProperty('--button-size',Math.max(28,Math.min(40,height-5,window.innerWidth<370?32:40))+'px');main.style.setProperty('--label-size',Math.max(12,Math.min(15,height*.29))+'px');main.style.setProperty('--clock-size',Math.max(15,Math.min(20,height*.4))+'px')}
 window.addEventListener('resize',fitScreen);window.visualViewport?.addEventListener('resize',fitScreen);
 document.addEventListener('visibilitychange',()=>{save();tick();if(!document.hidden){acquireWake();checkUpdate()}});window.addEventListener('pagehide',save);
@@ -51,11 +75,12 @@ function setCompact(on,persist=true){
  if(on&&atril)setAtril(false);
  compact=on;
  document.body.classList.toggle('compact',on);
- $('compactToggle').textContent=on?'Vista completa':'Vista compacta';
+ $('compactToggle').textContent=on?'Vista completa':'Consola lateral';
+ $('toolsDisclosure').open=!on;
  $('compactToggle').setAttribute('aria-pressed',String(on));
  $('partsDisclosure').open=!on;
  if(persist){compactPreference=on;try{localStorage.setItem('cronometro-compact-v1',JSON.stringify(on))}catch(e){}}
- requestAnimationFrame(fitScreen);
+ if($('rows').children.length)tick();requestAnimationFrame(fitScreen);
 }
 function initCompact(){
  try{const saved=JSON.parse(localStorage.getItem('cronometro-compact-v1'));if(typeof saved==='boolean')compactPreference=saved}catch(e){}

@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 8
+# Cronómetro de reunión · versión 10
 
 Reemplaza los archivos de la versión anterior por los de este ZIP. index.html debe quedar en la raíz del repositorio, junto a app.js, style.css y version.json. Conserva la misma dirección web para recuperar la plantilla y los tiempos guardados en ese navegador.
 
@@ -46,3 +46,18 @@ En un iPad, sin una preferencia guardada, se activa al abrir en una ventana de 6
 Para dejar el cronómetro sobre JW Library en iPadOS 27, abre su dirección en Safari y usa los controles de ventana del iPad para activar Slide Over. La página adapta su contenido; no puede activar Slide Over por sí sola. Después puedes ajustar el tamaño de la ventana. La lista cerrada deja más espacio para leer JW Library.
 
 La vista compacta no introduce sincronización entre iPhone e iPad: cada navegador conserva sus propios datos.
+
+
+## Versión 10 · consola lateral para dirigir la reunión
+
+Activa «Consola lateral» desde Opciones. Conserva la preferencia de la vista compacta anterior. El total sigue visible arriba y el número central muestra el tiempo RESTANTE de la asignación; cuando se supera, muestra el exceso con signo + y en rojo. El tiempo transcurrido queda debajo en pequeño. El encabezado utiliza el color de la sección de la guía y muestra la próxima intervención.
+
+- Pausa detiene solo la asignación y Continuar retoma su tiempo. El total sigue contando.
+- Finalizar marca la asignación como terminada. Úsalo al comenzar tus consejos o al presentar al siguiente participante; el total continúa y aparece un aviso que lo recuerda.
+- Siguiente termina la asignación seleccionada e inicia la próxima. Púlsalo cuando comience la nueva intervención.
+- Reiniciar borra solo el tiempo de la asignación, tras confirmación.
+- Ver intervenciones despliega la lista completa. Opciones reúne la plantilla, el resumen y las otras vistas.
+
+La ventana flotante la activa iPadOS mediante Slide Over. La consola adapta el contenido dentro de esa ventana. La pantalla puede desplazarse si la ventana es muy baja, los títulos son largos o tienes el texto ampliado; los controles principales permanecen agrupados encima de la lista desplegable.
+
+Comprobados la pausa, la reanudación, el tiempo restante, el exceso, el siguiente participante y la continuidad del total mediante pruebas de lógica. La distribución visual queda pendiente de comprobar en el iPad físico.
