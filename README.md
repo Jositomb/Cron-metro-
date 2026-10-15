@@ -1,30 +1,38 @@
-# Cronómetro de reunión
+# Cronómetro de reunión · versión 8
 
-Plantilla editable para la reunión de entre semana. Los títulos y minutos iniciales son orientativos: ajusta las intervenciones a la guía de actividades de cada semana mediante **Editar**.
+Reemplaza los archivos de la versión anterior por los de este ZIP. index.html debe quedar en la raíz del repositorio, junto a app.js, style.css y version.json. Conserva la misma dirección web para recuperar la plantilla y los tiempos guardados en ese navegador.
 
-- Las canciones y oraciones no aparecen en la lista de asignaciones. El total de la reunión sigue contando durante ellas si está iniciado.
-- Cada intervención tiene Inicio, Fin y Reinicio. La activa aparece en una tarjeta elevada sobre la lista, con su nombre, tiempo y minutos restantes. La tarjeta reserva su propio espacio para no tapar los botones y desaparece al detener la asignación.
-- Al iniciar otra intervención se detiene la anterior y sigue el total de reunión.
-- El total cuenta también las transiciones entre partes. Fin del total detiene todos los relojes; su Reinicio pide confirmación y reinicia todos.
-- Los tiempos se conservan en el navegador del dispositivo. El cálculo usa la hora del dispositivo para recuperar el tiempo tras pasar a segundo plano. Evita cambiar la hora durante la reunión.
-- Diseño compacto para iPhone. Si añades muchas partes o usas texto ampliado, puedes desplazarte.
+## Uso
 
-## Subir a GitHub
+- Cada intervención tiene Inicio, Fin y Reinicio. Al iniciar otra, se detiene la anterior.
+- El total empieza automáticamente al iniciar una intervención. Sigue contando entre intervenciones. Puedes iniciarlo antes para incluir la canción y la oración.
+- Fin de una intervención conserva su tiempo; Inicio lo continúa. Reinicio de una intervención solo borra su contador.
+- Siguiente finaliza la intervención seleccionada e inicia la siguiente. Si aún no has seleccionado ninguna, inicia la primera.
+- El contador de cada fila muestra el tiempo transcurrido. Debajo del título se indica el tiempo restante o el exceso.
+- Ámbar cuando falta un minuto en una parte en marcha; rojo al superar el tiempo. Sin sonidos ni vibración. Un tiempo de 0 minutos significa sin límite.
+- El total tiene un objetivo de 105 minutos. «Fin previsto» estima la hora de finalización incorporando las diferencias de las partes finalizadas y el exceso de la parte activa. Es una estimación: no conoce la duración futura de las canciones o de los comentarios del presidente si no los añades a la plantilla. La diferencia se muestra en minutos y segundos respecto al objetivo.
+- Modo atril amplía la intervención seleccionada y mantiene visibles el total y los controles. Puedes salir con el botón o con Escape.
+- Fin del total detiene todos los tiempos y abre el resumen. Inicio del total permite continuar después.
+- Resumen muestra tiempos previstos, reales y diferencias por intervención; se puede abrir en cualquier momento sin pausar.
+- Editar permite cambiar títulos, minutos y encabezados de sección, añadir canciones, oraciones, consejos y otras intervenciones. Guardar una plantilla reinicia los tiempos tras confirmación si ya hay tiempos registrados.
 
-1. Descomprime el ZIP en Archivos.
-2. Abre tu repositorio y elige **Add file → Upload files**.
-3. Sube index.html, style.css, app.js y version.json a la raíz del repositorio, junto con este README si lo deseas, y confirma con **Commit changes**.
-4. Para publicarlo, abre **Settings → Pages** y selecciona **Deploy from a branch**, rama **main**, carpeta **/(root)**. Guarda y usa el enlace que muestre GitHub al terminar.
-5. En Safari abre ese enlace y usa **Compartir → Añadir a pantalla de inicio**.
+## Recuperación
 
-No necesita instalaciones, cuentas ni dependencias. La primera carga requiere conexión. Mantén la pantalla encendida durante el uso.
+La plantilla y el estado de los contadores se guardan en el navegador. Si recargas o cierras la página, un contador que estaba en marcha incluye el tiempo transcurrido mientras estuvo cerrada. Los que estaban detenidos permanecen detenidos. Se conserva la clave de almacenamiento de la versión anterior.
 
-## Actualizaciones
+No se transfieren entre dispositivos o navegadores. Borrar los datos del sitio también borra la plantilla y la sesión. Si el navegador impide guardar, se muestra un aviso. Evita varias pestañas simultáneas para la misma reunión.
 
-Esta versión comprueba version.json al abrirse, al volver a primer plano y cada minuto. Si hay una versión nueva, recarga automáticamente y conserva los tiempos y la plantilla. Mientras una asignación está en curso, espera para evitar interrumpirla. Para futuras versiones, cambia el número BUILD de app.js, la versión de version.json y los parámetros v de los archivos CSS y JS en index.html al mismo número nuevo. Sube todos los archivos juntos. La primera instalación de este mecanismo requiere cargar esta versión una vez en el acceso directo existente.
+## iPhone
 
-La plantilla incluye cuatro intervenciones de Seamos mejores maestros. Quita la cuarta cuando no corresponda y ajusta sus minutos. Las filas y botones crecen según la altura y anchura de pantalla disponibles; con muchas asignaciones o texto ampliado se permite desplazamiento.
+Abre la dirección habitual en Safari. Puedes usar Compartir → Añadir a pantalla de inicio. El diseño ajusta las filas a la altura disponible; con muchas intervenciones o texto ampliado se puede desplazar la lista. El modo atril permite leer cómodamente una intervención sin buscarla en la lista.
 
-La tarjeta de la asignación activa incluye Fin y Reiniciar. Fin detiene solo esa asignación; el total sigue contando. Reiniciar solicita confirmación, pone la asignación a cero y cierra la tarjeta. Puedes volver a iniciarla desde la lista.
+Solicita mantener la pantalla encendida cuando el navegador lo permite. Los cronómetros usan marcas de tiempo, por lo que no dependen de que Safari siga ejecutando la animación en segundo plano. La comprobación de nuevas versiones no recarga durante una reunión en marcha.
 
-Secciones diferenciadas con gris (Tesoros), dorado (Seamos mejores maestros) y rojo (Nuestra vida cristiana), tanto en el encabezado como en la franja lateral de las asignaciones.
+## Archivos
+
+- index.html: interfaz.
+- style.css: diseño, colores y modo atril.
+- app.js: controles, recuperación, estimación y resumen.
+- version.json: versión 8 para actualización.
+
+Se ha comprobado la sintaxis y la lógica de los controles mediante pruebas automatizadas. Falta verificar visualmente la distribución en un iPhone físico.
