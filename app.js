@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='11',key='cronometro-reunion-v1';
+const BUILD='12',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -46,27 +46,27 @@ function updateActivePanel(now=Date.now()){
   $('activeClockLabel').textContent=compact?(s.over?'EXCESO':p.min>0?'TIEMPO RESTANTE':'TRANSCURRIDO'):'Transcurrido';
   $('activeTime').textContent=compact&&p.min>0?(s.over?'+':'')+fmt(Math.abs(s.remaining)):fmt(elapsed);
   $('activeElapsed').textContent='Transcurrido '+fmt(elapsed)+' · previsto '+p.min+' min';
-  if(compact&&p.done){$('activeClockLabel').textContent=p.adviceMin>0?'CONSEJOS':'PRESENTACIÓN / TRANSICIÓN';$('activeTime').textContent=fmt(value(p.after,now));$('activeElapsed').textContent='Asignación finalizada: '+fmt(elapsed);}
+  if(p.done){$('activeClockLabel').textContent=p.adviceMin>0?'CONSEJOS':'PRESENTACIÓN / TRANSICIÓN';$('activeTime').textContent=fmt(value(p.after,now));$('activeElapsed').textContent='Asignación finalizada: '+fmt(elapsed);}
   $('primaryAction').textContent=p.started!==null?'Finalizar asignación':p.done?'Iniciar siguiente':elapsed>0?'Continuar asignación':'Iniciar asignación';$('primaryAction').disabled=p.done&&i===state.parts.length-1;$('undoAction').disabled=!state.undo;
   $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min');
-  if(compact&&p.done)$('activeTarget').textContent=p.adviceMin>0?'Consejos previstos: '+p.adviceMin+' min':'El total sigue contando';
-  const afterOver=compact&&p.done&&p.adviceMin>0&&value(p.after,now)>p.adviceMin*60000;panel.classList.toggle('over',compact&&p.done?afterOver:s.over);panel.classList.toggle('warning',!p.done&&s.warning);
+  if(p.done)$('activeTarget').textContent=p.adviceMin>0?'Consejos previstos: '+p.adviceMin+' min':'El total sigue contando';
+  const afterOver=p.done&&p.adviceMin>0&&value(p.after,now)>p.adviceMin*60000;panel.classList.toggle('over',p.done?afterOver:s.over);panel.classList.toggle('warning',!p.done&&s.warning);
   let group='';for(let j=0;j<=i;j++)if(state.parts[j].section)group=state.parts[j].section;
   panel.classList.toggle('treasures',group==='TESOROS DE LA BIBLIA');panel.classList.toggle('teaching',group==='SEAMOS MEJORES MAESTROS');panel.classList.toggle('living',group==='NUESTRA VIDA CRISTIANA');
   $('activeStart').hidden=p.started!==null;$('activeStart').textContent=elapsed>0?'▶ Continuar':'▶ Inicio';
   $('activePause').hidden=p.started===null;$('activeStop').hidden=p.done;
-  $('activeNext').disabled=i===state.parts.length-1;
+  $('activeNext').disabled=p.done&&i===state.parts.length-1;
   $('chairGap').hidden=!(p.done&&state.total.started!==null);
   const next=state.parts[i+1];$('upNextLabel').textContent=next?'A CONTINUACIÓN':'FIN DEL PROGRAMA';$('upNextTitle').textContent=next?next.title+(next.participant?' · '+next.participant:''):'Última intervención';$('upNextDuration').textContent=next?next.min+' min':'Finaliza el total después de la canción y la oración.';
  }
- $('next').disabled=state.focusIndex===state.parts.length-1;
+ const focused=state.parts[state.focusIndex];const actionLabel=!focused?'Iniciar primera asignación':focused.started!==null?'Finalizar asignación':focused.done?'Iniciar siguiente':value(focused,now)>0?'Continuar asignación':'Iniciar asignación';const lastDone=!!focused&&focused.done&&state.focusIndex===state.parts.length-1;['next','activeNext','primaryAction'].forEach(id=>{$(id).textContent=lastDone?'Programa terminado':actionLabel;$(id).disabled=lastDone});
  if(changed)requestAnimationFrame(fitScreen);
 }
 
 $('startTotal').onclick=()=>{if(state.total.started===null)state.total.started=Date.now();const focused=state.parts[state.focusIndex];if(focused?.done&&focused.after.started===null)focused.after.started=Date.now();state.endedAt=null;save();tick();acquireWake()};
 $('stopTotal').onclick=()=>{stopTransitions();state.undo=null;state.parts.forEach(p=>{if(p.started!==null){stop(p);p.done=true}});stop(state.total);state.endedAt=Date.now();save();tick();releaseWake();openSummary()};
 $('resetTotal').onclick=()=>{if(!confirm('¿Reiniciar todos los cronómetros? La plantilla se conserva.'))return;state.parts.forEach(p=>{resetTimer(p);resetTimer(p.after)});state.undo=null;resetTimer(state.total);state.focusIndex=null;state.endedAt=null;save();announce('Tiempos reiniciados.');tick();releaseWake()};
-$('primaryAction').onclick=primaryAction;$('undoAction').onclick=undoLast;$('resetSelected').onclick=()=>{if(state.focusIndex!==null)resetPart(state.focusIndex);else announce('Selecciona primero una asignación.');};$('next').onclick=nextPart;$('activeNext').onclick=nextPart;$('activeStart').onclick=()=>startPart(state.focusIndex);$('activeStop').onclick=()=>finishPart(state.focusIndex);$('activePause').onclick=()=>pausePart(state.focusIndex);$('activeReset').onclick=()=>resetPart(state.focusIndex);$('beginFirst').onclick=()=>startPart(0);
+$('primaryAction').onclick=primaryAction;$('undoAction').onclick=undoLast;$('resetSelected').onclick=()=>{if(state.focusIndex!==null)resetPart(state.focusIndex);else announce('Selecciona primero una asignación.');};$('next').onclick=primaryAction;$('activeNext').onclick=primaryAction;$('activeStart').onclick=()=>startPart(state.focusIndex);$('activeStop').onclick=()=>finishPart(state.focusIndex);$('activePause').onclick=()=>pausePart(state.focusIndex);$('activeReset').onclick=()=>resetPart(state.focusIndex);$('beginFirst').onclick=()=>startPart(0);
 let compact=false,compactPreference=null;
 let atril=false;function setAtril(on){if(on&&compact)setCompact(false);atril=on;document.body.classList.toggle('atril',on);$('atril').textContent=on?'Salir del atril':'Modo atril';$('atril').setAttribute('aria-pressed',String(on));requestAnimationFrame(fitScreen);if(on)acquireWake()}
 $('atril').onclick=()=>setAtril(!atril);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&atril)setAtril(false)});

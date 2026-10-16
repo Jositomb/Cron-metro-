@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 11
+# Cronómetro de reunión · versión 12
 
 ## Actualización
 
@@ -42,7 +42,7 @@ Conserva los colores de las secciones. Durante una asignación, ámbar cuando fa
 
 Fin del total detiene asignaciones y consejos y abre el resumen. Puedes abrirlo antes desde Opciones sin detener nada. Muestra tiempos previstos, reales, diferencias y una columna separada para consejos/transición.
 
-La vista completa y el modo atril siguen disponibles. En la vista completa, Siguiente conserva su función de terminar una parte e iniciar la siguiente; el botón por etapas pertenece al modo Presidencia.
+La vista completa, el modo atril y el modo Presidencia usan el mismo botón por etapas. Finalizar asignación nunca inicia la siguiente; abre un intervalo separado de consejos/transición. Iniciar siguiente comienza la próxima asignación únicamente cuando tú lo pulses. El contador de consejos se muestra también en las otras vistas.
 
 ## iPad junto a JW Library
 
