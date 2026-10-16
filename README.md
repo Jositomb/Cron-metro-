@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 12
+# Cronómetro de reunión · versión 13
 
 ## Actualización
 
@@ -59,3 +59,14 @@ La aplicación solicita mantener la pantalla encendida cuando el navegador lo pe
 ## Verificación
 
 Comprobados mediante pruebas de lógica: recuperación de datos anteriores, cuenta atrás, avisos, pausa, finalización, consejos separados, botón por etapas, deshacer persistente, continuidad del total, ritmo, cambios de vista y resumen. Verificados la sintaxis y el contenido del ZIP. Queda pendiente comprobar la distribución visual en tu iPad físico.
+
+
+## Versión 13 · interacción más segura
+
+- Cuando hay un participante preparado, el botón de inicio muestra su nombre: «Iniciar a Manuel». Si no indicas un nombre, conserva una etiqueta genérica. Finalizar siempre detiene la asignación antes del consejo.
+- Las acciones de inicio, fin y pausa tienen una protección de 0,9 segundos frente a un segundo toque accidental. Los botones principales se desactivan brevemente; Deshacer sigue disponible.
+- El encabezado identifica el momento: ASIGNACIÓN, CONSEJOS o PRESENTACIÓN. Si una parte lleva consejos, su intervalo posterior incluye tus consejos y la presentación hasta que inicias la siguiente; nunca se añade al tiempo de ninguno de los estudiantes. Las partes con consejos a 0 muestran PRESENTACIÓN al terminar.
+- En Opciones → Dejar una parte preparada, o desde Elegir próxima sin iniciar, puedes elegir la próxima intervención durante una canción o vídeo. Esto no inicia, pausa ni reinicia ningún contador. La parte elegida queda marcada como preparada. Tras finalizar la asignación actual, el botón principal iniciará esa parte cuando lo pulses. Puedes elegir otra; el último cambio se puede deshacer. Si todavía no hay asignación seleccionada, el botón inicial arranca la preparada. El ritmo sigue referido al orden original de la plantilla si saltas intervenciones.
+- Consultar / preparar reunión abre el programa en modo de consulta mientras la reunión está en curso, incluso si has pausado el total. Para cambiarlo, pulsa Desbloquear edición y confirma. Guardar la preparación sigue pidiendo confirmación y reinicia los tiempos. Consultar, desbloquear o cancelar por sí solos no cambian los tiempos.
+
+Comprobados la protección de doble toque, los nombres, la preparación sin modificar tiempos, su recuperación al recargar, deshacer, el bloqueo de edición, los momentos, la separación de consejos, los avisos, el resumen y el reinicio. La distribución visual en el iPad físico sigue pendiente de comprobar.
