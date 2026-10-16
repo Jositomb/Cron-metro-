@@ -1,63 +1,61 @@
-# Cronómetro de reunión · versión 10
+# Cronómetro de reunión · versión 11
 
-Reemplaza los archivos de la versión anterior por los de este ZIP. index.html debe quedar en la raíz del repositorio, junto a app.js, style.css y version.json. Conserva la misma dirección web para recuperar la plantilla y los tiempos guardados en ese navegador.
+## Actualización
 
-## Uso
+Sustituye los archivos anteriores por los de este ZIP. Mantén index.html en la raíz, junto a app.js, style.css y version.json. Mantener la misma dirección web y el mismo navegador permite recuperar la plantilla y la sesión de la versión anterior.
 
-- Cada intervención tiene Inicio, Fin y Reinicio. Al iniciar otra, se detiene la anterior.
-- El total empieza automáticamente al iniciar una intervención. Sigue contando entre intervenciones. Puedes iniciarlo antes para incluir la canción y la oración.
-- Fin de una intervención conserva su tiempo; Inicio lo continúa. Reinicio de una intervención solo borra su contador.
-- Siguiente finaliza la intervención seleccionada e inicia la siguiente. Si aún no has seleccionado ninguna, inicia la primera.
-- El contador de cada fila muestra el tiempo transcurrido. Debajo del título se indica el tiempo restante o el exceso.
-- Ámbar cuando falta un minuto en una parte en marcha; rojo al superar el tiempo. Sin sonidos ni vibración. Un tiempo de 0 minutos significa sin límite.
-- El total tiene un objetivo de 105 minutos. «Fin previsto» estima la hora de finalización incorporando las diferencias de las partes finalizadas y el exceso de la parte activa. Es una estimación: no conoce la duración futura de las canciones o de los comentarios del presidente si no los añades a la plantilla. La diferencia se muestra en minutos y segundos respecto al objetivo.
-- Modo atril amplía la intervención seleccionada y mantiene visibles el total y los controles. Puedes salir con el botón o con Escape.
-- Fin del total detiene todos los tiempos y abre el resumen. Inicio del total permite continuar después.
-- Resumen muestra tiempos previstos, reales y diferencias por intervención; se puede abrir en cualquier momento sin pausar.
-- Editar permite cambiar títulos, minutos y encabezados de sección, añadir canciones, oraciones, consejos y otras intervenciones. Guardar una plantilla reinicia los tiempos tras confirmación si ya hay tiempos registrados.
+## Modo Presidencia
 
-## Recuperación
+En Opciones elige Modo Presidencia. Si ya usabas la vista compacta, se conserva tu preferencia y aparece este modo automáticamente. El iPad también puede activarlo por defecto al abrir en una ventana estrecha, si aún no elegiste una vista.
 
-La plantilla y el estado de los contadores se guardan en el navegador. Si recargas o cierras la página, un contador que estaba en marcha incluye el tiempo transcurrido mientras estuvo cerrada. Los que estaban detenidos permanecen detenidos. Se conserva la clave de almacenamiento de la versión anterior.
+El número central muestra el tiempo restante de la asignación. Cuando se supera, aparece el exceso con signo + y color rojo. El total permanece arriba y la siguiente intervención debajo, con el nombre del participante si lo preparaste.
 
-No se transfieren entre dispositivos o navegadores. Borrar los datos del sitio también borra la plantilla y la sesión. Si el navegador impide guardar, se muestra un aviso. Evita varias pestañas simultáneas para la misma reunión.
+El botón grande cambia según el momento:
 
-## iPhone
+1. Iniciar asignación / Continuar asignación: inicia o retoma el contador.
+2. Finalizar asignación: detiene el tiempo del estudiante y comienza un contador separado de consejos o transición. NO inicia la siguiente asignación.
+3. Iniciar siguiente: detiene el contador de consejos y comienza la siguiente asignación cuando el hermano empiece a hablar.
 
-Abre la dirección habitual en Safari. Puedes usar Compartir → Añadir a pantalla de inicio. El diseño ajusta las filas a la altura disponible; con muchas intervenciones o texto ampliado se puede desplazar la lista. El modo atril permite leer cómodamente una intervención sin buscarla en la lista.
+El total sigue contando durante los consejos y las presentaciones. Pausa detiene únicamente la asignación; el botón grande permite continuarla. En la última intervención, tras finalizarla, termina el total desde su botón superior cuando corresponda.
 
-Solicita mantener la pantalla encendida cuando el navegador lo permite. Los cronómetros usan marcas de tiempo, por lo que no dependen de que Safari siga ejecutando la animación en segundo plano. La comprobación de nuevas versiones no recarga durante una reunión en marcha.
+Deshacer último cambio recupera el estado anterior de las asignaciones, los consejos y la selección. Sirve para corregir una finalización o un inicio equivocados y conserva el total real. Guarda una sola acción: no es un historial ilimitado. Si recuperas una asignación que estaba en marcha, su tiempo incluye el intervalo desde la pulsación equivocada. Esta recuperación también se conserva al recargar. Reiniciar la reunión o terminar el total elimina ese paso de deshacer.
 
-## Archivos
+Ver intervenciones despliega la lista con controles individuales. Opciones reúne Preparar reunión, Resumen, Reiniciar reunión, Reiniciar asignación y los cambios de vista. Los reinicios piden confirmación.
 
-- index.html: interfaz.
-- style.css: diseño, colores y modo atril.
-- app.js: controles, recuperación, estimación y resumen.
-- version.json: versión 8 para actualización.
+## Preparar reunión
 
-Se ha comprobado la sintaxis y la lógica de los controles mediante pruebas automatizadas. Falta verificar visualmente la distribución en un iPhone físico.
+Puedes cambiar títulos, duración, secciones, participantes y minutos de consejos. Se sugieren 1 minuto para la lectura y las asignaciones de Seamos mejores maestros al migrar plantillas antiguas. Revisa los valores según tu programa: no son una importación automática de la guía ni una asignación oficial de tiempos. Pon 0 si la parte no lleva consejos.
 
-## Versión 9 · vista compacta para iPad
+Indica también cuántos minutos prevés entre el inicio del total y la primera asignación. Usa 0 si inicias el total al empezar las palabras de introducción. Si lo inicias antes, introduce el tiempo previsto para esa apertura. Puedes añadir otras transiciones como filas si necesitas que cuenten en el programa preparado.
 
-Pulsa «Vista compacta» para ver el total, la hora prevista, la intervención seleccionada y los botones Inicio/Fin, Reiniciar y Siguiente. «Ver intervenciones» despliega la lista con todos los controles individuales. «Vista completa» vuelve al diseño habitual. La elección se guarda en el navegador; el modo atril sigue disponible en la vista completa.
+Guardar la preparación reinicia los tiempos tras confirmación. Prepárala antes de la reunión.
 
-En un iPad, sin una preferencia guardada, se activa al abrir en una ventana de 660 píxeles de ancho o menos. También puedes elegirla manualmente en cualquier dispositivo. Reducir la ventana no cambia los tiempos ni la plantilla.
+## Ritmo y hora prevista
 
-Para dejar el cronómetro sobre JW Library en iPadOS 27, abre su dirección en Safari y usa los controles de ventana del iPad para activar Slide Over. La página adapta su contenido; no puede activar Slide Over por sí sola. Después puedes ajustar el tamaño de la ventana. La lista cerrada deja más espacio para leer JW Library.
+El indicador compara el total real con el punto del programa en el que estás: minutos previos, duración de las partes anteriores, consejos previstos y avance de la parte o de los consejos actuales. Muestra Vamos a tiempo dentro de un margen de 30 segundos, o el margen/retraso en minutos y segundos.
 
-La vista compacta no introduce sincronización entre iPhone e iPad: cada navegador conserva sus propios datos.
+La hora de finalización utiliza un objetivo de 105 minutos y ajusta la estimación según ese ritmo. No conoce tiempos futuros que no hayas incluido; conviene preparar todas las partes y transiciones relevantes. Si omites una parte saltando directamente a otra, la referencia temporal sigue siendo el orden de la plantilla.
 
+## Colores y resumen
 
-## Versión 10 · consola lateral para dirigir la reunión
+Conserva los colores de las secciones. Durante una asignación, ámbar cuando falta un minuto y rojo al exceder el tiempo. Los consejos muestran rojo si superan el tiempo que les hayas preparado. No emite sonidos ni vibraciones.
 
-Activa «Consola lateral» desde Opciones. Conserva la preferencia de la vista compacta anterior. El total sigue visible arriba y el número central muestra el tiempo RESTANTE de la asignación; cuando se supera, muestra el exceso con signo + y en rojo. El tiempo transcurrido queda debajo en pequeño. El encabezado utiliza el color de la sección de la guía y muestra la próxima intervención.
+Fin del total detiene asignaciones y consejos y abre el resumen. Puedes abrirlo antes desde Opciones sin detener nada. Muestra tiempos previstos, reales, diferencias y una columna separada para consejos/transición.
 
-- Pausa detiene solo la asignación y Continuar retoma su tiempo. El total sigue contando.
-- Finalizar marca la asignación como terminada. Úsalo al comenzar tus consejos o al presentar al siguiente participante; el total continúa y aparece un aviso que lo recuerda.
-- Siguiente termina la asignación seleccionada e inicia la próxima. Púlsalo cuando comience la nueva intervención.
-- Reiniciar borra solo el tiempo de la asignación, tras confirmación.
-- Ver intervenciones despliega la lista completa. Opciones reúne la plantilla, el resumen y las otras vistas.
+La vista completa y el modo atril siguen disponibles. En la vista completa, Siguiente conserva su función de terminar una parte e iniciar la siguiente; el botón por etapas pertenece al modo Presidencia.
 
-La ventana flotante la activa iPadOS mediante Slide Over. La consola adapta el contenido dentro de esa ventana. La pantalla puede desplazarse si la ventana es muy baja, los títulos son largos o tienes el texto ampliado; los controles principales permanecen agrupados encima de la lista desplegable.
+## iPad junto a JW Library
 
-Comprobados la pausa, la reanudación, el tiempo restante, el exceso, el siguiente participante y la continuidad del total mediante pruebas de lógica. La distribución visual queda pendiente de comprobar en el iPad físico.
+Abre el cronómetro en Safari y activa Slide Over desde los controles de ventana del iPad. Colócalo junto a JW Library y usa Modo Presidencia. La página adapta su contenido: la ventana flotante la gestiona iPadOS.
+
+Los controles principales quedan agrupados sobre la lista plegable. Si la ventana es muy baja, los títulos son largos o amplías el texto, puede ser necesario desplazarla.
+
+## Conservación de datos
+
+La plantilla y los cronómetros se guardan en este navegador. Un contador en marcha sigue incluyendo el tiempo transcurrido al cerrar o recargar. Un contador detenido permanece detenido. Borrar los datos del sitio elimina la sesión. No existe sincronización entre dispositivos; evita usar varias pestañas para la misma reunión.
+
+La aplicación solicita mantener la pantalla encendida cuando el navegador lo permite. No recarga por actualizaciones mientras el total está en marcha.
+
+## Verificación
+
+Comprobados mediante pruebas de lógica: recuperación de datos anteriores, cuenta atrás, avisos, pausa, finalización, consejos separados, botón por etapas, deshacer persistente, continuidad del total, ritmo, cambios de vista y resumen. Verificados la sintaxis y el contenido del ZIP. Queda pendiente comprobar la distribución visual en tu iPad físico.
