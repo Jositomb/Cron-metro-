@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 13
+# Cronómetro de reunión · versión 14
 
 ## Actualización
 
@@ -6,7 +6,7 @@ Sustituye los archivos anteriores por los de este ZIP. Mantén index.html en la 
 
 ## Modo Presidencia
 
-En Opciones elige Modo Presidencia. Si ya usabas la vista compacta, se conserva tu preferencia y aparece este modo automáticamente. El iPad también puede activarlo por defecto al abrir en una ventana estrecha, si aún no elegiste una vista.
+La vista sencilla aparece por defecto al actualizar a esta versión. Después se recuerda la vista que elijas. En Opciones puedes volver a Vista completa, Modo atril o Vista sencilla sin cambiar los tiempos.
 
 El número central muestra el tiempo restante de la asignación. Cuando se supera, aparece el exceso con signo + y color rojo. El total permanece arriba y la siguiente intervención debajo, con el nombre del participante si lo preparaste.
 
@@ -70,3 +70,22 @@ Comprobados mediante pruebas de lógica: recuperación de datos anteriores, cuen
 - Consultar / preparar reunión abre el programa en modo de consulta mientras la reunión está en curso, incluso si has pausado el total. Para cambiarlo, pulsa Desbloquear edición y confirma. Guardar la preparación sigue pidiendo confirmación y reinicia los tiempos. Consultar, desbloquear o cancelar por sí solos no cambian los tiempos.
 
 Comprobados la protección de doble toque, los nombres, la preparación sin modificar tiempos, su recuperación al recargar, deshacer, el bloqueo de edición, los momentos, la separación de consejos, los avisos, el resumen y el reinicio. La distribución visual en el iPad físico sigue pendiente de comprobar.
+
+
+## Versión 14 · todo conservado, pantalla simplificada
+
+La pantalla habitual muestra únicamente:
+
+- Total de reunión y una frase sobre el ritmo.
+- Asignación, participante y contador grande.
+- Un botón principal que cambia entre finalizar y comenzar al siguiente.
+- Pausa y Deshacer como acciones secundarias.
+- La próxima intervención.
+
+Programa abre la lista completa y permite dejar una parte preparada sin iniciarla. Los controles individuales siguen disponibles allí; iniciar una intervención cierra el programa y vuelve al cronómetro. En Vista completa, la lista sigue visible en la pantalla principal.
+
+Opciones reúne el inicio del total, Finalizar reunión, la preparación/consulta bloqueada, el resumen, los reinicios protegidos y los cambios de vista. Tiempo y previsión despliega el objetivo, el tiempo restante de reunión y la hora prevista que antes ocupaban espacio en la pantalla principal. El total empieza automáticamente al iniciar una asignación; si quieres incluir antes la canción y la oración, usa Opciones → Iniciar total.
+
+Se mantienen los nombres, la protección contra el doble toque, la selección sin iniciar, los consejos separados, la recuperación al recargar y la opción de deshacer. Abrir Programa u Opciones no detiene ni reinicia los tiempos.
+
+Comprobados mediante pruebas de lógica: funciones anteriores, vista sencilla inicial, apertura y cierre del programa, consulta sin alterar los contadores y persistencia de la vista elegida. También se comprobaron sintaxis, estructura HTML y referencias de controles. La distribución visual en el iPad físico queda pendiente.
