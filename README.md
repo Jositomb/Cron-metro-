@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 15
+# Cronómetro de reunión · versión 16
 
 ## Actualización
 
@@ -102,3 +102,14 @@ Iniciar utiliza un botón azul; Finalizar utiliza un acabado metálico. La etiqu
 IMPORTANTE: incluye también theme.css al sustituir los archivos. La distribución, los accesos Programa/Opciones y todas las funciones anteriores se conservan. No se ha cambiado la clave de datos ni se reinician la sesión o la plantilla al actualizar.
 
 Pruebas de lógica superadas para el anillo, consejos, fases, protección de doble toque, nombres, recuperación de tiempos, selección preparada, deshacer, consulta, bloqueo de edición, avisos, pausa, vistas, resumen y reinicio. Verificados sintaxis, estructura y ZIP. No se ha realizado una comprobación visual en un iPad físico.
+
+
+## Versión 16 · total circular y cabecera compacta
+
+El total de reunión tiene ahora su propio círculo de cristal, más pequeño que el de la asignación. Su anillo se completa al llegar al objetivo de 105 minutos; al superarlo cambia al color de aviso, sin detener el contador.
+
+La cabecera queda en una sola fila: Reunión, Programa y Opciones. El subtítulo se oculta y el menú Opciones empieza plegado tanto en la vista sencilla como en la completa. Cuando lo abres aparece sobre el contenido, en vez de ocupar altura y empujar el cronómetro. Se cierra al elegir una acción, tocar fuera o pulsar Escape.
+
+La tarjeta del total presenta el círculo y el indicador de ritmo a su lado. En ventanas más bajas, el círculo se reduce para ahorrar espacio. Los tiempos, las asignaciones y las preferencias se mantienen.
+
+Comprobados el avance del anillo de total, su exceso y recuperación, el menú plegado en ambas vistas y la lógica anterior. Verificados HTML, referencias y ZIP. Queda pendiente la comprobación visual en el iPad físico.

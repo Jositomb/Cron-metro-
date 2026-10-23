@@ -163,3 +163,51 @@ td,th{border-bottom-color:var(--ms-border)}
 p,.compact #emptyAtril p{color:var(--ms-secondary)}
 .active-panel.over #activeTarget{color:var(--ms-danger)}
 .active-panel.warning #activeTarget{color:var(--ms-warning)}
+
+/* Versión 16: cabecera corta, menú superpuesto y total circular. */
+header,.compact header,.atril header{
+ display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:7px;margin:0 0 7px;min-height:38px;
+}
+header>div,.atril header>div{display:block;min-width:0}header>div>small{display:none!important}
+header h1,.compact header h1{font-size:20px;line-height:1.15;margin:0;letter-spacing:-.5px}
+#programOpen,.compact #programOpen,.atril #programOpen{display:block;margin:0;min-height:36px;padding:8px 10px;font-size:13px}
+#toolsDisclosure,.atril #toolsDisclosure{position:relative;margin:0;z-index:90}
+#toolsDisclosure>summary,.compact #toolsDisclosure>summary,.atril #toolsDisclosure>summary{
+ display:block;list-style:none;min-height:36px;padding:8px 10px;font-size:13px;font-weight:600;cursor:pointer;line-height:18px;
+}
+#toolsDisclosure>summary::-webkit-details-marker{display:none}
+#toolsDisclosure[open]>.options-menu,.compact #toolsDisclosure[open]>.options-menu,.atril #toolsDisclosure[open]>.options-menu{
+ display:flex;flex-direction:column;position:absolute;right:0;top:calc(100% + 7px);width:240px;max-width:calc(100vw - 28px);max-height:70dvh;overflow-y:auto;margin:0;padding:8px;gap:5px;z-index:100;text-align:left;
+}
+#toolsDisclosure:not([open])>.options-menu{display:none!important}
+#toolsDisclosure .options-menu button{min-height:40px;font-size:14px;text-align:left;padding:9px 10px}
+.total,.compact .total,.atril .total{
+ display:grid;grid-template-columns:104px minmax(0,1fr);align-items:center;gap:14px;padding:8px 13px;margin:0 0 8px;
+}
+.total #totalFace,.compact .total #totalFace,.atril .total #totalFace{
+ display:block;position:relative;width:104px;aspect-ratio:1;isolation:isolate;border-radius:50%;background:var(--ms-dial);
+ box-shadow:inset 1px 2px 2px var(--ms-shine),inset -2px -3px 4px #304d443b,0 3px 6px var(--ms-shadow),0 0 0 3px #68847b22;
+}
+#totalFace::before{content:"";position:absolute;inset:9%;border:1px solid #ffffff3d;border-radius:50%;background:linear-gradient(145deg,#ffffff35,transparent 60%);pointer-events:none}
+.total-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.total-ring-track,#totalArc{fill:none;stroke-width:2.8}
+.total-ring-track{stroke:var(--ms-track)}#totalArc{stroke:var(--ms-dial-accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+#totalFace.over #totalArc{stroke:var(--ms-danger)}
+.total-dial-content{position:absolute;inset:15% 5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:1}
+.total .total-dial-content span,.compact .total .total-dial-content span,.atril .total .total-dial-content span{font-size:10px;font-weight:700;letter-spacing:1.3px;color:var(--ms-secondary)}
+#totalFace #total,.compact #totalFace #total,.atril #totalFace #total{font-size:24px;line-height:1;font-weight:750;letter-spacing:-.8px;color:var(--ms-dial-text);white-space:nowrap;font-variant-numeric:tabular-nums}
+#totalFace.long-time #total,.compact #totalFace.long-time #total,.atril #totalFace.long-time #total{font-size:20px}
+#totalFace.over #total{color:var(--ms-danger)}
+.total .total-brief{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0;gap:7px}
+.total-goal{font-size:13px;color:var(--ms-secondary);line-height:1.25;font-weight:550}
+.total #pace,.compact .total #pace,.atril .total #pace{font-size:14px;font-weight:650;line-height:1.3;margin:0;overflow-wrap:anywhere}
+@media(max-height:740px){
+ .total,.compact .total,.atril .total{grid-template-columns:86px minmax(0,1fr);gap:12px;padding:7px 11px}
+ .total #totalFace,.compact .total #totalFace,.atril .total #totalFace{width:86px}
+ #totalFace #total,.compact #totalFace #total,.atril #totalFace #total{font-size:21px}
+ #totalFace.long-time #total,.compact #totalFace.long-time #total,.atril #totalFace.long-time #total{font-size:17px}
+ .total .total-dial-content span,.compact .total .total-dial-content span,.atril .total .total-dial-content span{font-size:9px}
+ .total #pace,.compact .total #pace{font-size:13px}
+}
+@media(max-width:340px){header,.compact header{gap:5px}header h1,.compact header h1{font-size:18px}#programOpen,.compact #programOpen,#toolsDisclosure>summary,.compact #toolsDisclosure>summary{font-size:12px;padding:8px}.total,.compact .total{gap:10px}.total #pace,.compact .total #pace{font-size:13px}}
+@media(prefers-reduced-motion:reduce){#totalArc{transition:none}}
