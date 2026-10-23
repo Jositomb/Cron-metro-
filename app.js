@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='14',key='cronometro-reunion-v1';
+const BUILD='15',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -58,6 +58,7 @@ function updateActivePanel(now=Date.now()){
   $('primaryAction').textContent=p.started!==null?'Finalizar asignación':p.done?'Iniciar siguiente':elapsed>0?'Continuar asignación':'Iniciar asignación';$('primaryAction').disabled=p.done&&i===state.parts.length-1;$('undoAction').disabled=!state.undo;
   $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min');
   if(p.done)$('activeTarget').textContent=p.adviceMin>0?'Consejos previstos: '+p.adviceMin+' min':'El total sigue contando';
+  $('clockFace').classList.toggle('long-time',$('activeTime').textContent.length>6);const dialLimit=(p.done?p.adviceMin:p.min)*60000,dialElapsed=p.done?value(p.after,now):elapsed,dialFraction=dialLimit>0?Math.max(0,Math.min(1,1-dialElapsed/dialLimit)):0;$('clockArc').style.strokeDashoffset=String(289.027*(1-dialFraction));$('clockFace').classList.toggle('no-limit',dialLimit===0);
   const afterOver=p.done&&p.adviceMin>0&&value(p.after,now)>p.adviceMin*60000;panel.classList.toggle('over',p.done?afterOver:s.over);panel.classList.toggle('warning',!p.done&&s.warning);
   let group='';for(let j=0;j<=i;j++)if(state.parts[j].section)group=state.parts[j].section;
   panel.classList.toggle('treasures',group==='TESOROS DE LA BIBLIA');panel.classList.toggle('teaching',group==='SEAMOS MEJORES MAESTROS');panel.classList.toggle('living',group==='NUESTRA VIDA CRISTIANA');
@@ -70,7 +71,7 @@ function updateActivePanel(now=Date.now()){
  const focused=state.parts[state.focusIndex],nextIndex=upcomingIndex();
  const actionLabel=!focused?namedStart(nextIndex,'Iniciar primera asignación'):focused.started!==null?'Finalizar asignación':focused.done?namedStart(nextIndex,'Iniciar siguiente'):value(focused,now)>0?'Continuar asignación':namedStart(state.focusIndex,'Iniciar asignación');
  const lastDone=!!focused&&focused.done&&nextIndex===null;
- ['next','activeNext','primaryAction'].forEach(id=>{$(id).textContent=lastDone?'Programa terminado':actionLabel;$(id).disabled=lastDone||now<inputGuardUntil});
+ ['next','activeNext','primaryAction'].forEach(id=>{$(id).textContent=lastDone?'Programa terminado':actionLabel;$(id).disabled=lastDone||now<inputGuardUntil;$(id).dataset.intent=lastDone?'complete':focused?.started!==null&&focused?'finish':'start'});
  $('beginFirst').textContent=namedStart(nextIndex,'Iniciar primera asignación');$('beginFirst').disabled=now<inputGuardUntil;
  $('preparedEmpty').textContent=nextIndex===null?'':state.parts[nextIndex].title+(state.parts[nextIndex].participant?' · '+state.parts[nextIndex].participant:'');
 

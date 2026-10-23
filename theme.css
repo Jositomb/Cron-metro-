@@ -1,0 +1,165 @@
+/* Mi Servicio · metal cepillado y cristal. Las reglas de interacción se conservan. */
+:root{
+ color-scheme:light dark;
+ --ms-page:#d8d7d4;--ms-text:#242722;--ms-secondary:#515b5c;
+ --ms-primary:#2864d7;--ms-soft:#2864d715;--ms-border:#4d62532d;
+ --ms-front:linear-gradient(110deg,#e2e1dd 0%,#c8cbc8 26%,#b6bdbc 49%,#dfe1dc 74%,#aeb8b5 100%);
+ --ms-card:linear-gradient(145deg,rgba(250,252,248,.94),rgba(208,218,214,.96) 60%,rgba(237,242,235,.96));
+ --ms-control:linear-gradient(160deg,#fafcf9,#cbd4d0 67%,#b9c5c0);
+ --ms-surface:#edf1ed;--ms-input:#f7f9f5;--ms-shine:#ffffffd9;--ms-shadow:#273c3830;
+ --ms-warning:#805300;--ms-danger:#ad293b;--ms-success:#266652;
+ --ms-dial:radial-gradient(ellipse at 30% 15%,#fff 0%,#f0f5f1 27%,#d1dcda 67%,#afbfbb 100%);
+ --ms-track:#203a4324;--ms-dial-text:#172f40;--ms-dial-accent:#2864d7;
+}
+html,body{background:var(--ms-page);color:var(--ms-text)}
+body{
+ background-image:repeating-linear-gradient(100deg,#ffffff0a 0 1px,#23372e03 1px 3px),var(--ms-front);
+ background-attachment:fixed;
+ font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",system-ui,sans-serif;
+ -webkit-font-smoothing:antialiased;
+}
+main,.compact main{padding-left:14px;padding-right:14px}
+header h1,.compact header h1{font-size:22px;letter-spacing:-.6px;font-weight:750;color:var(--ms-text)}
+header small,small,.label small,footer,dialog p,#notice,.compact #notice{color:var(--ms-secondary)}
+button{
+ color:var(--ms-text);background:var(--ms-control);border:1px solid var(--ms-border);border-radius:12px;
+ box-shadow:inset 0 1px 0 var(--ms-shine),0 2px 4px var(--ms-shadow);
+ -webkit-tap-highlight-color:transparent;
+}
+button:active:not(:disabled){transform:translateY(1px);box-shadow:inset 0 1px 3px var(--ms-shadow)}
+button:disabled{opacity:.45}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--ms-primary);outline-offset:3px}
+#programOpen,.compact #programOpen,#toolsDisclosure>summary,.compact #toolsDisclosure>summary,.atril #toolsDisclosure>summary{
+ background:var(--ms-control);color:var(--ms-text);border:1px solid var(--ms-border);border-radius:12px;
+ box-shadow:inset 0 1px 0 var(--ms-shine),0 2px 5px var(--ms-shadow);font-weight:600;
+}
+.total,.compact .total,.atril .total{
+ background:var(--ms-card);border:1px solid var(--ms-border);border-radius:20px;
+ box-shadow:inset 0 1px 1px var(--ms-shine),inset 0 -1px 1px #24493e18,0 6px 15px var(--ms-shadow);
+ color:var(--ms-text);
+}
+.total span,.compact .total span{color:var(--ms-secondary)}
+.total strong,.compact .total strong{color:var(--ms-text);font-weight:750;letter-spacing:-.7px}
+#pace,.compact #pace{color:var(--ms-success);font-size:13px;font-weight:600}
+#pace[data-rhythm=late]{color:var(--ms-warning)}
+.track{background:var(--ms-track);height:4px;box-shadow:inset 0 1px 2px #203b4024}
+.track i{background:linear-gradient(180deg,#80b3ff,var(--ms-primary));box-shadow:0 1px 2px #133e7466}
+.active-panel,.compact .active-panel{
+ --section-color:#7d929c;
+ background:var(--ms-card);border:1px solid var(--ms-border);border-top:4px solid var(--section-color);border-radius:24px;
+ box-shadow:inset 0 1px 1px var(--ms-shine),inset 0 -1px 2px #24493e18,0 8px 20px var(--ms-shadow);
+ color:var(--ms-text);animation:none;
+}
+.active-panel.treasures,.compact .active-panel.treasures{--section-color:#808b90;background:var(--ms-card);border-top-color:var(--section-color)}
+.active-panel.teaching,.compact .active-panel.teaching{--section-color:#bd8f34;background:var(--ms-card);border-top-color:var(--section-color)}
+.active-panel.living,.compact .active-panel.living{--section-color:#b3474c;background:var(--ms-card);border-top-color:var(--section-color)}
+.active-panel[data-moment=advice],.active-panel[data-moment=presentation]{border-right-color:var(--ms-border);border-bottom-color:var(--ms-border);border-left-color:var(--ms-border)}
+#activeState,.compact #activeState{color:var(--ms-secondary);font-size:11px;letter-spacing:1.3px;font-weight:750}
+#activeTitle,.compact #activeTitle{color:var(--ms-secondary);font-size:15px;font-weight:550;line-height:1.25}
+#activeParticipant,.compact #activeParticipant{color:var(--ms-text);font-size:20px;font-weight:750;letter-spacing:-.3px}
+#activeTarget,.compact #activeTarget,#activeElapsed{color:var(--ms-secondary)}
+/* El anillo es una escala funcional: se vacía con el tiempo disponible. */
+#clockFace{
+ position:relative;isolation:isolate;width:210px;max-width:100%;aspect-ratio:1;flex:0 0 auto;margin:7px auto 10px;border-radius:50%;
+ background:var(--ms-dial);
+ box-shadow:inset 2px 3px 3px var(--ms-shine),inset -3px -4px 6px #304d443b,0 5px 9px var(--ms-shadow),0 0 0 5px #68847b22;
+}
+#clockFace::before{content:"";position:absolute;inset:9%;border-radius:50%;background:linear-gradient(145deg,#ffffff47,transparent 48%,#ffffff12 70%);border:1px solid #ffffff4d;pointer-events:none}
+.dial-ring{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.dial-track,#clockArc{fill:none;stroke-width:2.4}
+.dial-track{stroke:var(--ms-track)}
+#clockArc{stroke:var(--ms-dial-accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+#clockFace.no-limit #clockArc{opacity:0}
+.dial-content{position:absolute;inset:15% 7%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;z-index:1;pointer-events:none}
+#clockFace #activeClockLabel,.compact #clockFace #activeClockLabel,.atril #clockFace #activeClockLabel{display:block;color:var(--ms-secondary);font-size:10px;letter-spacing:.7px;margin:0;text-align:center;line-height:1.2}
+#clockFace #activeTime,.compact #clockFace #activeTime,.atril #clockFace #activeTime{
+ color:var(--ms-dial-text);font-size:48px;font-weight:750;letter-spacing:-1.8px;line-height:1.05;white-space:nowrap;margin:0;font-variant-numeric:tabular-nums;
+ text-shadow:0 1px 0 #ffffff45;
+}
+#clockFace #activeElapsed{font-size:10px;text-align:center;line-height:1.3}
+.compact #clockFace{grid-column:1/-1;width:220px;margin:5px auto 8px}
+.compact .active-right{row-gap:7px}
+.compact .active-actions,.compact #undoAction{grid-row:3}
+.active-panel.warning #clockFace{--ms-dial-accent:#bd7c14;--ms-dial-text:var(--ms-warning)}
+.active-panel.over #clockFace{--ms-dial-accent:#d43c51;--ms-dial-text:var(--ms-danger)}
+#primaryAction,.compact #primaryAction,.atril #primaryAction,#next,#activeNext,.active-actions #activeNext{
+ background:linear-gradient(160deg,#6ba0fa,var(--ms-primary) 58%,#16469d);color:#fff;border:1px solid #16469d55;border-radius:17px;
+ box-shadow:inset 0 1px 1px #ffffff75,inset 0 -1px 2px #071e4c55,0 4px 9px #1b4d9d35;
+}
+#primaryAction[data-intent=finish],#next[data-intent=finish],#activeNext[data-intent=finish]{
+ background:var(--ms-control);color:var(--ms-text);border-color:var(--ms-border);
+ box-shadow:inset 0 1px 1px var(--ms-shine),inset 0 -1px 1px #173f3420,0 3px 7px var(--ms-shadow);
+}
+#primaryAction[data-intent=complete],#next[data-intent=complete],#activeNext[data-intent=complete]{background:var(--ms-control);color:var(--ms-secondary)}
+.compact #undoAction,.compact .active-actions #activePause:not([hidden]){color:var(--ms-secondary);background:transparent;box-shadow:none;border-color:var(--ms-border);border-radius:10px}
+.compact #undoAction{border-color:transparent}
+#upNext,.compact #upNext{border-top:1px solid var(--ms-border)}
+#upNextLabel,.compact #upNextLabel,#upNextDuration,.compact #upNextDuration{color:var(--ms-secondary)}
+#upNextTitle,.compact #upNextTitle{color:var(--ms-text)}
+.compact #emptyAtril:not([hidden]){background:var(--ms-card);border:1px solid var(--ms-border);border-radius:24px;box-shadow:inset 0 1px 0 var(--ms-shine),0 6px 16px var(--ms-shadow)}
+#preparedEmpty,.compact #preparedEmpty{color:var(--ms-text)}
+.compact #beginFirst{background:linear-gradient(160deg,#6ba0fa,var(--ms-primary) 58%,#16469d);color:#fff;border-radius:17px;box-shadow:inset 0 1px 1px #ffffff75,0 4px 9px #1b4d9d35}
+/* Programa, opciones y preparación comparten el mismo material. */
+dialog,#programDialog{background:var(--ms-card);color:var(--ms-text);border:1px solid var(--ms-border);border-radius:24px;box-shadow:inset 0 1px 1px var(--ms-shine),0 16px 45px #0e253a45}
+dialog::backdrop{background:#14263770;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+dialog p,#summaryTotal,#summaryParts{color:var(--ms-secondary)}
+#summaryTotal{color:var(--ms-text)}
+#toolsDisclosure .options-menu,.compact #toolsDisclosure[open]>.options-menu{
+ background:var(--ms-card);color:var(--ms-text);border:1px solid var(--ms-border);border-radius:17px;box-shadow:inset 0 1px 0 var(--ms-shine),0 9px 22px #0c25363b;
+}
+#toolsDisclosure .options-menu{padding:6px}
+.options-menu #startTotal{color:var(--ms-success)}.options-menu #stopTotal{color:var(--ms-danger)}
+#timeDetails[open]{background:var(--ms-soft)}#timeDetails #eta,#timeDetails #totalInfo{color:var(--ms-secondary)}
+input,select,#prepareSelect,.field select{
+ background:var(--ms-input);color:var(--ms-text);border:1px solid var(--ms-border);box-shadow:inset 0 1px 2px #26473910;border-radius:10px;
+}
+input::placeholder{color:var(--ms-secondary);opacity:.8}
+.field{border-bottom-color:var(--ms-border)}.field .participant-caption,.field .advice-caption{color:var(--ms-secondary)}
+#editLockNote{background:#bd861b1a;color:var(--ms-warning)}
+td,th{border-bottom-color:var(--ms-border)}
+#programDialog #rows .row,#fullProgramHost .row{
+ background:var(--ms-surface);border:1px solid var(--ms-border);border-left:3px solid var(--section-color,#87999b);border-radius:13px;box-shadow:inset 0 1px 0 var(--ms-shine),0 2px 4px #2647380a;color:var(--ms-text);
+}
+#programDialog #rows .row.active,#fullProgramHost .row.active{background:var(--ms-soft);border-left-color:var(--ms-primary)}
+#programDialog #rows .row.over .clock,#fullProgramHost .row.over .clock{color:var(--ms-danger)}
+#programDialog #rows .row.warning .clock,#fullProgramHost .row.warning .clock{color:var(--ms-warning)}
+.row .label small{color:var(--ms-secondary)}
+.section.treasures{background:#6b747a}.section.teaching{background:#966b20}.section.living{background:#a23e48}
+#chairGap:not([hidden]){color:var(--ms-secondary)}
+.atril #clockFace{width:min(48vh,340px)}
+.atril #clockFace #activeTime{font-size:clamp(48px,11vw,78px)}
+.atril #clockFace #activeClockLabel{font-size:14px}
+@media(prefers-color-scheme:dark){
+ :root{
+  --ms-page:#1b201f;--ms-text:#edf3ef;--ms-secondary:#b8c7c5;
+  --ms-primary:#629bff;--ms-soft:#649bff20;--ms-border:#c4e2dc26;
+  --ms-front:linear-gradient(110deg,#192421,#2c3936 26%,#202e2b 49%,#34423d 74%,#1e2c28);
+  --ms-card:linear-gradient(145deg,rgba(63,79,73,.97),rgba(30,47,43,.98) 60%,rgba(48,66,59,.97));
+  --ms-control:linear-gradient(155deg,#4b6059,#2a4038 70%,#263a33);
+  --ms-surface:#2a3b35;--ms-input:#1b2c26;--ms-shine:#e3fff135;--ms-shadow:#00000050;
+  --ms-warning:#ffda8a;--ms-danger:#ffadb6;--ms-success:#a4dfc4;
+  --ms-dial:radial-gradient(ellipse at 30% 15%,#52768a 0%,#28495a 30%,#183747 67%,#0c2433 100%);
+  --ms-track:#daf5ff2e;--ms-dial-text:#f4fbff;--ms-dial-accent:#8ab7ff;
+ }
+ #clockFace::before{border-color:#ffffff20;background:linear-gradient(145deg,#ffffff26,transparent 48%,#ffffff08 70%)}
+ #clockFace #activeTime{text-shadow:0 1px 1px #00000080}
+ #primaryAction,.compact #primaryAction,.atril #primaryAction,#next,#activeNext,.active-actions #activeNext,.compact #beginFirst{background:linear-gradient(155deg,#6b9eee,#3164bf 60%,#204687);color:#fff}
+ #primaryAction[data-intent=finish],#next[data-intent=finish],#activeNext[data-intent=finish]{background:var(--ms-control);color:var(--ms-text)}
+ #primaryAction[data-intent=complete],#next[data-intent=complete],#activeNext[data-intent=complete]{background:var(--ms-control);color:var(--ms-secondary)}
+}
+@media(max-height:760px){
+ .compact main{gap:6px}.compact .active-panel{padding:10px;gap:5px}.compact #clockFace{width:180px;margin:4px auto 6px}
+ .compact #clockFace #activeTime{font-size:41px}.compact #primaryAction{min-height:52px;font-size:17px}.compact #activeParticipant{font-size:18px}.compact #activeTitle{font-size:14px}
+}
+@media(max-height:600px){
+ .compact #clockFace{width:148px}.compact #clockFace #activeTime{font-size:34px}.compact #clockFace #activeClockLabel{font-size:9px}
+ .compact .active-panel{gap:3px}.compact #activeParticipant{font-size:16px}.compact #primaryAction{min-height:46px}
+}
+@media(max-width:340px){.compact main{padding-left:9px;padding-right:9px}.compact #clockFace{width:180px}.compact #clockFace #activeTime{font-size:40px}}
+@media(prefers-reduced-motion:reduce){#clockArc{transition:none}button:active:not(:disabled){transform:none}}
+#clockFace.long-time #activeTime,.compact #clockFace.long-time #activeTime{font-size:34px;letter-spacing:-1.2px}
+@media(max-height:600px){#clockFace.long-time #activeTime,.compact #clockFace.long-time #activeTime{font-size:28px}}
+@media(min-width:700px){.atril #clockFace.long-time #activeTime{font-size:60px}}
+p,.compact #emptyAtril p{color:var(--ms-secondary)}
+.active-panel.over #activeTarget{color:var(--ms-danger)}
+.active-panel.warning #activeTarget{color:var(--ms-warning)}

@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 14
+# Cronómetro de reunión · versión 15
 
 ## Actualización
 
@@ -89,3 +89,16 @@ Opciones reúne el inicio del total, Finalizar reunión, la preparación/consult
 Se mantienen los nombres, la protección contra el doble toque, la selección sin iniciar, los consejos separados, la recuperación al recargar y la opción de deshacer. Abrir Programa u Opciones no detiene ni reinicia los tiempos.
 
 Comprobados mediante pruebas de lógica: funciones anteriores, vista sencilla inicial, apertura y cierre del programa, consulta sin alterar los contadores y persistencia de la vista elegida. También se comprobaron sintaxis, estructura HTML y referencias de controles. La distribución visual en el iPad físico queda pendiente.
+
+
+## Versión 15 · estilo de Mi Servicio
+
+Renovación visual inspirada en Mi Servicio V257: metal cepillado, cristal, tarjetas con relieve, botones con bisel y tipografía del sistema. El modo claro utiliza plata y el modo oscuro materiales más oscuros; se adapta a la apariencia elegida en el dispositivo.
+
+El contador se presenta en una esfera de cristal con un anillo fino. El anillo se vacía según el tiempo restante de la asignación. En consejos, el número sigue mostrando el tiempo transcurrido y el anillo refleja los minutos de consejos previstos; en partes o transiciones sin límite no se muestra un arco de progreso. El ámbar y el rojo continúan indicando los avisos. Los colores de la guía permanecen como detalles de la sección.
+
+Iniciar utiliza un botón azul; Finalizar utiliza un acabado metálico. La etiqueta escrita sigue indicando la acción, sin depender del color. Los materiales tienen reflejos estáticos. El movimiento del anillo respeta la preferencia de reducir movimiento.
+
+IMPORTANTE: incluye también theme.css al sustituir los archivos. La distribución, los accesos Programa/Opciones y todas las funciones anteriores se conservan. No se ha cambiado la clave de datos ni se reinician la sesión o la plantilla al actualizar.
+
+Pruebas de lógica superadas para el anillo, consejos, fases, protección de doble toque, nombres, recuperación de tiempos, selección preparada, deshacer, consulta, bloqueo de edición, avisos, pausa, vistas, resumen y reinicio. Verificados sintaxis, estructura y ZIP. No se ha realizado una comprobación visual en un iPad físico.
