@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 20
+# Cronómetro de reunión · versión 21
 
 ## Actualizar
 
@@ -73,3 +73,18 @@ Opciones → Modo ensayo abre una sesión de práctica con el mismo programa y l
 Para proteger una reunión que está en curso, no se permite entrar en ensayo mientras la sesión real no esté finalizada. Durante el ensayo, la gestión de programas y copias reales se bloquea: sal primero del ensayo. La práctica no se añade a Reuniones anteriores. El total y las notas reales se conservan. Las opciones de guardar en el navegador son necesarias para usar el ensayo.
 
 Se añaden support.js y sus recursos a la caché sin conexión. Actualiza todos los archivos. Se comprobaron la visibilidad de notas y consejos, su conservación en programas, la separación de almacenamiento de ensayo, su recuperación y salida, y el bloqueo de modificaciones en programas reales durante la práctica. Siguen pasando las pruebas de edición sin reiniciar, programas, archivo, recuperación y copia. El mecanismo offline se verificó con una caché simulada; la prueba visual y la apertura en modo avión en Safari siguen pendientes en el iPad físico.
+
+
+## Versión 21 · secciones desplegables
+
+La pantalla se abre por defecto en la vista por secciones, inspirada en la referencia: Apertura, Tesoros, Seamos mejores maestros y Nuestra vida cristiana, con sus colores. Cada sección contiene las intervenciones de tu plantilla y cada intervención puede plegarse para dejar solo el título y su estado.
+
+Al iniciar una asignación se abre su sección y se pliegan las demás; la asignación actual se despliega. Al finalizar se mantiene esa parte abierta para dar el consejo. Iniciar siguiente avanza cuando tú lo pulsas y abre la sección que corresponda. Puedes desplegar otras secciones o partes manualmente sin iniciar ni detener nada.
+
+Cada parte muestra el tiempo transcurrido, el restante, su participante y controles. Si lleva consejos, muestra un contador separado que empieza al finalizar la asignación. En Notas y apoyo puedes escribir una nota breve y consultar tu tarjeta de consejos. La nota se guarda en la sesión actual; guarda el programa semanal si quieres conservarla también en esa plantilla.
+
+El total continúa visible arriba. Para volver al reloj de cristal, usa Opciones → Volver al reloj. Opciones → Vista por secciones recupera esta vista. Se recuerda tu elección. La vista completa y el modo atril siguen disponibles.
+
+No se pierde ninguna función anterior. Si eliges iniciar una parte mientras otra está en marcha, se pide confirmación antes de cambiar. La tarjeta de la parte actual mantiene el flujo Finalizar asignación → consejo → Iniciar siguiente, para separar los tiempos.
+
+Verificados la estructura de secciones, la apertura automática, el plegado manual sin alterar tiempos, los consejos separados, el avance a otra sección, las notas, la recuperación de la vista y la alternancia con el reloj. Siguen pasando las comprobaciones de programas, edición, copias y ensayo. Recursos offline comprobados mediante caché simulada. La revisión visual en el iPad y el modo avión real quedan pendientes.
