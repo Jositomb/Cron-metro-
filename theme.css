@@ -211,3 +211,101 @@ header h1,.compact header h1{font-size:20px;line-height:1.15;margin:0;letter-spa
 }
 @media(max-width:340px){header,.compact header{gap:5px}header h1,.compact header h1{font-size:18px}#programOpen,.compact #programOpen,#toolsDisclosure>summary,.compact #toolsDisclosure>summary{font-size:12px;padding:8px}.total,.compact .total{gap:10px}.total #pace,.compact .total #pace{font-size:13px}}
 @media(prefers-reduced-motion:reduce){#totalArc{transition:none}}
+
+/* Versión 17: una sola composición de cristal, sin cambiar los controles. */
+:root{
+ --ms-front:linear-gradient(125deg,#e2e3e0,#cdd2ce 52%,#dde1dc);
+ --ms-card:linear-gradient(145deg,rgba(250,252,249,.96),rgba(226,233,227,.96));
+ --ms-shadow:#273c381d;
+}
+body{background-image:repeating-linear-gradient(100deg,#ffffff05 0 1px,#23372e02 1px 4px),var(--ms-front)}
+button{box-shadow:inset 0 1px 0 #ffffff75,0 2px 4px var(--ms-shadow)}
+.compact main{gap:8px}
+.compact #meetingPanel{
+ --section-edge:#7d929c;position:relative;isolation:isolate;min-width:0;display:flex;flex-direction:column;gap:0;
+ background:var(--ms-card);border:1px solid var(--ms-border);border-top:3px solid var(--section-edge);border-radius:25px;
+ box-shadow:inset 0 1px 0 var(--ms-shine),0 6px 18px var(--ms-shadow);padding:10px 12px 12px;
+}
+.compact #meetingPanel::before{
+ content:"";position:absolute;inset:0;border-radius:inherit;background:#6288d00b;opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:-1;
+}
+.compact #meetingPanel[data-section=treasures]{--section-edge:#808b90}
+.compact #meetingPanel[data-section=teaching]{--section-edge:#bd8f34}
+.compact #meetingPanel[data-section=living]{--section-edge:#b3474c}
+.compact #meetingPanel[data-moment=advice]::before{opacity:1}
+.compact #meetingPanel>.total{
+ display:grid;grid-template-columns:minmax(0,1fr) 78px;gap:12px;align-items:center;
+ background:transparent;border:0;box-shadow:none;border-radius:0;padding:0 0 8px;margin:0;
+ border-bottom:1px solid var(--ms-border);
+}
+.compact #meetingPanel>.total #totalFace{grid-column:2;grid-row:1;width:78px;justify-self:end;box-shadow:inset 1px 1px 2px var(--ms-shine),inset -1px -2px 3px #304d4424,0 2px 4px var(--ms-shadow),0 0 0 2px #68847b12}
+.compact #meetingPanel>.total .total-brief{grid-column:1;grid-row:1;gap:5px}
+.compact #meetingPanel #totalFace #total{font-size:20px;letter-spacing:-.6px}
+.compact #meetingPanel #totalFace.long-time #total{font-size:16px}
+.compact #meetingPanel #totalFace .total-dial-content{gap:4px;inset:14% 4%}
+.compact #meetingPanel #totalFace .total-dial-content span{font-size:9px;letter-spacing:1px}
+.compact #meetingPanel .total-goal{font-size:12px;font-weight:500}
+.compact #meetingPanel #pace{font-size:13px;font-weight:650;line-height:1.3}
+.compact #meetingPanel>.active-panel{
+ background:transparent;border:0;border-radius:0;box-shadow:none;padding:12px 0 0;margin:0;gap:9px;
+}
+.compact .active-panel>div:first-child{display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;gap:2px}
+.compact #activeState{order:0;font-size:10px;letter-spacing:1.25px;color:var(--ms-secondary);margin-bottom:2px}
+.compact #activeParticipant{order:1;color:var(--ms-text);font-size:23px;font-weight:750;line-height:1.2;letter-spacing:-.5px;margin:2px 0;overflow-wrap:anywhere}
+.compact #activeTitle{order:2;color:var(--ms-secondary);font-size:14px;font-weight:500;line-height:1.3;margin:2px 0;overflow-wrap:anywhere}
+.compact .active-panel:not(.has-participant) #activeTitle{font-size:19px;font-weight:650;letter-spacing:-.3px;color:var(--ms-text)}
+.compact #activeTarget{order:3}
+.compact #clockFace{width:216px;margin:4px auto 8px;box-shadow:inset 1px 2px 3px var(--ms-shine),inset -2px -3px 5px #304d4429,0 4px 8px var(--ms-shadow),0 0 0 4px #68847b15}
+#clockFace::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4872c41a;opacity:0;transition:opacity .25s ease;z-index:0;pointer-events:none}
+.active-panel[data-moment=advice] #clockFace::after{opacity:1}
+#clockFace .dial-ring{z-index:1}#clockFace .dial-content{z-index:2}
+.compact #clockFace #activeTime{font-size:49px;letter-spacing:-1.7px;text-shadow:none}
+.compact #clockFace.long-time #activeTime{font-size:34px;letter-spacing:-1px}
+.compact #clockFace #activeClockLabel{font-size:10px;letter-spacing:.7px}
+.compact #primaryAction{min-height:58px;border-radius:16px;font-size:18px;box-shadow:inset 0 1px 0 #ffffff65,0 3px 7px var(--ms-shadow)}
+.compact #primaryAction[data-intent=finish]{box-shadow:inset 0 1px 0 var(--ms-shine),0 2px 5px var(--ms-shadow)}
+.compact .active-actions #activePause:not([hidden]),.compact #undoAction{min-height:34px;font-size:12px}
+.compact #meetingPanel #upNext{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:9px;row-gap:2px;width:100%;
+ margin:0;padding:8px 10px;background:#365b7e08;border:1px solid var(--ms-border);border-radius:12px;text-align:left;
+}
+.compact #upNextLabel{grid-column:1/-1;grid-row:1;font-size:9px;letter-spacing:.9px}
+.compact #upNextTitle{grid-column:1;grid-row:2;font-size:13px;line-height:1.25;font-weight:600;margin:0;overflow-wrap:anywhere}
+.compact #upNextDuration{grid-column:2;grid-row:2;align-self:center;font-size:11px;line-height:1.25;max-width:100px;text-align:right}
+.compact #meetingPanel #emptyAtril:not([hidden]){background:transparent;border:0;border-radius:0;box-shadow:none;padding:18px 0 0;margin:0}
+.compact #emptyAtril p{font-size:13px;line-height:1.4}
+.compact #emptyAtril #preparedEmpty{font-size:20px;line-height:1.25;font-weight:650;color:var(--ms-text)}
+.compact #beginFirst{min-height:56px;font-size:18px}
+@media(prefers-color-scheme:dark){
+ :root{--ms-front:linear-gradient(125deg,#202c27,#293b32 52%,#1d2d25);--ms-card:linear-gradient(145deg,rgba(53,71,61,.97),rgba(31,48,39,.98));--ms-shadow:#00000038}
+ .compact #meetingPanel::before{background:#7999e211}
+ #clockFace::after{background:#688fdb21}
+ .compact #meetingPanel #upNext{background:#c1d5f208}
+}
+@media(max-height:740px){
+ .compact #meetingPanel{padding:8px 10px 10px;border-radius:22px}
+ .compact #meetingPanel>.total{grid-template-columns:minmax(0,1fr) 68px;gap:9px;padding-bottom:7px}
+ .compact #meetingPanel>.total #totalFace{width:68px}
+ .compact #meetingPanel #totalFace #total{font-size:18px}
+ .compact #meetingPanel #totalFace.long-time #total{font-size:14px}
+ .compact #meetingPanel #totalFace .total-dial-content span{font-size:8px}
+ .compact #meetingPanel>.active-panel{padding-top:9px;gap:7px}
+ .compact #activeParticipant{font-size:21px}
+ .compact #clockFace{width:184px;margin:3px auto 6px}
+ .compact #clockFace #activeTime{font-size:43px}
+ .compact #clockFace.long-time #activeTime{font-size:31px}
+ .compact #primaryAction{min-height:52px;font-size:17px}
+ .compact #meetingPanel #upNext{padding:7px 9px}
+}
+@media(max-height:580px){
+ .compact #clockFace{width:148px}
+ .compact #clockFace #activeTime{font-size:34px}
+ .compact #clockFace.long-time #activeTime{font-size:27px}
+ .compact #activeParticipant{font-size:18px}
+ .compact #activeTitle{font-size:13px}
+ .compact .active-panel:not(.has-participant) #activeTitle{font-size:17px}
+ .compact #primaryAction{min-height:46px}
+}
+@media(max-width:340px){.compact #meetingPanel{padding-left:9px;padding-right:9px}.compact #clockFace{max-width:100%}.compact #activeParticipant{font-size:21px}.compact #primaryAction{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.compact #meetingPanel::before,#clockFace::after{transition:none}}
+.atril #meetingPanel{display:flex;flex-direction:column;flex:1;min-height:0}

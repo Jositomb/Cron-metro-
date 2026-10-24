@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='16',key='cronometro-reunion-v1';
+const BUILD='17',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -46,10 +46,11 @@ $('startTotal').disabled=state.total.started!==null;$('stopTotal').disabled=stat
 state.parts.forEach((p,i)=>{const t=value(p,now),s=statusFor(p,now),row=$('row'+i);$('clock'+i).textContent=fmt(t);row.classList.toggle('active',p.started!==null);row.classList.toggle('over',s.over);row.classList.toggle('warning',s.warning);row.classList.toggle('done',!!p.done);$('hint'+i).textContent=p.min+' min · '+(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining))+(p.done?' · ✓':'');row.querySelector('[data-action=start]').disabled=p.started!==null;row.querySelector('[data-action=stop]').disabled=p.started===null;});updateActivePanel(now);}
 function updateActivePanel(now=Date.now()){
  const i=state.focusIndex,p=i===null?null:state.parts[i],panel=$('activePanel');
- const changed=panel.hidden===Boolean(p);panel.hidden=!p;$('emptyAtril').hidden=!!p;
+ const changed=panel.hidden===Boolean(p);panel.hidden=!p;$('emptyAtril').hidden=!!p;if(!p){$('meetingPanel').dataset.moment='ready';$('meetingPanel').dataset.section='opening';}
  if(p){
   const s=statusFor(p,now),elapsed=value(p,now);
   $('activeState').textContent=p.started!==null?'ASIGNACIÓN':p.done?(p.adviceMin>0?'CONSEJOS':'PRESENTACIÓN'):elapsed>0?'ASIGNACIÓN · EN PAUSA':'ASIGNACIÓN · PREPARADA';panel.dataset.moment=p.done?(p.adviceMin>0?'advice':'presentation'):'assignment';
+  panel.classList.toggle('has-participant',!!p.participant);$('meetingPanel').dataset.moment=panel.dataset.moment;
   $('activeTitle').textContent=p.title;$('activeParticipant').textContent=p.participant;$('activeParticipant').hidden=!p.participant;
   $('activeClockLabel').textContent=compact?(s.over?'EXCESO':p.min>0?'TIEMPO RESTANTE':'TRANSCURRIDO'):'Transcurrido';
   $('activeTime').textContent=compact&&p.min>0?(s.over?'+':'')+fmt(Math.abs(s.remaining)):fmt(elapsed);
@@ -61,6 +62,7 @@ function updateActivePanel(now=Date.now()){
   $('clockFace').classList.toggle('long-time',$('activeTime').textContent.length>6);const dialLimit=(p.done?p.adviceMin:p.min)*60000,dialElapsed=p.done?value(p.after,now):elapsed,dialFraction=dialLimit>0?Math.max(0,Math.min(1,1-dialElapsed/dialLimit)):0;$('clockArc').style.strokeDashoffset=String(289.027*(1-dialFraction));$('clockFace').classList.toggle('no-limit',dialLimit===0);
   const afterOver=p.done&&p.adviceMin>0&&value(p.after,now)>p.adviceMin*60000;panel.classList.toggle('over',p.done?afterOver:s.over);panel.classList.toggle('warning',!p.done&&s.warning);
   let group='';for(let j=0;j<=i;j++)if(state.parts[j].section)group=state.parts[j].section;
+  $('meetingPanel').dataset.section=group==='TESOROS DE LA BIBLIA'?'treasures':group==='SEAMOS MEJORES MAESTROS'?'teaching':group==='NUESTRA VIDA CRISTIANA'?'living':'opening';
   panel.classList.toggle('treasures',group==='TESOROS DE LA BIBLIA');panel.classList.toggle('teaching',group==='SEAMOS MEJORES MAESTROS');panel.classList.toggle('living',group==='NUESTRA VIDA CRISTIANA');
   $('activeStart').hidden=p.started!==null;$('activeStart').textContent=elapsed>0?'▶ Continuar':'▶ Inicio';
   $('activePause').hidden=p.started===null;$('activeStop').hidden=p.done;

@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 16
+# Cronómetro de reunión · versión 17
 
 ## Actualización
 
@@ -113,3 +113,14 @@ La cabecera queda en una sola fila: Reunión, Programa y Opciones. El subtítulo
 La tarjeta del total presenta el círculo y el indicador de ritmo a su lado. En ventanas más bajas, el círculo se reduce para ahorrar espacio. Los tiempos, las asignaciones y las preferencias se mantienen.
 
 Comprobados el avance del anillo de total, su exceso y recuperación, el menú plegado en ambas vistas y la lógica anterior. Verificados HTML, referencias y ZIP. Queda pendiente la comprobación visual en el iPad físico.
+
+
+## Versión 17 · pulido visual sin nuevos pasos
+
+La vista sencilla reúne los dos relojes en un único panel de cristal: el total pequeño ocupa la esquina superior derecha y la asignación mantiene el reloj central. Los bordes y reflejos son más suaves, con menos sombras. El nombre del participante se destaca por encima del título; si no hay nombre, el título gana protagonismo.
+
+El contador cambia ligeramente de tono al pasar a CONSEJOS, sin desplazar los controles. La transición respeta Reducir movimiento. La próxima intervención se muestra en una franja compacta con nombre y minutos. El acabado claro/oscuro y los colores de sección se conservan.
+
+No cambia la lógica de los cronómetros, las etiquetas de los botones ni los pasos para finalizar, dar consejos e iniciar al siguiente. Tampoco cambia los datos guardados. Para actualizar, sustituye todos los archivos, incluido theme.css.
+
+Verificados: sintaxis, estructura HTML, referencias, ZIP, anillos, cambio de fase y sección del panel, consejos separados, nombres, bloqueo de doble toque, recuperación de tiempos, preparación sin iniciar, deshacer, consulta, bloqueo de edición, avisos, pausa, vistas, resumen y reinicio. La distribución visual en el iPad físico queda pendiente de comprobar.
