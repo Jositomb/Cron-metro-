@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 22
+# Bosquejo de presidencia con cronómetros · versión 23
 
 ## Una sola interfaz
 
@@ -57,3 +57,16 @@ La apertura offline requiere HTTPS y una primera carga con internet; en Opciones
 ## Verificación
 
 Pruebas superadas: datos manuales generales y por parte, acompañantes y lectores, guardar/duplicar/cargar/exportar, migración de programas anteriores, edición sin reiniciar, persistencia tras recargar y una sola interfaz visible. Se conservan las comprobaciones de cronómetros, consejos, secciones, notas, copia, recuperación y ensayo. El caché offline se comprobó con una simulación sin red; no se ha verificado una apertura real en modo avión ni el diseño en un iPad físico.
+
+
+## Versión 23 · editar desde cada asignación
+
+Despliega una asignación y abre Editar esta asignación. Desde ahí puedes rellenar título, duración, participante, acompañante, lector, referencias, presentación, textos, bosquejo, preguntas, materiales, lección y notas del consejo. Guardar asignación conserva sus cronómetros y el total; Cancelar descarta lo escrito en ese editor. La ficha vuelve a mostrar los datos guardados. Deshacer se limpia al editar para evitar restaurar datos antiguos.
+
+En Palabras de conclusión aparece Anuncios y un campo específico Anuncios de la congregación dentro de su editor. Usa los mismos datos de anuncios que ya existían: se conservan y no se duplica su contenido al final de la sección. La identificación de conclusión se conserva aunque después cambies su título.
+
+El acceso Preparar se sustituye por Datos generales. Úsalo para fecha, presidente, canciones, oraciones y datos de cierre. Añadir o quitar asignaciones queda plegado dentro de ese formulario, como opción de estructura. Ya no es necesario ir al formulario general para rellenar una parte.
+
+Si la sesión está vinculada a un programa semanal existente, guardar la asignación también actualiza ese programa. Si no hay programa guardado, se conserva en la sesión actual y en la plantilla incluida en la copia exportada; puedes guardar una semana desde Opciones. En ensayo los cambios continúan separados de los datos reales.
+
+Verificados: edición directa sin reiniciar, anuncios en conclusión, validación, conservación al recargar y en plantillas exportables, además de las funciones anteriores. Los archivos y el caché offline se comprobaron mediante simulación. Queda pendiente la revisión visual en el iPad y la apertura real en modo avión.

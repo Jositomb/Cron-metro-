@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='22',key='cronometro-reunion-v1';
+const BUILD='23',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -14,7 +14,7 @@ const running=state.parts.findIndex(p=>p.started!==null);if(running>=0)state.foc
 // Conserva plantillas anteriores y añade preparación y consejos.
 state.meeting=meetingOf(state.meeting);
 let sectionForMigration='';
-state.parts.forEach(p=>{if(!p.id)p.id=newPartId()});
+state.parts.forEach(p=>{if(!p.id)p.id=newPartId();if(!p.role)p.role=/^palabras de conclusi[oó]n/i.test(p.title)?'conclusion':''});
 state.parts.forEach(p=>{if(p.section)sectionForMigration=p.section;p.participant=typeof p.participant==='string'?p.participant.slice(0,120):'';p.adviceMin=Number.isFinite(p.adviceMin)?Math.max(0,Math.min(10,p.adviceMin)):(sectionForMigration==='SEAMOS MEJORES MAESTROS'||p.title==='Lectura de la Biblia'?1:0);p.after=cleanTimer(p.after)});
 state.leadInMin=Number.isFinite(state.leadInMin)?Math.max(0,Math.min(60,state.leadInMin)):0;
 if(!Number.isInteger(state.preparedIndex)||!state.parts[state.preparedIndex]||state.preparedIndex===state.focusIndex)state.preparedIndex=null;
