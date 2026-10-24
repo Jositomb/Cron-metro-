@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 17
+# Cronómetro de reunión · versión 18
 
 ## Actualización
 
@@ -124,3 +124,14 @@ El contador cambia ligeramente de tono al pasar a CONSEJOS, sin desplazar los co
 No cambia la lógica de los cronómetros, las etiquetas de los botones ni los pasos para finalizar, dar consejos e iniciar al siguiente. Tampoco cambia los datos guardados. Para actualizar, sustituye todos los archivos, incluido theme.css.
 
 Verificados: sintaxis, estructura HTML, referencias, ZIP, anillos, cambio de fase y sección del panel, consejos separados, nombres, bloqueo de doble toque, recuperación de tiempos, preparación sin iniciar, deshacer, consulta, bloqueo de edición, avisos, pausa, vistas, resumen y reinicio. La distribución visual en el iPad físico queda pendiente de comprobar.
+
+
+## Versión 18 · cristal azul y mayor contraste
+
+El reloj principal utiliza cristal azul profundo y números blancos. Durante los consejos adopta un tono cálido; la presentación usa azul grisáceo. Las etiquetas escritas identifican cada momento. El ámbar y el rojo siguen diferenciando los avisos de tiempo.
+
+La intervención actual tiene más presencia y la próxima aparece en una franja discreta. Iniciar conserva el botón azul y Finalizar el metálico, con una respuesta breve al pulsar. No se añade ningún paso ni control. Reducir movimiento desactiva la animación de pulsación.
+
+El reloj se amplía cuando hay más espacio y se recoge en ventanas estrechas o bajas, usando el ancho real del contenido y la altura disponible. En ventanas muy pequeñas o con texto ampliado puede ser necesario desplazar la pantalla.
+
+La sesión, la plantilla y los pasos de presidencia no cambian. Para actualizar, sustituye todos los archivos del ZIP, incluido theme.css. La lógica anterior supera sus comprobaciones; queda pendiente la revisión visual en el iPad físico.
