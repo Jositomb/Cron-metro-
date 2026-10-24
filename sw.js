@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='cronometro-reunion-v19',BASE=new URL('./',self.location.href),ASSETS=['./index.html','./app.css?v=19','./model.js?v=19','./timers.js?v=19','./storage.js?v=19','./app.js?v=19','./programs.js?v=19','./offline.js?v=19','./manifest.webmanifest','./icon.svg'];
+const CACHE='cronometro-reunion-v20',BASE=new URL('./',self.location.href),ASSETS=['./index.html','./app.css?v=20','./model.js?v=20','./timers.js?v=20','./storage.js?v=20','./app.js?v=20','./programs.js?v=20','./support.js?v=20','./offline.js?v=20','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 // No skipWaiting: una reunión abierta mantiene su versión hasta cerrar sus ventanas.
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('cronometro-reunion-v')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

@@ -1,4 +1,4 @@
-# Cronómetro de reunión · versión 19
+# Cronómetro de reunión · versión 20
 
 ## Actualizar
 
@@ -56,3 +56,20 @@ La instalación de una actualización no sustituye la versión mientras una vent
 Superadas pruebas de lógica para editar conservando tiempos, migración, guardar/duplicar/cargar semanas, archivar una sesión, recuperar la reunión en curso, importar sin alterar el estado y rechazar copias inválidas. Comprobadas también las funciones anteriores de reloj, anillos, consejos, doble toque, deshacer, preparación de partes, pausa, vistas y resumen.
 
 El manejador sin conexión se comprobó con una caché simulada que sirve página y scripts sin red. La instalación real del service worker y la apertura en modo avión quedan pendientes de comprobar en Safari del iPad; no se dispone de un navegador instalado en este entorno para esa prueba. Verificados sintaxis de todos los scripts, HTML, controles, referencias y ZIP.
+
+
+## Versión 20 · apoyo personal y ensayo
+
+En Consultar / preparar reunión, cada intervención permite añadir opcionalmente:
+
+- Nota de apoyo (300 caracteres).
+- Lección que trabaja el estudiante (120 caracteres).
+- Qué encomiar y qué destacar (250 caracteres cada una).
+
+La nota se muestra plegada bajo el contador. Al finalizar una asignación con consejos, aparece la tarjeta de consejo con tus notas, abierta para consultarla. Puedes plegarla. Si no has escrito nada no se muestra ningún panel. Los textos son tuyos: no se genera ni importa automáticamente el consejo. Se conservan al guardar, duplicar y exportar programas.
+
+Opciones → Modo ensayo abre una sesión de práctica con el mismo programa y los tiempos a cero, separados del almacenamiento real. Una franja ENSAYO recuerda el modo y permite salir. Puedes probar botones y editar notas o nombres: al salir vuelve la sesión real intacta. Si cierras la página durante el ensayo, se recupera ese ensayo y el botón Salir vuelve a la reunión real.
+
+Para proteger una reunión que está en curso, no se permite entrar en ensayo mientras la sesión real no esté finalizada. Durante el ensayo, la gestión de programas y copias reales se bloquea: sal primero del ensayo. La práctica no se añade a Reuniones anteriores. El total y las notas reales se conservan. Las opciones de guardar en el navegador son necesarias para usar el ensayo.
+
+Se añaden support.js y sus recursos a la caché sin conexión. Actualiza todos los archivos. Se comprobaron la visibilidad de notas y consejos, su conservación en programas, la separación de almacenamiento de ensayo, su recuperación y salida, y el bloqueo de modificaciones en programas reales durante la práctica. Siguen pasando las pruebas de edición sin reiniciar, programas, archivo, recuperación y copia. El mecanismo offline se verificó con una caché simulada; la prueba visual y la apertura en modo avión en Safari siguen pendientes en el iPad físico.

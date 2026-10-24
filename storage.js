@@ -1,3 +1,3 @@
 'use strict';
 // Persistencia de la sesión actual, compatible con versiones anteriores.
-function save(){try{localStorage.setItem(key,JSON.stringify(state));storageOK=true;$('status').textContent='Guardado';}catch(e){storageOK=false;$('status').textContent='No se puede guardar';$('notice').textContent='Este navegador no permite guardar. No cierres la página durante la reunión.'}}
+function save(){try{localStorage.setItem(rehearsalActive?rehearsalKey:key,JSON.stringify(state));storageOK=true;$('status').textContent='Guardado';}catch(e){storageOK=false;$('status').textContent='No se puede guardar';$('notice').textContent='Este navegador no permite guardar. No cierres la página durante la reunión.'}}
