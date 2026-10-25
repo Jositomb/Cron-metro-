@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='30',key='cronometro-reunion-v1';
+const BUILD='31',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -37,7 +37,7 @@ function paceAt(now){const i=state.focusIndex;if(i===null)return null;let expect
 
 function acquireWake(){if(navigator.wakeLock&&!wake&&state.total.started!==null){navigator.wakeLock.request('screen').then(w=>{wake=w;w.addEventListener('release',()=>wake=null,{once:true})}).catch(()=>{});}}
 function releaseWake(){if(wake)wake.release().catch(()=>{});wake=null}
-function startPart(i,keepUndo=false){const p=state.parts[i];if(!p)return;if(p.started!==null){state.focusIndex=i;save();tick();return;}if(!keepUndo)remember();stopTransitions();state.parts.forEach((x,j)=>{if(j!==i&&x.started!==null){stop(x);x.done=true}});p.started=Date.now();p.done=false;state.focusIndex=i;if(state.preparedIndex===i)state.preparedIndex=null;if(state.total.started===null)state.total.started=Date.now();state.endedAt=null;save();tick();acquireWake()}
+function startPart(i,keepUndo=false){const p=state.parts[i];if(!p)return;if(p.started!==null){state.focusIndex=i;if(typeof closePreparationForms==='function')closePreparationForms();save();tick();return;}if(!keepUndo)remember();stopTransitions();state.parts.forEach((x,j)=>{if(j!==i&&x.started!==null){stop(x);x.done=true}});p.started=Date.now();p.done=false;state.focusIndex=i;if(state.preparedIndex===i)state.preparedIndex=null;if(state.total.started===null)state.total.started=Date.now();state.endedAt=null;if(typeof closePreparationForms==='function')closePreparationForms();save();tick();acquireWake()}
 function finishPart(i,keepUndo=false){const p=state.parts[i];if(!p||p.done)return;if(!keepUndo)remember();stopTransitions();stop(p);p.done=true;state.focusIndex=i;if(state.total.started!==null)p.after.started=Date.now();save();tick()}
 function resetPart(i){const p=state.parts[i];if(!p)return;if(!confirm('¿Reiniciar el tiempo de esta intervención y sus consejos? El total se conserva.'))return;remember();resetTimer(p);resetTimer(p.after);state.focusIndex=i;save();tick()}
 function nextPart(){const next=upcomingIndex();if(next===null){announce('Has llegado a la última intervención.');return;}remember();if(state.focusIndex!==null)finishPart(state.focusIndex,true);startPart(next,true)}
@@ -83,7 +83,7 @@ function updateActivePanel(now=Date.now()){
  if(changed)requestAnimationFrame(fitScreen);
 }
 
-$('startTotal').onclick=()=>{if(state.total.started===null)state.total.started=Date.now();const focused=state.parts[state.focusIndex];if(focused?.done&&focused.after.started===null)focused.after.started=Date.now();state.endedAt=null;save();tick();acquireWake()};
+$('startTotal').onclick=()=>{if(state.total.started===null)state.total.started=Date.now();const focused=state.parts[state.focusIndex];if(focused?.done&&focused.after.started===null)focused.after.started=Date.now();state.endedAt=null;if(typeof closePreparationForms==='function')closePreparationForms();save();tick();acquireWake()};
 $('stopTotal').onclick=()=>{stopTransitions();state.undo=null;state.parts.forEach(p=>{if(p.started!==null){stop(p);p.done=true}});stop(state.total);state.endedAt=Date.now();save();tick();releaseWake();openSummary()};
 $('resetTotal').onclick=()=>{if(!confirm('¿Reiniciar todos los cronómetros? La plantilla se conserva.'))return;state.parts.forEach(p=>{resetTimer(p);resetTimer(p.after)});state.undo=null;resetTimer(state.total);state.focusIndex=null;state.preparedIndex=null;inputGuardUntil=0;state.endedAt=null;save();announce('Tiempos reiniciados.');tick();releaseWake()};
 $('primaryAction').onclick=()=>guarded(primaryAction);$('undoAction').onclick=undoLast;$('resetSelected').onclick=()=>{if(state.focusIndex!==null)resetPart(state.focusIndex);else announce('Selecciona primero una asignación.');};$('next').onclick=()=>guarded(primaryAction);$('activeNext').onclick=()=>guarded(primaryAction);$('activeStart').onclick=()=>guarded(()=>startPart(state.focusIndex));$('activeStop').onclick=()=>guarded(()=>finishPart(state.focusIndex));$('activePause').onclick=()=>guarded(()=>pausePart(state.focusIndex));$('activeReset').onclick=()=>resetPart(state.focusIndex);$('beginFirst').onclick=()=>guarded(primaryAction);

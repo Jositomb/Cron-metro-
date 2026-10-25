@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 30
+# Bosquejo de presidencia con cronómetros · versión 31
 
 ## Una sola interfaz
 
@@ -133,3 +133,14 @@ El texto de la lección se puede añadir o corregir directamente en ese panel, s
 Se conserva la consulta de la próxima presentación antes de iniciar su cronómetro, el consejo separado y la franja del reloj que sigue en curso mientras consultas otra asignación.
 
 Pruebas superadas: posición de cada elemento en la columna correspondiente, guardado/cancelación del texto sin alterar tiempos, consejo, consulta previa de la próxima parte, programas/duplicados/copia, recuperación y caché simulado. Pendiente revisión visual en el iPad físico. Actualiza todos los archivos y cierra y abre la aplicación.
+
+## Versión 31 · preparación directa y controles más claros
+Toca el tema, el participante, la lección o una canción para abrir su campo de edición dentro de la asignación. Tocar esos datos no abre un cronómetro ni cambia los tiempos. El lápiz conserva el formulario completo y sus opciones menos frecuentes.
+
+Cada parte indica Preparada, En curso, En pausa, Consejo o Finalizada. Los botones dicen Iniciar asignación, Continuar asignación, Finalizar asignación y Finalizar consejo. Ver presentación abre el bosquejo de la próxima parte sin iniciar su reloj; la parte pendiente muestra Cronómetro sin iniciar. Deshacer está junto a los controles y sigue disponible en Opciones.
+
+Al iniciar una asignación se recogen los formularios y quedan visibles el bosquejo, la lección y las notas guardadas. Los borradores que aún no hayas guardado se mantienen en esos campos mientras no se reconstruya la pantalla; para conservarlos entre sesiones pulsa Guardar. Las notas breves siguen guardándose al escribir.
+
+Se conservan los programas, copias, consejo separado, consulta anticipada de la próxima parte, distribución izquierda/derecha, opciones y reunión de fin de semana.
+
+Verificados los accesos directos de edición, separación de tiempos, estados, deshacer, conservación de borradores al recoger formularios y regresión de programas y copias. Pendiente revisión visual en un iPad físico. Actualiza todos los archivos y cierra y vuelve a abrir la aplicación.
