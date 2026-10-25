@@ -151,3 +151,6 @@ Antes de Anuncios aparecen Resumen de la reunión y Adelanto de la próxima reun
 Orden del cierre: resumen, adelanto, anuncios, canción y oración final. Los tres primeros bloques tienen acentos suaves en verde, azul y ámbar. El reloj tiene una superficie discreta y las tarjetas abiertas un acento con el color de su sección. No se repite el estado en la cabecera y el interior al abrir una tarjeta; el aviso Cronómetro sin iniciar se reserva a la consulta de otra asignación durante la reunión. Se mantienen las letras legibles, modo oscuro y adaptación al móvil.
 
 Probados orden y edición de los bloques, conservación de textos anteriores, tiempos, programas, duplicados, copias, consulta anticipada y regresión de fin de semana. Pendiente revisión visual en el iPad físico. Sustituye todos los archivos y cierra y vuelve a abrir la aplicación.
+
+## Versión 33 · Inicio con color
+Bienvenida, tarjetas azul petróleo y terracota, iconos destacados y fondo suave. Adaptación al móvil, modo oscuro y navegación por teclado. Los datos, relojes y pantallas de reunión se conservan.
