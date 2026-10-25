@@ -154,3 +154,6 @@ Probados orden y edición de los bloques, conservación de textos anteriores, ti
 
 ## Versión 33 · Inicio con color
 Bienvenida, tarjetas azul petróleo y terracota, iconos destacados y fondo suave. Adaptación al móvil, modo oscuro y navegación por teclado. Los datos, relojes y pantallas de reunión se conservan.
+
+## Versión 34 · azul petróleo y tarjetas de color
+Acabado oscuro uniforme, también si el sistema usa apariencia clara. Fondo azul petróleo, tarjetas azules, detalles turquesa, consejo ámbar y bloques de conclusión verdes, azules y dorados. Se conservan los colores de las secciones y las alertas de exceso. No añade controles ni cambia datos, relojes o distribución. La pantalla de inicio y el fin de semana comparten la nueva paleta. Probadas las funciones y el caché; pendiente revisión visual en el dispositivo físico.
