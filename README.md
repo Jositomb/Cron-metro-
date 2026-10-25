@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 25
+# Bosquejo de presidencia con cronómetros · versión 26
 
 ## Una sola interfaz
 
@@ -82,3 +82,14 @@ Para uso sin conexión, primero abre la app en su dirección HTTPS con internet 
 
 ## Versión 25 · numeración de las asignaciones
 La primera parte de Tesoros lleva el número 1. La apertura y las palabras de conclusión no llevan número ni cuentan para la secuencia. La misma numeración aparece al elegir la próxima asignación. Este ajuste solo cambia la presentación: conserva los títulos, datos, programas y tiempos.
+
+## Versión 26 · preparar cada parte en su lugar
+El botón Datos generales desaparece. La introducción contiene fecha, presidente, canción y oración inicial, y las palabras de bienvenida. La conclusión contiene anuncios, próxima reunión, repaso, canción y oración final. Los datos ya escritos en versiones anteriores aparecen en estas partes sin necesidad de copiarlos.
+
+Editar esta asignación muestra los campos adecuados al tipo: Tesoros, perlas, lectura, estudiante con acompañante, discurso de estudiante, vida cristiana y estudio de congregación. El tipo se puede corregir en la propia edición. Los consejos se reservan a lectura y estudiantes. Si se cambia de tipo, los campos que ya contenían información se conservan en Otros datos que ya habías guardado. Los campos sin guardar se pierden al salir de la página.
+
+Una tarjeta Canción intermedia se coloca por defecto antes de Nuestra vida cristiana, como en el esquema de referencia. Permite introducir número o título y moverla antes de Seamos mejores maestros. No crea un contador ni altera la numeración. Sus datos se incluyen en los programas y copias de seguridad.
+
+Opciones > Organizar asignaciones permite añadir o quitar partes y ajustar títulos, duración o secciones; los participantes y el bosquejo se editan dentro de cada asignación. Los datos y tiempos existentes se conservan al actualizar, siempre en la misma dirección web y navegador. No borres el almacenamiento. Sube todos los archivos de este ZIP y cierra todas las ventanas para activar el nuevo caché.
+
+Verificadas edición contextual, conservación de tiempos, copia/duplicado/importación de programas y caché sin conexión simulado. Sigue pendiente la comprobación visual y de instalación en un iPad físico.
