@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 23
+# Bosquejo de presidencia con cronómetros · versión 24
 
 ## Una sola interfaz
 
@@ -70,3 +70,12 @@ El acceso Preparar se sustituye por Datos generales. Úsalo para fecha, presiden
 Si la sesión está vinculada a un programa semanal existente, guardar la asignación también actualiza ese programa. Si no hay programa guardado, se conserva en la sesión actual y en la plantilla incluida en la copia exportada; puedes guardar una semana desde Opciones. En ensayo los cambios continúan separados de los datos reales.
 
 Verificados: edición directa sin reiniciar, anuncios en conclusión, validación, conservación al recargar y en plantillas exportables, además de las funciones anteriores. Los archivos y el caché offline se comprobaron mediante simulación. Queda pendiente la revisión visual en el iPad y la apertura real en modo avión.
+
+## Versión 24 · dos reuniones desde Inicio
+Abre index.html: permite entrar a Entre semana o Fin de semana. La reunión de entre semana conserva todos sus datos existentes, usando la misma dirección y dispositivo. No borres el almacenamiento del navegador al actualizar. Sube TODOS los archivos del ZIP a la misma carpeta de tu web; conserva weekday.html y weekend.html. Cierra todas las ventanas de la app y vuelve a abrir para activar la actualización.
+
+Fin de semana tiene dos tarjetas: discurso público y estudio de La Atalaya. Edita los datos directamente en cada asignación. El discurso admite tema, discursante, canción, próximo discursante, tema del próximo discurso y notas. La Atalaya admite tema, conductor, canción, lector y notas. Duraciones iniciales de 30 y 60 minutos, siempre editables. Los dos cronómetros son independientes: solo se permite una parte en marcha a la vez. Pausar o finalizar una parte no detiene el total; Finalizar reunión detiene todo. Volver a Inicio o cerrar la página no detiene los relojes; al reabrir incluyen el tiempo transcurrido. Reiniciar tiempos mantiene los datos escritos.
+
+La copia de seguridad del fin de semana se exporta e importa desde su propia pantalla, por separado de los programas entre semana. Importar sustituye la sesión de fin de semana tras confirmación y deja los relojes pausados. Los campos se guardan al pulsar Guardar asignación. Los cambios que aún no hayas guardado se pierden al salir.
+
+Para uso sin conexión, primero abre la app en su dirección HTTPS con internet y espera el aviso de disponibilidad. Inicio, Entre semana y Fin de semana quedan preparados en el mismo caché. Verificado con pruebas de lógica y caché simulado; pendiente revisión visual y prueba de instalación en un iPad físico.

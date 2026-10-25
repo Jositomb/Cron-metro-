@@ -1,0 +1,2 @@
+'use strict';
+(function(){for(const [id,key] of [['weekdayStatus','cronometro-reunion-v1'],['weekendStatus','cronometro-weekend-v1']]){try{const data=JSON.parse(localStorage.getItem(key)||'null');if(data?.total?.started!=null)document.getElementById(id).textContent='● Reunión en curso · continuar';else if(data?.total?.elapsed>0)document.getElementById(id).textContent='Tiempos guardados';}catch(e){}}})();
