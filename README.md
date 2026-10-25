@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 26
+# Bosquejo de presidencia con cronómetros · versión 27
 
 ## Una sola interfaz
 
@@ -93,3 +93,14 @@ Una tarjeta Canción intermedia se coloca por defecto antes de Nuestra vida cris
 Opciones > Organizar asignaciones permite añadir o quitar partes y ajustar títulos, duración o secciones; los participantes y el bosquejo se editan dentro de cada asignación. Los datos y tiempos existentes se conservan al actualizar, siempre en la misma dirección web y navegador. No borres el almacenamiento. Sube todos los archivos de este ZIP y cierra todas las ventanas para activar el nuevo caché.
 
 Verificadas edición contextual, conservación de tiempos, copia/duplicado/importación de programas y caché sin conexión simulado. Sigue pendiente la comprobación visual y de instalación en un iPad físico.
+
+## Versión 27 · vista más sencilla y limpia
+Cabecera con Entre semana, total circular y menú de opciones. Una sola sección y una sola asignación desplegada: abrir otra no altera los cronómetros. La fila plegada muestra tema, participante y duración.
+
+Un botón principal permite Iniciar, Finalizar asignación e Iniciar siguiente. En lectura y asignaciones de estudiantes, finalizar congela el tiempo del estudiante y destaca el reloj separado de CONSEJO. Al iniciar la siguiente, el consejo termina y el siguiente cronómetro empieza desde su propio tiempo. La última parte ofrece Finalizar reunión para pulsarlo después de la canción y la oración final. A continuación muestra la siguiente parte y su participante, respetando la asignación que hayas dejado preparada.
+
+El lápiz abre los datos esenciales; Añadir notas o detalles contiene el bosquejo, los apoyos y el tipo de asignación. Los textos que ya habías preparado se conservan y siguen visibles en el bosquejo. El menú de puntos de cada parte contiene Reiniciar; Opciones incluye Deshacer último cambio y Elegir próxima asignación.
+
+Paleta suave, fondo liso, sombras reducidas, canciones en una franja compacta, adaptación a pantalla estrecha, modo oscuro y reducción de movimiento. La reunión de fin de semana y la pantalla principal comparten el acabado más limpio.
+
+Actualiza todos los archivos sin borrar los datos del navegador. Cierra todas las ventanas de la aplicación para activar la nueva versión. Verificados la navegación de los desplegables, la edición, el consejo separado, los controles, las copias, los relojes y el caché simulado. Pendiente la comprobación visual e instalación en un iPad físico.
