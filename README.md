@@ -160,3 +160,10 @@ Acabado oscuro uniforme, también si el sistema usa apariencia clara. Fondo azul
 
 ## Versión 35 · cierre fiable del menú
 El botón de puntos controla explícitamente apertura y cierre sin depender del cambio nativo del desplegable. Cierra también al tocar fuera, pulsar Escape, elegir una acción habilitada o pulsar Cerrar. Cabecera de menú fija y desplazamiento interno limitado al alto de pantalla. v35 aparece junto a Opciones para reconocer la actualización. No cambia datos ni tiempos. Probados los eventos de cierre y el caché; pendiente prueba táctil en el iPad físico.
+
+## Versión 36 · nueva reunión y cuaderno del consejo
+Opciones > Preparar nueva reunión limpia nombres, temas, notas, lecciones, trazos y tiempos de la sesión, tras confirmación. Conserva las secciones, tipos, duraciones y minutos de consejo. Los títulos pasan a nombres genéricos según su tipo. Desvincula el programa cargado para conservar intactos los programas guardados. En fin de semana hay un botón equivalente que conserva sus duraciones. Reiniciar reunión sigue poniendo solo tiempos a cero.
+
+En cada lectura o asignación de estudiante, abre Cuaderno para el consejo, en el panel de la lección. Escribe con Apple Pencil o un ratón; el contacto táctil se ignora para evitar trazos con la mano. El lienzo permite lápiz, goma de trazos completos, deshacer trazo y borrar con confirmación. Para desplazar la página, desliza fuera del lienzo. No convierte la escritura a texto. Los trazos se guardan al levantar el lápiz y se incluyen en los programas y copias. Guardar trazos invalida Deshacer del cronómetro para que este no borre escritura posterior; Deshacer trazo actúa solo sobre el cuaderno.
+
+Límites por estudiante: 300 trazos y 6000 puntos. El reloj no se detiene al escribir. Pruebas de eventos simulados de lápiz, goma, deshacer, conservación de tiempos, copias y limpieza de sesión superadas. Pendiente prueba de escritura, respuesta táctil y apariencia con Apple Pencil en el iPad físico.
