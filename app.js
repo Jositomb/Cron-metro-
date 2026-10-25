@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='28',key='cronometro-reunion-v1';
+const BUILD='29',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -29,7 +29,8 @@ function remember(){const {undo,...rest}=state;state.undo=JSON.parse(JSON.string
 function undoLast(){if(!state.undo)return;const previous=state.undo;state.parts=previous.parts;state.focusIndex=previous.focusIndex;state.preparedIndex=previous.preparedIndex??null;inputGuardUntil=0;state.endedAt=previous.endedAt;state.undo=null;if(state.total.started===null){state.parts.forEach(p=>{stop(p);stop(p.after)})}save();render();announce('Último cambio deshecho. El total se conserva.');}
 function stopTransitions(){state.parts.forEach(p=>stop(p.after))}
 function pausePart(i){const p=state.parts[i];if(!p)return;remember();stop(p);p.done=false;state.focusIndex=i;save();tick()}
-function primaryAction(){const i=state.focusIndex,p=i===null?null:state.parts[i];if(!p){startPart(upcomingIndex()??0);return;}if(p.started!==null){finishPart(i);return;}if(!p.done){startPart(i);return;}if(upcomingIndex()!==null)nextPart();else announce('Programa terminado. Finaliza el total después de la canción y la oración.');}
+function finishCounsel(i){const p=state.parts[i];if(!p||!p.done||p.after.started===null)return;remember();stop(p.after);save();tick();announce((isStudentPart(p)&&p.adviceMin>0?'Consejo finalizado.':'Presentación finalizada.')+' El tiempo de la próxima asignación sigue detenido.');}
+function primaryAction(){const i=state.focusIndex,p=i===null?null:state.parts[i];if(!p){startPart(upcomingIndex()??0);return;}if(p.started!==null){finishPart(i);return;}if(!p.done){startPart(i);return;}if(isStudentPart(p)&&p.adviceMin>0&&p.after.started!==null)finishCounsel(i);if(upcomingIndex()!==null){if(typeof previewNextPart==='function')previewNextPart();else openPrepare();}else if(state.total.started!==null)$('stopTotal').onclick();}
 function paceAt(now){const i=state.focusIndex;if(i===null)return null;let expected=state.leadInMin*60000;for(let j=0;j<i;j++)expected+=(state.parts[j].min+state.parts[j].adviceMin)*60000;const p=state.parts[i];expected+=p.done?p.min*60000+Math.min(value(p.after,now),p.adviceMin*60000):Math.min(value(p,now),p.min*60000);return value(state.total,now)-expected;}
 
 
@@ -58,7 +59,7 @@ function updateActivePanel(now=Date.now()){
   $('activeTime').textContent=compact&&p.min>0?(s.over?'+':'')+fmt(Math.abs(s.remaining)):fmt(elapsed);
   $('activeElapsed').textContent='Transcurrido '+fmt(elapsed)+' · previsto '+p.min+' min';
   if(p.done){$('activeClockLabel').textContent=p.adviceMin>0?'CONSEJOS':'PRESENTACIÓN';$('activeTime').textContent=fmt(value(p.after,now));$('activeElapsed').textContent='Asignación finalizada: '+fmt(elapsed);}
-  $('primaryAction').textContent=p.started!==null?'Finalizar asignación':p.done?'Iniciar siguiente':elapsed>0?'Continuar asignación':'Iniciar asignación';$('primaryAction').disabled=p.done&&i===state.parts.length-1;$('undoAction').disabled=!state.undo;
+  $('primaryAction').textContent=p.started!==null?'Finalizar asignación':p.done?'Ver próxima asignación':elapsed>0?'Continuar asignación':'Iniciar asignación';$('primaryAction').disabled=p.done&&i===state.parts.length-1;$('undoAction').disabled=!state.undo;
   $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min');
   if(p.done)$('activeTarget').textContent=p.adviceMin>0?'Consejos previstos: '+p.adviceMin+' min':'El total sigue contando';
   $('clockFace').classList.toggle('long-time',$('activeTime').textContent.length>6);const dialLimit=(p.done?p.adviceMin:p.min)*60000,dialElapsed=p.done?value(p.after,now):elapsed,dialFraction=dialLimit>0?Math.max(0,Math.min(1,1-dialElapsed/dialLimit)):0;$('clockArc').style.strokeDashoffset=String(289.027*(1-dialFraction));$('clockFace').classList.toggle('no-limit',dialLimit===0);
@@ -73,7 +74,7 @@ function updateActivePanel(now=Date.now()){
   const nextIndex=upcomingIndex(),next=nextIndex===null?null:state.parts[nextIndex];$('upNextLabel').textContent=next?(state.preparedIndex!==null?'PREPARADA · SIN INICIAR':'A CONTINUACIÓN'):'FIN DEL PROGRAMA';$('upNextTitle').textContent=next?next.title+(next.participant?' · '+next.participant:''):'Última intervención';$('upNextDuration').textContent=next?next.min+' min':'Finaliza el total después de la canción y la oración.';
  }
  const focused=state.parts[state.focusIndex],nextIndex=upcomingIndex();
- const actionLabel=!focused?namedStart(nextIndex,'Iniciar primera asignación'):focused.started!==null?'Finalizar asignación':focused.done?namedStart(nextIndex,'Iniciar siguiente'):value(focused,now)>0?'Continuar asignación':namedStart(state.focusIndex,'Iniciar asignación');
+ const actionLabel=!focused?namedStart(nextIndex,'Iniciar primera asignación'):focused.started!==null?'Finalizar asignación':focused.done?'Ver próxima asignación':value(focused,now)>0?'Continuar asignación':namedStart(state.focusIndex,'Iniciar asignación');
  const lastDone=!!focused&&focused.done&&nextIndex===null;
  ['next','activeNext','primaryAction'].forEach(id=>{$(id).textContent=lastDone?'Programa terminado':actionLabel;$(id).disabled=lastDone||now<inputGuardUntil;$(id).dataset.intent=lastDone?'complete':focused?.started!==null&&focused?'finish':'start'});
  $('beginFirst').textContent=namedStart(nextIndex,'Iniciar primera asignación');$('beginFirst').disabled=now<inputGuardUntil;

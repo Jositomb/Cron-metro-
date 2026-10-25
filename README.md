@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 28
+# Bosquejo de presidencia con cronómetros · versión 29
 
 ## Una sola interfaz
 
@@ -115,3 +115,12 @@ Si hay texto guardado, el globo lo muestra primero. Ver enlace intenta mostrar l
 El texto y el enlace se incluyen en programas, duplicados y copias de seguridad. Solo se aceptan enlaces HTTPS sin credenciales. La vista del enlace se descarta al cerrar el globo.
 
 Probadas apertura/cierre sin alterar relojes, consejo separado, controles del globo, texto guardado, persistencia y validación de enlaces. La carga real de páginas externas y la apariencia en iPad requieren comprobación en ese dispositivo.
+
+## Versión 29 · presentar la siguiente antes de iniciar su cronómetro
+Se retira Iniciar siguiente. Abrir una asignación desde su encabezado o desde Ver asignación solo permite consultar su presentación, tema y bosquejo. Su tiempo no empieza hasta pulsar Iniciar dentro de esa tarjeta. La pantalla consultada y la parte cronometrada se mantienen separadas: finalizar la anterior no vuelve a cerrar la próxima presentación.
+
+Si consultas otra parte mientras corre un reloj, una franja muestra el tiempo en curso y permite volver a él o finalizarlo. En las asignaciones con consejo, Finalizar asignación detiene al estudiante y comienza el consejo. Finalizar consejo detiene ese contador; el total continúa mientras presentas la siguiente parte. El siguiente estudiante empieza a contar cuando pulses Iniciar en su tarjeta. Ver próxima asignación nunca inicia el siguiente contador.
+
+La vista de la lección ya no intenta incrustar la web: jw.org utiliza X-Frame-Options SAMEORIGIN, por lo que esa vista no puede usarse desde esta aplicación. El enlace original se ofrece como enlace externo explícito. Para consultar sin salir del cronómetro, pega el texto en el propio globo y pulsa Guardar texto. Se conserva para uso sin conexión. No se descarga automáticamente el contenido del enlace.
+
+Pruebas: consulta anticipada sin alterar tiempos, permanencia de la presentación al finalizar otra parte, franja del reloj activo, consejo separado, inicio manual del siguiente estudiante, guardado de texto desde el globo, programas y copias, caché simulado y regresión de fin de semana. La navegación real del enlace externo depende del navegador y JW Library del dispositivo.
