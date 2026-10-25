@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 29
+# Bosquejo de presidencia con cronómetros · versión 30
 
 ## Una sola interfaz
 
@@ -124,3 +124,12 @@ Si consultas otra parte mientras corre un reloj, una franja muestra el tiempo en
 La vista de la lección ya no intenta incrustar la web: jw.org utiliza X-Frame-Options SAMEORIGIN, por lo que esa vista no puede usarse desde esta aplicación. El enlace original se ofrece como enlace externo explícito. Para consultar sin salir del cronómetro, pega el texto en el propio globo y pulsa Guardar texto. Se conserva para uso sin conexión. No se descarga automáticamente el contenido del enlace.
 
 Pruebas: consulta anticipada sin alterar tiempos, permanencia de la presentación al finalizar otra parte, franja del reloj activo, consejo separado, inicio manual del siguiente estudiante, guardado de texto desde el globo, programas y copias, caché simulado y regresión de fin de semana. La navegación real del enlace externo depende del navegador y JW Library del dispositivo.
+
+## Versión 30 · apoyo a la izquierda, cronómetro a la derecha
+Se elimina la ventana flotante de la lección. La tarjeta de la asignación muestra a la izquierda el bosquejo, la lección con su texto guardado, Qué encomiar, Qué destacar, las notas para la presidencia y la edición. A la derecha quedan solo el cronómetro, el consejo y los controles.
+
+El texto de la lección se puede añadir o corregir directamente en ese panel, sin cambiar de pantalla. La fuente se conserva como enlace externo explícito. Los textos y enlaces ya guardados aparecen automáticamente en la columna izquierda; no se borra ningún dato. En tabletas anchas los controles permanecen a la vista al recorrer una lección larga. En pantallas estrechas, el reloj aparece arriba y el contenido debajo.
+
+Se conserva la consulta de la próxima presentación antes de iniciar su cronómetro, el consejo separado y la franja del reloj que sigue en curso mientras consultas otra asignación.
+
+Pruebas superadas: posición de cada elemento en la columna correspondiente, guardado/cancelación del texto sin alterar tiempos, consejo, consulta previa de la próxima parte, programas/duplicados/copia, recuperación y caché simulado. Pendiente revisión visual en el iPad físico. Actualiza todos los archivos y cierra y abre la aplicación.
