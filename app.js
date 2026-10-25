@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='34',key='cronometro-reunion-v1';
+const BUILD='35',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -141,7 +141,3 @@ function initCompact(){
 
 function placeProgramList(inDialog=compact||atril){$(inDialog?'programListHost':'fullProgramHost').append($('partsDisclosure'));$('partsDisclosure').open=true;}
 
-// El menú siempre se despliega sobre el contenido, sin ampliar la cabecera.
-$('toolsDisclosure').addEventListener('click',e=>{if(e.target.closest('button'))$('toolsDisclosure').open=false});
-document.addEventListener('pointerdown',e=>{if(!$('toolsDisclosure').contains(e.target))$('toolsDisclosure').open=false});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('toolsDisclosure').open=false});
