@@ -6,3 +6,7 @@ function templateOf(session){return {name:session.programName||'Mi reunión',mee
 
 const rehearsalKey='cronometro-rehearsal-v1';let rehearsalActive=false;try{rehearsalActive=localStorage.getItem('cronometro-rehearsal-active')==='1'}catch(e){}
 function validSupport(p){return [['supportNote',300],['lesson',120],['praise',250],['emphasis',250]].every(([k,n])=>p[k]===undefined||typeof p[k]==='string'&&p[k].length<=n)}
+
+// La apertura y la conclusión no forman parte de la numeración de la guía.
+function isUnnumberedPart(parts,index){const p=parts[index];if(!p)return true;if(p.role==='conclusion'||/^palabras de (introducci[oó]n|apertura|conclusi[oó]n|cierre)/i.test(p.title||''))return true;const treasures=parts.findIndex(x=>x.section==='TESOROS DE LA BIBLIA');return treasures>=0&&index<treasures;}
+function numberedPartTitle(parts,index){const p=parts[index];if(!p)return '';if(isUnnumberedPart(parts,index))return p.title;let number=0;for(let i=0;i<=index;i++)if(!isUnnumberedPart(parts,i))number++;return number+'. '+p.title;}

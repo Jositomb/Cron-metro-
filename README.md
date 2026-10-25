@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 24
+# Bosquejo de presidencia con cronómetros · versión 25
 
 ## Una sola interfaz
 
@@ -79,3 +79,6 @@ Fin de semana tiene dos tarjetas: discurso público y estudio de La Atalaya. Edi
 La copia de seguridad del fin de semana se exporta e importa desde su propia pantalla, por separado de los programas entre semana. Importar sustituye la sesión de fin de semana tras confirmación y deja los relojes pausados. Los campos se guardan al pulsar Guardar asignación. Los cambios que aún no hayas guardado se pierden al salir.
 
 Para uso sin conexión, primero abre la app en su dirección HTTPS con internet y espera el aviso de disponibilidad. Inicio, Entre semana y Fin de semana quedan preparados en el mismo caché. Verificado con pruebas de lógica y caché simulado; pendiente revisión visual y prueba de instalación en un iPad físico.
+
+## Versión 25 · numeración de las asignaciones
+La primera parte de Tesoros lleva el número 1. La apertura y las palabras de conclusión no llevan número ni cuentan para la secuencia. La misma numeración aparece al elegir la próxima asignación. Este ajuste solo cambia la presentación: conserva los títulos, datos, programas y tiempos.

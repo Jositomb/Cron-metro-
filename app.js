@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='24',key='cronometro-reunion-v1';
+const BUILD='25',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -24,7 +24,7 @@ function upcomingIndex(){if(Number.isInteger(state.preparedIndex)&&state.parts[s
 function namedStart(i,fallback){const name=state.parts[i]?.participant;return name?'Iniciar a '+name:fallback;}
 function meetingInProgress(){return !state.endedAt&&(state.total.started!==null||value(state.total)>0);}
 function stagePart(i){if(!Number.isInteger(i)||!state.parts[i]||i===state.focusIndex){announce('Elige una intervención distinta de la actual.');return false;}remember();state.preparedIndex=i;save();tick();announce('Preparada: '+state.parts[i].title+'. Su cronómetro sigue detenido.');return true;}
-function openPrepare(){const select=$('prepareSelect');select.replaceChildren();state.parts.forEach((p,i)=>{if(i===state.focusIndex)return;const option=document.createElement('option');option.value=i;option.textContent=(i+1)+'. '+p.title+(p.participant?' · '+p.participant:'');select.append(option)});const next=upcomingIndex();if(next!==null)select.value=String(next);$('prepareSave').disabled=state.parts.length<=1&&state.focusIndex!==null;$('toolsDisclosure').open=false;$('programDialog').close();$('prepareDialog').showModal();}
+function openPrepare(){const select=$('prepareSelect');select.replaceChildren();state.parts.forEach((p,i)=>{if(i===state.focusIndex)return;const option=document.createElement('option');option.value=i;option.textContent=numberedPartTitle(state.parts,i)+(p.participant?' · '+p.participant:'');select.append(option)});const next=upcomingIndex();if(next!==null)select.value=String(next);$('prepareSave').disabled=state.parts.length<=1&&state.focusIndex!==null;$('toolsDisclosure').open=false;$('programDialog').close();$('prepareDialog').showModal();}
 function remember(){const {undo,...rest}=state;state.undo=JSON.parse(JSON.stringify({parts:rest.parts,focusIndex:rest.focusIndex,preparedIndex:rest.preparedIndex,endedAt:rest.endedAt??null}));}
 function undoLast(){if(!state.undo)return;const previous=state.undo;state.parts=previous.parts;state.focusIndex=previous.focusIndex;state.preparedIndex=previous.preparedIndex??null;inputGuardUntil=0;state.endedAt=previous.endedAt;state.undo=null;if(state.total.started===null){state.parts.forEach(p=>{stop(p);stop(p.after)})}save();render();announce('Último cambio deshecho. El total se conserva.');}
 function stopTransitions(){state.parts.forEach(p=>stop(p.after))}
