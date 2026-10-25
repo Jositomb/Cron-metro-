@@ -1,4 +1,4 @@
-# Bosquejo de presidencia con cronómetros · versión 27
+# Bosquejo de presidencia con cronómetros · versión 28
 
 ## Una sola interfaz
 
@@ -104,3 +104,14 @@ El lápiz abre los datos esenciales; Añadir notas o detalles contiene el bosque
 Paleta suave, fondo liso, sombras reducidas, canciones en una franja compacta, adaptación a pantalla estrecha, modo oscuro y reducción de movimiento. La reunión de fin de semana y la pantalla principal comparten el acabado más limpio.
 
 Actualiza todos los archivos sin borrar los datos del navegador. Cierra todas las ventanas de la aplicación para activar la nueva versión. Verificados la navegación de los desplegables, la edición, el consejo separado, los controles, las copias, los relojes y el caché simulado. Pendiente la comprobación visual e instalación en un iPad físico.
+
+## Versión 28 · lección en un globo sobre el cronómetro
+Dentro de Editar asignación, en las lecturas y asignaciones de estudiantes, escribe el número o título de la lección y un enlace HTTPS opcional. En Añadir notas o detalles puedes pegar el texto de la lección (hasta 16.000 caracteres) para consultarlo sin conexión. Guardar conserva los tiempos.
+
+Al tocar el botón de la lección se abre un globo con Cerrar, el tiempo de la asignación o del consejo y el total de reunión. Los relojes continúan. Si esa es la parte activa, también permite finalizarla o pasar a la siguiente desde el globo, respetando la separación del consejo. Consultar la lección de otra parte no cambia la parte activa.
+
+Si hay texto guardado, el globo lo muestra primero. Ver enlace intenta mostrar la página dentro de un marco aislado, sin navegar fuera de la aplicación. Algunas páginas pueden impedir esa visualización o necesitar internet; en ese caso usa el texto guardado. No se descarga ni extrae automáticamente el contenido del enlace, ni se guarda la página web para uso sin conexión.
+
+El texto y el enlace se incluyen en programas, duplicados y copias de seguridad. Solo se aceptan enlaces HTTPS sin credenciales. La vista del enlace se descarta al cerrar el globo.
+
+Probadas apertura/cierre sin alterar relojes, consejo separado, controles del globo, texto guardado, persistencia y validación de enlaces. La carga real de páginas externas y la apariencia en iPad requieren comprobación en ese dispositivo.
