@@ -1,0 +1,31 @@
+name: Actualizar guía y publicar cronómetro
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: '25 5 * * 0'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Descargar y validar guía oficial
+        run: python3 update-guide.py
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deploy
