@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 40
+# Mi Presidencia · versión 41
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -18,3 +18,6 @@ La importación reemplaza la preparación actual tras confirmarlo, conserva nomb
 Comprueba el tema, participantes, canciones y conclusión; prueba el inicio, fin y consejo. Abre la web con conexión en ambos dispositivos antes de salir. Confirma que muestre Disponible sin conexión y conserva el JSON exportado. Prueba también el Apple Pencil real en tu iPad.
 
 Validación: lógica de cronómetros, conservación de datos, transferencia de preparación y caché sin conexión comprobadas con pruebas automáticas. La interfaz nueva y la transferencia mediante AirDrop deben comprobarse en Safari del iPad y del iPhone.
+
+## Corrección del formulario de fin de semana
+Se corrige un error al crear el campo de notas que podía detener la carga del formulario en Safari. Guardar y cerrar aparece arriba y abajo de cada formulario. Al pasar a Dirigir, los formularios abiertos se validan y guardan; si algún dato no es válido, se mantiene la edición abierta. Tema y participante aparecen antes del reloj en el móvil. Reiniciar está dentro de los tres puntos del cronómetro y el resto de herramientas se despliega al pie.
