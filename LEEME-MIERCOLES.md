@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 43
+# Mi Presidencia · versión 44
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -27,3 +27,6 @@ Asignaciones y consejos se muestran en círculos de 112 px (104 px en móviles e
 
 ## Orientación compacta
 El selector Preparar/Dirigir está recogido en una esquina. La franja fija muestra la asignación cuyo cronómetro está activo, el consejo o la última asignación seleccionada. Antes de iniciar, muestra Viendo para distinguir una consulta de una intervención en marcha. Tocar la franja abre esa misma asignación sin iniciar, detener ni avanzar relojes. El estado local y la transferencia se consultan dentro de los tres puntos.
+
+## Vista de atril
+Selecciona Dirigir: se recoge el programa y destaca la asignación consultada. Programa permite ver todas las secciones. La tarjeta Después abre la siguiente presentación sin iniciar su cronómetro. La franja superior indica el reloj activo y permite regresar a él. Preparar conserva el acceso a todos los campos de edición. Canciones, consejos, notas y herramientas se mantienen. Revisa el resultado en Safari antes del uso real.
