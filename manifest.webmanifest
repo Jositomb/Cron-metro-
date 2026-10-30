@@ -1,1 +1,1 @@
-{"name":"Cronómetro de reunión","short_name":"Reunión","id":"./","start_url":"./","scope":"./","display":"standalone","background_color":"#10232f","theme_color":"#10232f","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
+{"name":"Cronómetro de reunión","short_name":"Reunión","id":"./","start_url":"./","scope":"./","display":"standalone","background_color":"#eee5d7","theme_color":"#eee5d7","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
