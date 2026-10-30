@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 42
+# Mi Presidencia · versión 43
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -24,3 +24,6 @@ Se corrige un error al crear el campo de notas que podía detener la carga del f
 
 ## Relojes compactos
 Asignaciones y consejos se muestran en círculos de 112 px (104 px en móviles estrechos), con tiempo restante debajo y controles al lado. Discurso y Atalaya usan el mismo tamaño compacto. Se conservan los colores de aviso y los tiempos separados. Verifica la legibilidad en Safari antes de la reunión.
+
+## Orientación compacta
+El selector Preparar/Dirigir está recogido en una esquina. La franja fija muestra la asignación cuyo cronómetro está activo, el consejo o la última asignación seleccionada. Antes de iniciar, muestra Viendo para distinguir una consulta de una intervención en marcha. Tocar la franja abre esa misma asignación sin iniciar, detener ni avanzar relojes. El estado local y la transferencia se consultan dentro de los tres puntos.
