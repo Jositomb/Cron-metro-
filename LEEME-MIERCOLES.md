@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 48
+# Mi Presidencia · versión 49
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -46,3 +46,13 @@ En Dirigir, la barra de abajo indica qué toca ahora y el tiempo restante. Su bo
 
 ## Preparación guiada (v48)
 Opciones > Preparar > Revisar preparación. Te pregunta uno a uno los datos que faltan. Puedes saltar cualquiera y terminar cuando quieras.
+
+## Antes de la reunión (v49)
+Configura una vez Opciones > Preparar > Día y hora de la reunión. Una hora antes verás la cuenta atrás y el botón Antes de empezar, con la lista para revisar.
+
+## Durante la reunión (v49)
+- Lee la frase sugerida «Para presentar» de cada parte o, en Preparar, pulsa «Usar y editar» para adaptarla.
+- Marca las fichas de consejo mientras el estudiante habla. Al pulsar Finalizar asignación quedan destacadas para el consejo.
+- Si vas con retraso, bajo el ritmo verás dónde recuperar tiempo.
+- Atril oscuro, en Opciones, si la luz de la sala lo pide.
+- Al terminar, pulsa Finalizar reunión para que quede en Tu historial.

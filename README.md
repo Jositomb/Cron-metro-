@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 48
+# Mi Presidencia · versión 49
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -7,10 +7,26 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 
 ## Actualizar a esta versión
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
-2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay siete archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `mejoras.css`, `apariencia.css` y `nueva-version.py`.
+2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v48**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v49**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v49
+**Funciones propias**
+- **Frases de presentación.** Cada asignación con participante muestra una frase sugerida para presentarla, con el agradecimiento a la parte anterior, la sección, el tema y los nombres. En Preparar, «Usar y editar» la convierte en tu texto para retocarlo. En Dirigir desaparece cuando la parte ya ha empezado.
+- **Ayuda para recuperar tiempo.** Con más de 1 min de retraso, bajo el ritmo aparece dónde recuperarlo, por ejemplo: «Para recuperar 02:10: Parte de vida cristiana −2 min · Conclusión −1 min».
+- **Consejo con un toque.** En las partes de estudiantes, fichas para marcar qué encomiar y qué mejorar mientras hablan. Durante el consejo se destacan con un resumen grande. Complementa el cuaderno del Pencil.
+- **Cuenta atrás y «Antes de empezar».** En Opciones › Preparar › Día y hora de la reunión. La pantalla de inicio muestra la próxima reunión. Desde una hora antes, la reunión enseña «Empieza en 07:46» y una lista para marcar: presidente, canciones, oraciones, participantes, audio y modo No molestar.
+- **Tu historial.** Opciones › Durante la reunión › Tu historial. Se guarda al pulsar Finalizar reunión (en el modo ensayo no se guarda) e incluye las reuniones anteriores que ya tenías. Muestra la duración media y en qué partes tiendes a pasarte o a quedarte corto.
+
+**Toque distintivo**
+- **Reloj TOTAL por secciones:** el anillo de 105 min dividido en los colores de cada sección; en el fin de semana, discurso y estudio.
+- **Columna de progreso** a la izquierda, con los colores de sección y un punto que avanza con la reunión.
+- **Títulos con letra editorial** («New York» en iPad e iPhone); los números siguen en la letra actual.
+- **Icono propio** para la pantalla de inicio: el reloj con el anillo por secciones. Para verlo, borra el icono antiguo y vuelve a añadirla.
+- **Atril oscuro** opcional (Opciones › Durante la reunión), que se recuerda en cada dispositivo.
+- **Latido suave** del tiempo en los últimos 10 segundos y transición suave al cambiar de asignación.
 
 ## Novedades de la v48
 **Más fácil de usar**
