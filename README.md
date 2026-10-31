@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 46
+# Mi Presidencia · versión 47
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,11 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Hay cinco archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `mejoras.css` y `nueva-version.py`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v46**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v47**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Corrección v47
+- El menú Opciones se abría a mitad de lista en el iPad: la cabecera quedaba en medio y no se podía llegar a las primeras opciones. Ahora empieza arriba y se desplaza entero.
 
 ## Novedades de la v46
 **Más segura durante la reunión**

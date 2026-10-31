@@ -58,7 +58,7 @@ body.save-failed .presidencia-bar{outline:3px solid #a13d48;outline-offset:2px}
 body.save-failed .presidencia-bar::after{content:"No se puede guardar · no cierres la página";color:#a13d48;font-weight:700;font-size:12px;white-space:nowrap}
 
 /* Menú Opciones: una sola columna con desplazamiento (antes se partía en dos y la segunda quedaba fuera de pantalla) */
-#toolsDisclosure[open]>.options-menu{flex-wrap:nowrap!important;flex-direction:column;overflow-y:auto;max-height:min(75dvh,640px);right:0;left:auto;width:min(300px,calc(100vw - 24px))}
+#toolsDisclosure[open]>.options-menu{flex-wrap:nowrap!important;flex-direction:column;justify-content:flex-start!important;align-items:stretch;overflow-y:auto;max-height:min(75dvh,640px);right:0;left:auto;width:min(300px,calc(100vw - 24px))}
 #toolsDisclosure[open]>.options-menu>*{flex:0 0 auto}
 #toolsDisclosure[open]>.options-menu>button,#toolsDisclosure[open]>.options-menu>details,#toolsDisclosure[open]>.options-menu>label{width:100%;box-sizing:border-box}
 #toolsClose{width:auto!important;flex:0 0 auto}

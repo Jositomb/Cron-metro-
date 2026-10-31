@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 46
+# Mi Presidencia · versión 47
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
