@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 44
+# Mi Presidencia · versión 45
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -30,3 +30,7 @@ El selector Preparar/Dirigir está recogido en una esquina. La franja fija muest
 
 ## Vista de atril
 Selecciona Dirigir: se recoge el programa y destaca la asignación consultada. Programa permite ver todas las secciones. La tarjeta Después abre la siguiente presentación sin iniciar su cronómetro. La franja superior indica el reloj activo y permite regresar a él. Preparar conserva el acceso a todos los campos de edición. Canciones, consejos, notas y herramientas se mantienen. Revisa el resultado en Safari antes del uso real.
+
+## Claridad y lectura
+En los tres puntos: A−/A+ ajusta el bosquejo; Revisar preparación lista participantes, acompañantes de prácticas y canciones sin rellenar. La franja adicional distingue lo consultado del reloj activo. El mapa de colores abre la sección del programa. Las palabras de presentación se destacan arriba; el panel Lección y consejo mantiene los datos y trazos juntos. Se recuerda la posición de lectura durante esta sesión al cambiar de asignación. El inicio ofrece Continuar mi reunión cuando detecta preparación o un reloj en marcha. Resumen conserva las duraciones de intervenciones y consejos; el fin de semana añade su propio resumen. La edición directa existente tiene un lápiz visible en Preparar.
+La revisión no comprueba todos los campos posibles y no bloquea el inicio. El resumen incluye solo los tiempos registrados. Comprueba la nueva interfaz en Safari antes de usarla.
