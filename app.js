@@ -1,5 +1,5 @@
 'use strict';
-const BUILD='45',key='cronometro-reunion-v1';
+const BUILD='46',key='cronometro-reunion-v1';
 const defaults=[['Palabras de introducción',1,''],['Discurso de Tesoros',10,'TESOROS DE LA BIBLIA'],['Perlas espirituales',10,''],['Lectura de la Biblia',4,''],['Intervención 1',3,'SEAMOS MEJORES MAESTROS'],['Intervención 2',4,''],['Intervención 3',5,''],['Intervención 4',5,''],['Parte de nuestra vida cristiana',15,'NUESTRA VIDA CRISTIANA'],['Estudio bíblico de congregación',30,''],['Palabras de conclusión',3,'']];
 const $=id=>document.getElementById(id),value=(t,now=Date.now())=>t.elapsed+(t.started===null?0:Math.max(0,now-t.started));
 function fmt(ms){const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
@@ -25,8 +25,8 @@ function namedStart(i,fallback){const name=state.parts[i]?.participant;return na
 function meetingInProgress(){return !state.endedAt&&(state.total.started!==null||value(state.total)>0);}
 function stagePart(i){if(!Number.isInteger(i)||!state.parts[i]||i===state.focusIndex){announce('Elige una intervención distinta de la actual.');return false;}remember();state.preparedIndex=i;save();tick();announce('Preparada: '+state.parts[i].title+'. Su cronómetro sigue detenido.');return true;}
 function openPrepare(){const select=$('prepareSelect');select.replaceChildren();state.parts.forEach((p,i)=>{if(i===state.focusIndex)return;const option=document.createElement('option');option.value=i;option.textContent=numberedPartTitle(state.parts,i)+(p.participant?' · '+p.participant:'');select.append(option)});const next=upcomingIndex();if(next!==null)select.value=String(next);$('prepareSave').disabled=state.parts.length<=1&&state.focusIndex!==null;$('toolsDisclosure').open=false;$('programDialog').close();$('prepareDialog').showModal();}
-function remember(){const {undo,...rest}=state;state.undo=JSON.parse(JSON.stringify({parts:rest.parts,focusIndex:rest.focusIndex,preparedIndex:rest.preparedIndex,endedAt:rest.endedAt??null}));}
-function undoLast(){if(!state.undo)return;const previous=state.undo;state.parts=previous.parts;state.focusIndex=previous.focusIndex;state.preparedIndex=previous.preparedIndex??null;inputGuardUntil=0;state.endedAt=previous.endedAt;state.undo=null;if(state.total.started===null){state.parts.forEach(p=>{stop(p);stop(p.after)})}save();render();announce('Último cambio deshecho. El total se conserva.');}
+function remember(){const {undo,...rest}=state;state.undo=JSON.parse(JSON.stringify({parts:rest.parts.map(({ink,...p})=>p),focusIndex:rest.focusIndex,preparedIndex:rest.preparedIndex,endedAt:rest.endedAt??null}));}
+function undoLast(){if(!state.undo)return;const previous=state.undo,inkById=new Map(state.parts.map(p=>[p.id,p.ink]));state.parts=previous.parts.map(p=>inkById.get(p.id)!==undefined?{...p,ink:inkById.get(p.id)}:p);state.focusIndex=previous.focusIndex;state.preparedIndex=previous.preparedIndex??null;inputGuardUntil=0;state.endedAt=previous.endedAt;state.undo=null;if(state.total.started===null){state.parts.forEach(p=>{stop(p);stop(p.after)})}save();render();announce('Último cambio deshecho. El total se conserva.');}
 function stopTransitions(){state.parts.forEach(p=>stop(p.after))}
 function pausePart(i){const p=state.parts[i];if(!p)return;remember();stop(p);p.done=false;state.focusIndex=i;save();tick()}
 function finishCounsel(i){const p=state.parts[i];if(!p||!p.done||p.after.started===null)return;remember();stop(p.after);save();tick();announce((isStudentPart(p)&&p.adviceMin>0?'Consejo finalizado.':'Presentación finalizada.')+' El tiempo de la próxima asignación sigue detenido.');}
@@ -35,7 +35,7 @@ function paceAt(now){const i=state.focusIndex;if(i===null)return null;let expect
 
 
 
-function acquireWake(){if(navigator.wakeLock&&!wake&&state.total.started!==null){navigator.wakeLock.request('screen').then(w=>{wake=w;w.addEventListener('release',()=>wake=null,{once:true})}).catch(()=>{});}}
+function acquireWake(){if(navigator.wakeLock&&!wake&&!document.hidden&&(state.total.started!==null||state.parts.some(p=>p.started!==null||p.after?.started!==null)||atril||document.body.classList.contains('bigclock-open'))){navigator.wakeLock.request('screen').then(w=>{wake=w;w.addEventListener('release',()=>wake=null,{once:true})}).catch(()=>{});}}
 function releaseWake(){if(wake)wake.release().catch(()=>{});wake=null}
 function startPart(i,keepUndo=false){const p=state.parts[i];if(!p)return;if(p.started!==null){state.focusIndex=i;if(typeof closePreparationForms==='function')closePreparationForms();save();tick();return;}if(!keepUndo)remember();stopTransitions();state.parts.forEach((x,j)=>{if(j!==i&&x.started!==null){stop(x);x.done=true}});p.started=Date.now();p.done=false;state.focusIndex=i;if(state.preparedIndex===i)state.preparedIndex=null;if(state.total.started===null)state.total.started=Date.now();state.endedAt=null;if(typeof closePreparationForms==='function')closePreparationForms();save();tick();acquireWake()}
 function finishPart(i,keepUndo=false){const p=state.parts[i];if(!p||p.done)return;if(!keepUndo)remember();stopTransitions();stop(p);p.done=true;state.focusIndex=i;if(state.total.started!==null)p.after.started=Date.now();save();tick()}
@@ -60,7 +60,7 @@ function updateActivePanel(now=Date.now()){
   $('activeElapsed').textContent='Transcurrido '+fmt(elapsed)+' · previsto '+p.min+' min';
   if(p.done){$('activeClockLabel').textContent=p.adviceMin>0?'CONSEJOS':'PRESENTACIÓN';$('activeTime').textContent=fmt(value(p.after,now));$('activeElapsed').textContent='Asignación finalizada: '+fmt(elapsed);}
   $('primaryAction').textContent=p.started!==null?'Finalizar asignación':p.done?'Ver próxima asignación':elapsed>0?'Continuar asignación':'Iniciar asignación';$('primaryAction').disabled=p.done&&i===state.parts.length-1;$('undoAction').disabled=!state.undo;
-  $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining)+' · '+p.min+' min');
+  $('activeTarget').textContent=compact?(p.min===0?'Sin límite':s.over?'Tiempo superado':s.warning?'Queda menos de un minuto':'Asignación de '+p.min+' min'):(p.min===0?'Sin límite':s.over?'Exceso '+fmt(-s.remaining):'Quedan '+fmt(s.remaining));
   if(p.done)$('activeTarget').textContent=p.adviceMin>0?'Consejos previstos: '+p.adviceMin+' min':'El total sigue contando';
   $('clockFace').classList.toggle('long-time',$('activeTime').textContent.length>6);const dialLimit=(p.done?p.adviceMin:p.min)*60000,dialElapsed=p.done?value(p.after,now):elapsed,dialFraction=dialLimit>0?Math.max(0,Math.min(1,1-dialElapsed/dialLimit)):0;$('clockArc').style.strokeDashoffset=String(289.027*(1-dialFraction));$('clockFace').classList.toggle('no-limit',dialLimit===0);
   const afterOver=p.done&&p.adviceMin>0&&value(p.after,now)>p.adviceMin*60000;panel.classList.toggle('over',p.done?afterOver:s.over);panel.classList.toggle('warning',!p.done&&s.warning);
@@ -116,7 +116,7 @@ function fitScreen(){if(atril||compact)return;const main=document.querySelector(
 window.addEventListener('resize',fitScreen);window.visualViewport?.addEventListener('resize',fitScreen);
 document.addEventListener('visibilitychange',()=>{save();tick();if(!document.hidden){acquireWake();checkUpdate()}});window.addEventListener('pagehide',save);
 let checkingUpdate=false;async function checkUpdate(){if(checkingUpdate||!navigator.onLine||location.protocol==='file:'||state.total.started!==null||state.parts.some(p=>p.started!==null))return;checkingUpdate=true;try{const response=await fetch(new URL('version.json?check='+Date.now(),location.href),{cache:'no-store'});if(!response.ok)return;const latest=await response.json();if(typeof latest.version!=='string'||latest.version===BUILD)return;const url=new URL(location.href);if(url.searchParams.get('version')===latest.version)return;save();url.searchParams.set('version',latest.version);location.replace(url.href)}catch(e){}finally{checkingUpdate=false}}
-initCompact();render();if(restored)announce('Tiempos recuperados. Puedes continuar donde lo dejaste.');save();setInterval(tick,250);setInterval(checkUpdate,60000);checkUpdate();acquireWake();
+initCompact();render();if(restored)announce('Tiempos recuperados. Puedes continuar donde lo dejaste.');save();heartbeat(tick,250);setInterval(checkUpdate,60000);checkUpdate();acquireWake();
 
 
 // La vista compacta adapta el contenido; Slide Over lo controla iPadOS.

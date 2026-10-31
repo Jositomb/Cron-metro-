@@ -1,0 +1,64 @@
+/* v46 · Mejoras de lectura y reloj grande. Se carga la última para no tocar las hojas anteriores. */
+
+/* ---------- Reloj grande ---------- */
+.bigclock{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1.6vh,16px);
+  padding:max(18px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));
+  background:#1f3f45;color:#f6f1e7;text-align:center;font-variant-numeric:tabular-nums;transition:background-color .4s}
+.bigclock[hidden]{display:none}
+.bigclock[data-level=idle]{background:#2b3a38}
+.bigclock[data-level=running]{background:#1f4f57}
+.bigclock[data-level=warning]{background:#8a5c0b}
+.bigclock[data-level=over]{background:#9b2f3c}
+.bigclock-top{position:absolute;top:max(14px,env(safe-area-inset-top));left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));display:flex;justify-content:space-between;align-items:center;gap:12px}
+.bigclock-phase{font-size:clamp(13px,2vw,17px);letter-spacing:.14em;font-weight:700;opacity:.85}
+.bigclock-close{min-height:48px;padding:0 18px;border-radius:24px;border:1px solid #ffffff55;background:#ffffff1a;color:inherit;font-size:16px;font-weight:600}
+.bigclock-title{margin:0;max-width:92vw;font-size:clamp(22px,4.2vw,40px);line-height:1.15;font-weight:700}
+.bigclock-who{margin:0;max-width:92vw;font-size:clamp(18px,3.2vw,30px);opacity:.92}
+body .bigclock :is(p,small,h2,span,strong){color:inherit}
+.bigclock-time{font-size:clamp(64px,min(23vw,34vh),360px);line-height:.95;font-weight:700;letter-spacing:-.02em;margin:clamp(4px,1vh,12px) 0}
+.bigclock-detail{margin:0;font-size:clamp(15px,2.3vw,21px);opacity:.9}
+.bigclock-bar{width:min(640px,86vw);height:10px;border-radius:5px;background:#ffffff2e;overflow:hidden}
+.bigclock-bar>span{display:block;height:100%;width:0;background:#f6f1e7;border-radius:5px;transition:width .25s linear}
+.bigclock-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:clamp(8px,2vh,22px)}
+.bigclock-actions button{min-height:64px;padding:0 28px;border-radius:32px;font-size:clamp(18px,2.6vw,24px);font-weight:700;border:0}
+.bigclock-primary{background:#f6f1e7;color:#1f3f45;min-width:min(420px,80vw)}
+.bigclock[data-level=over] .bigclock-primary{color:#9b2f3c}
+.bigclock[data-level=warning] .bigclock-primary{color:#6e4908}
+.bigclock-pause{background:#ffffff26;color:inherit;border:1px solid #ffffff55!important}
+.bigclock-next{margin:clamp(4px,1.5vh,14px) 0 0;font-size:clamp(14px,2vw,18px);opacity:.8;max-width:92vw}
+body.bigclock-open{overflow:hidden}
+@media (orientation:landscape) and (max-height:500px){
+  .bigclock-time{font-size:min(30vh,22vw)}
+  .bigclock-actions button{min-height:52px}
+  .bigclock-who,.bigclock-next{display:none}
+}
+@media (prefers-reduced-motion:reduce){.bigclock,.bigclock-bar>span{transition:none}}
+
+/* Botón para abrir el reloj grande junto a cada cronómetro */
+.bigclock-open-btn{min-height:40px;padding:0 14px;border-radius:20px;border:1px solid #b9ae98;background:#f8f1e5;color:#28666c;font-weight:600;font-size:14px}
+.weekend-actions .bigclock-open-btn{width:auto}
+
+/* Reiniciar como botón discreto (sustituye al segundo menú «•••») */
+.reset-inline{min-height:40px;padding:0 12px;border-radius:20px;border:1px solid #c8bea9;background:transparent;color:#5a6256;font-size:13px;font-weight:500;box-shadow:none}
+
+/* ---------- Franja superior más limpia en el móvil ---------- */
+@media (max-width:520px){
+  .meeting-locator>span{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block}
+  .presidencia-bar .program-access{padding-left:10px;padding-right:10px}
+}
+.assignment-counters>span,.weekend-remaining{white-space:nowrap}
+
+/* ---------- Guardado y almacenamiento ---------- */
+.storage-info{display:block;margin-top:6px;font-size:12px;color:#5a6256}
+.storage-info[data-level=high]{color:#80580c;font-weight:600}
+.storage-info[data-level=full]{color:#a13d48;font-weight:700}
+.options-menu .transfer-button,.weekend-footer .transfer-button{width:100%}
+.options-menu .local-save,.weekend-footer .local-save{display:block;font-size:12px;color:#5a6256;margin-top:4px}
+body.save-failed .presidencia-bar{outline:3px solid #a13d48;outline-offset:2px}
+body.save-failed .presidencia-bar::after{content:"No se puede guardar · no cierres la página";color:#a13d48;font-weight:700;font-size:12px;white-space:nowrap}
+
+/* Menú Opciones: una sola columna con desplazamiento (antes se partía en dos y la segunda quedaba fuera de pantalla) */
+#toolsDisclosure[open]>.options-menu{flex-wrap:nowrap!important;flex-direction:column;overflow-y:auto;max-height:min(75dvh,640px);right:0;left:auto;width:min(300px,calc(100vw - 24px))}
+#toolsDisclosure[open]>.options-menu>*{flex:0 0 auto}
+#toolsDisclosure[open]>.options-menu>button,#toolsDisclosure[open]>.options-menu>details,#toolsDisclosure[open]>.options-menu>label{width:100%;box-sizing:border-box}
+#toolsClose{width:auto!important;flex:0 0 auto}
