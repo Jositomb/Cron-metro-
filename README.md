@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 47
+# Mi Presidencia · versión 48
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -7,10 +7,27 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 
 ## Actualizar a esta versión
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
-2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Hay cinco archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `mejoras.css` y `nueva-version.py`.
+2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay siete archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `mejoras.css`, `apariencia.css` y `nueva-version.py`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v47**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v48**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v48
+**Más fácil de usar**
+- **Barra fija abajo en Dirigir:** muestra la asignación, el tiempo restante y un solo botón que hace el siguiente paso (iniciar, finalizar, finalizar consejo, iniciar la siguiente, finalizar reunión), con Pausa y Reloj grande al lado. Sigue siempre el orden del programa. Para saltarte el orden, usa «Iniciar asignación» en la tarjeta que quieras. Tocar el nombre lleva a esa tarjeta. En Preparar solo aparece si hay un cronómetro en marcha.
+- **Opciones por bloques:** Durante la reunión, Preparar, Copias y datos, y Empezar de nuevo (en rojo y al final).
+- **Preparación guiada:** «Revisar preparación» pregunta los datos que faltan uno a uno (participantes, acompañantes y canciones). Escribes, pulsas «Guardar y seguir» o «Saltar».
+- **Deslizar a los lados** en Dirigir para pasar a la asignación siguiente o anterior sin abrir ni cerrar tarjetas. No afecta al cuaderno del Pencil ni a los campos de texto.
+- **Solo dos vistas:** Preparar y Dirigir. Las vistas antiguas, que ya estaban ocultas, se han retirado del menú.
+
+**Apariencia, con el mismo estilo**
+- Un solo botón destacado por tarjeta; el resto con borde fino.
+- El anillo de cada reloj se va vaciando con el color de su sección (Apertura, Tesoros, Maestros, Vida cristiana) y pasa a ámbar y rojo al final.
+- En Preparar, los datos vacíos se agrupan en una línea: «＋ Completar 3 datos: presidente, canción inicial…».
+- Iconos coherentes en todos los botones y un lápiz de edición más claro, que desaparece en Dirigir.
+- Etiquetas pequeñas algo más grandes para leerlas desde el atril.
+
+Si algo de la v48 no te convence antes de la reunión, vuelve a subir la v47: los datos son compatibles en los dos sentidos.
 
 ## Corrección v47
 - El menú Opciones se abría a mitad de lista en el iPad: la cabecera quedaba en medio y no se podía llegar a las primeras opciones. Ahora empieza arriba y se desplaza entero.

@@ -12,15 +12,15 @@
   box.setAttribute('role','dialog');
   box.setAttribute('aria-modal','true');
   box.setAttribute('aria-label','Reloj grande');
-  const top=el('div','bigclock-top'),phase=el('small','bigclock-phase'),close=el('button','bigclock-close','✕ Cerrar');
+  const top=el('div','bigclock-top'),phase=el('small','bigclock-phase'),close=el('button','bigclock-close','Cerrar');
   close.type='button';
   top.append(phase,close);
   const title=el('h2','bigclock-title'),who=el('p','bigclock-who');
   const time=el('div','bigclock-time'),detail=el('p','bigclock-detail');
   const bar=el('div','bigclock-bar'),fill=el('span');
   bar.append(fill);
-  const actions=el('div','bigclock-actions'),primary=el('button','bigclock-primary'),pause=el('button','bigclock-pause','Ⅱ Pausa');
-  primary.type=pause.type='button';
+  const actions=el('div','bigclock-actions'),primary=el('button','bigclock-primary'),pause=el('button','bigclock-pause','Pausa');
+  primary.type=pause.type='button';pause.dataset.icon='pause';close.dataset.icon='close';
   actions.append(primary,pause);
   const next=el('p','bigclock-next');
   box.append(top,title,who,time,detail,bar,actions,next);
@@ -43,17 +43,25 @@
   close.onclick=shut;
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)shut()});
   window.openBigClock=open;
+  window.MeetingAction={model:o=>model(o),guard:fn=>tapGuard(fn),weekday,weekendPage,setWeekendId:id=>{weekendId=id}};
 
   // Datos de lo que se muestra, según la página.
-  function model(){
+  function model(opts={}){
     const now=Date.now();
     if(weekday){
+      const busy=state.parts.some(p=>p.started!==null||(p.done&&p.after?.started!==null&&isStudentPart(p)&&p.adviceMin>0));
+      const v=Number.isInteger(opts.viewIndex)?state.parts[opts.viewIndex]:null;
+      if(v&&!busy&&opts.viewIndex!==state.focusIndex&&!v.done){
+        const ve=value(v,now);
+        return {phase:ve>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,opts.viewIndex),who:v.participant||'',limit:v.min*60000,elapsed:ve,running:false,
+          primary:ve>0?'Continuar':'Iniciar'+(v.participant?' a '+v.participant:''),intent:'start',act:()=>startPart(opts.viewIndex),canPause:false,next:''};
+      }
       const i=Number.isInteger(state.focusIndex)&&state.parts[state.focusIndex]?state.focusIndex:null;
       const nextI=upcomingIndex();
       if(i===null){
         const n=state.parts[nextI??0];
         return {phase:'PREPARADA',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:n?.participant||'',limit:(n?.min||0)*60000,elapsed:0,running:false,
-          primary:n?'▶ Iniciar':'',act:()=>startPart(nextI??0),canPause:false,next:''};
+          index:nextI??0,primary:n?'Iniciar':'',intent:'start',act:()=>startPart(nextI??0),canPause:false,next:''};
       }
       const p=state.parts[i],elapsed=value(p,now),counselOn=p.done&&p.after?.started!==null,
             counsel=p.done&&isStudentPart(p)&&p.adviceMin>0;
@@ -62,23 +70,23 @@
       if(p.done){
         const t=value(p.after,now);
         if(counsel&&counselOn)return {phase:'CONSEJO',title:numberedPartTitle(state.parts,i),who:p.participant||'',limit:p.adviceMin*60000,elapsed:t,running:true,
-          warnAt:15000,primary:'■ Finalizar consejo',act:()=>finishCounsel(i),canPause:false,next:nextText,sub:'Asignación: '+mmss(elapsed)};
-        if(n)return {phase:'SIGUIENTE',title:numberedPartTitle(state.parts,nextI),who:n.participant||'',limit:n.min*60000,elapsed:0,running:false,
-          primary:'▶ Iniciar'+(n.participant?' a '+n.participant:''),act:()=>startPart(nextI),canPause:false,next:'Anterior: '+p.title+' · '+mmss(elapsed)};
+          index:i,warnAt:15000,primary:'Finalizar consejo',intent:'finish',act:()=>finishCounsel(i),canPause:false,next:nextText,sub:'Asignación: '+mmss(elapsed)};
+        if(n)return {phase:'SIGUIENTE',title:numberedPartTitle(state.parts,nextI),who:n.participant||'',index:nextI,limit:n.min*60000,elapsed:0,running:false,
+          primary:'Iniciar'+(n.participant?' a '+n.participant:''),intent:'start',act:()=>startPart(nextI),canPause:false,next:'Anterior: '+p.title+' · '+mmss(elapsed)};
         return {phase:'FIN DEL PROGRAMA',title:'Canción final y oración',who:'',limit:0,elapsed:value(state.total,now),running:state.total.started!==null,
-          primary:state.total.started!==null?'■ Finalizar reunión':'',act:()=>{shut();$('stopTotal').onclick()},canPause:false,next:''};
+          primary:state.total.started!==null?'Finalizar reunión':'',intent:'finish',act:()=>{shut();$('stopTotal').onclick()},canPause:false,next:''};
       }
-      return {phase:p.started!==null?'EN CURSO':elapsed>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,i),who:p.participant||'',limit:p.min*60000,elapsed,running:p.started!==null,
-        primary:p.started!==null?'■ Finalizar asignación':elapsed>0?'▶ Continuar':'▶ Iniciar',act:()=>p.started!==null?finishPart(i):startPart(i),
+      return {phase:p.started!==null?'EN CURSO':elapsed>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,i),who:p.participant||'',index:i,limit:p.min*60000,elapsed,running:p.started!==null,
+        primary:p.started!==null?'Finalizar asignación':elapsed>0?'Continuar':'Iniciar',intent:p.started!==null?'finish':'start',act:()=>p.started!==null?finishPart(i):startPart(i),
         canPause:p.started!==null,doPause:()=>pausePart(i),next:nextText};
     }
-    const id=weekendId||'talk',part=weekend[id],elapsed=weekendValue(part,now);
+    const id=opts.weekendId||weekendId||'talk',part=weekend[id],elapsed=weekendValue(part,now);
     const name=id==='talk'?'Discurso público':'Estudio de La Atalaya';
     const info=id==='talk'?(part.theme||part.title||''):(part.theme||part.title||'');
     const speaker=part.speaker||part.conductor||part.participant||'';
     return {phase:part.started!==null?'EN CURSO':part.done?'FINALIZADA':elapsed>0?'EN PAUSA':'PREPARADA',title:name,who:[typeof info==='string'?info:'',typeof speaker==='string'?speaker:''].filter(Boolean).join(' · '),
       limit:(part.min||0)*60000,elapsed,running:part.started!==null,
-      primary:part.started!==null?'■ Finalizar':part.done?'▶ Reanudar':elapsed>0?'▶ Continuar':'▶ Iniciar',
+      primary:part.started!==null?'Finalizar':part.done?'Reanudar':elapsed>0?'Continuar':'Iniciar',intent:part.started!==null?'finish':'start',
       act:()=>document.getElementById(id+(part.started!==null?'Finish':'Start')).click(),
       canPause:part.started!==null,doPause:()=>document.getElementById(id+'Pause').click(),
       next:id==='talk'?'Después: Estudio de La Atalaya':'',
@@ -99,7 +107,7 @@
     detail.textContent=(hasLimit?(over?'Tiempo superado · ':'')+'Llevamos '+mmss(m.elapsed)+' de '+Math.round(m.limit/60000*10)/10+' min':'Sin límite · transcurrido')+(m.sub?' · '+m.sub:'');
     fill.style.width=(hasLimit?Math.max(0,Math.min(1,m.elapsed/m.limit))*100:0)+'%';
     box.dataset.level=over?'over':warning?'warning':m.running?'running':'idle';
-    primary.textContent=m.primary;
+    primary.textContent=m.primary;primary.dataset.icon=m.intent==='finish'?'stop':'play';
     primary.hidden=!m.primary;
     pause.hidden=!m.canPause;
     next.textContent=m.next||'';
@@ -114,7 +122,7 @@
     const hosts=weekday?document.querySelectorAll('.assignment-controls'):document.querySelectorAll('.weekend-actions');
     hosts.forEach(h=>{
       if(h.querySelector('.bigclock-open-btn'))return;
-      const b=el('button','bigclock-open-btn','⛶ Reloj grande');
+      const b=el('button','bigclock-open-btn','Reloj grande');b.dataset.icon='expand';
       b.type='button';
       b.setAttribute('aria-label','Abrir el reloj grande');
       b.onclick=()=>{

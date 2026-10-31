@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 47
+# Mi Presidencia · versión 48
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -40,3 +40,9 @@ Pulsa ⛶ Reloj grande junto a cualquier cronómetro. El tiempo restante ocupa t
 
 ## Espacio y protección de datos (v46)
 Al final de Opciones verás el espacio usado. Si pasa del 70 % aparece un aviso: exporta una copia y borra cuadernos o programas antiguos. Instala la aplicación en la pantalla de inicio del iPad y del iPhone (Compartir > Añadir a pantalla de inicio) para que Safari no borre sus datos.
+
+## Barra inferior (v48)
+En Dirigir, la barra de abajo indica qué toca ahora y el tiempo restante. Su botón hace siempre el siguiente paso del programa: Iniciar, Finalizar asignación, Finalizar consejo, Iniciar a la siguiente persona y, al final, Finalizar reunión. Pausa y Reloj grande están a su lado. Para empezar una parte fuera de orden, ábrela y pulsa Iniciar asignación en su tarjeta. Desliza a los lados para consultar otras asignaciones: el reloj activo no cambia.
+
+## Preparación guiada (v48)
+Opciones > Preparar > Revisar preparación. Te pregunta uno a uno los datos que faltan. Puedes saltar cualquiera y terminar cuando quieras.
