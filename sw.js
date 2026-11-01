@@ -2,8 +2,8 @@
 // Caché para uso sin conexión.
 // v51: los archivos opcionales (iconos) ya no pueden bloquear una actualización, las páginas se
 // piden siempre recién publicadas al instalar, y nunca se mezclan archivos de dos versiones.
-const CACHE='cronometro-reunion-v52',BASE=new URL('./',self.location.href);
-const ASSETS=['./heartbeat.js?v=52','./robust.js?v=52','./big-clock.js?v=52','./mejoras.css?v=52','./apariencia.css?v=52','./facil.js?v=52','./unica.js?v=52','./avisos.js?v=52','./distintivo.css?v=52','./clarity.js?v=52','./presidencia.css?v=52','./presidencia.js?v=52','./index.html','./weekday.html','./weekend.html','./portal.css?v=52','./home.js?v=52','./weekend.js?v=52','./app.css?v=52','./polish.css?v=52','./colour.css?v=52','./outline-model.js?v=52','./outline-view.js?v=52','./model.js?v=52','./timers.js?v=52','./storage.js?v=52','./app.js?v=52','./programs.js?v=52','./inline-edit.js?v=52','./sections.js?v=52','./lesson-panel.js?v=52','./support.js?v=52','./offline.js?v=52','./menu.js?v=52','./ink.js?v=52','./new-meeting.js?v=52','./guide-import.js?v=52','./guide-index.json'];
+const CACHE='cronometro-reunion-v53',BASE=new URL('./',self.location.href);
+const ASSETS=['./heartbeat.js?v=53','./robust.js?v=53','./big-clock.js?v=53','./mejoras.css?v=53','./apariencia.css?v=53','./facil.js?v=53','./unica.js?v=53','./avisos.js?v=53','./resaltar.js?v=53','./distintivo.css?v=53','./clarity.js?v=53','./presidencia.css?v=53','./presidencia.js?v=53','./index.html','./weekday.html','./weekend.html','./portal.css?v=53','./home.js?v=53','./weekend.js?v=53','./app.css?v=53','./polish.css?v=53','./colour.css?v=53','./outline-model.js?v=53','./outline-view.js?v=53','./model.js?v=53','./timers.js?v=53','./storage.js?v=53','./app.js?v=53','./programs.js?v=53','./inline-edit.js?v=53','./sections.js?v=53','./lesson-panel.js?v=53','./support.js?v=53','./offline.js?v=53','./menu.js?v=53','./ink.js?v=53','./new-meeting.js?v=53','./guide-import.js?v=53','./guide-index.json'];
 const OPTIONAL=['./icon-180.png','./icon-192.png','./icon-512.png','./manifest.webmanifest','./icon.svg'];
 const ALL=[...ASSETS,...OPTIONAL];
 async function store(cache,path,required){

@@ -133,3 +133,26 @@ section.outline-block>.notify-toggle{margin:6px 0 0}
 .notify-who strong{font-size:17px}
 .notify-who span{font-size:13px;color:#5a6256}
 .notify-row .notify-toggle{min-height:40px;padding:0 14px;margin:0;font-size:14px}
+
+/* ---------- v53 · Resaltar la lección ---------- */
+.lesson-mark{color:inherit;border-radius:3px;padding:.05em 0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lesson-mark.c-yellow{background:#f6dc7a}
+.lesson-mark.c-green{background:#bfe0c4}
+.lesson-mark.c-pink{background:#f2c2cd}
+.lesson-mark.preview{opacity:.75}
+.lesson-inline-text.markable{cursor:text}
+body.mark-finger-on .lesson-inline-text.markable{touch-action:none;-webkit-user-select:none;user-select:none;outline:2px dashed #c8bea9;outline-offset:6px;border-radius:6px;cursor:crosshair}
+.mark-toolbar{margin:6px 0 10px}
+.mark-hint{margin:0 0 6px;font-size:13px;color:#5a6256}
+.mark-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.mark-color{width:34px;height:34px;min-height:34px;padding:0!important;border-radius:50%;border:2px solid #fff!important;box-shadow:0 0 0 1px #c8bea9!important}
+.mark-color.c-yellow{background:#f6dc7a!important}
+.mark-color.c-green{background:#bfe0c4!important}
+.mark-color.c-pink{background:#f2c2cd!important}
+.mark-color[aria-pressed=true]{box-shadow:0 0 0 3px #28666c!important}
+.mark-finger,.mark-undo,.mark-clear{min-height:36px;padding:0 12px;border-radius:18px;border:1px solid #c8bea9!important;background:transparent!important;color:#28666c!important;font-size:13px;font-weight:600;box-shadow:none!important}
+.mark-finger[aria-pressed=true]{background:#28666c!important;color:#fff!important;border-color:#28666c!important}
+.mark-clear{color:#a13d48!important;border-color:#e3c3c6!important}
+.mark-undo:disabled{opacity:.4}
+.directing-view .mark-toolbar{display:none}
+body.atril-oscuro .lesson-mark{filter:none}
