@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 51
+# Mi Presidencia · versión 52
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,13 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v51**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v52**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v52
+- **Marca «Avisado» junto a cada participante.** En Preparar, junto a cada nombre (participante, acompañante, lector, presidente y oraciones) aparece «Avisar»; tócalo y queda «✓ Avisado». También hay una lista completa en Opciones › Preparar › Avisos a participantes («3 de 9»), y en el fin de semana en Herramientas de la reunión.
+- Si cambias a un participante, su marca se quita sola. Al preparar una reunión nueva, todo empieza sin marcar. En Dirigir las marcas no se muestran en las tarjetas.
+- Se actualiza sola desde la v51: no hace falta cerrar nada.
 
 ## Corrección de la v51 (importante)
 - **Por qué Safari no se actualizaba:** la publicación de GitHub (`update-guide.py`) solo copiaba archivos .html, .js, .css, .json, .svg y .webmanifest. Los iconos .png de la v49 no se publicaban, el sistema sin conexión no podía guardarlos y rechazaba toda la actualización. Los navegadores que ya tenían la app instalada, como Safari, se quedaban en la versión anterior.

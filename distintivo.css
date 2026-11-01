@@ -118,3 +118,18 @@ body.atril-oscuro .action-bar{background:rgba(248,241,229,.98)}
 body.atril-oscuro canvas{filter:none}
 
 @media (max-width:520px){.start-banner{padding:10px 12px}.start-text{font-size:16px}.start-check{padding:0 12px;font-size:14px}}
+
+/* ---------- v52 · Avisado ---------- */
+.notify-toggle{display:inline-flex;align-items:center;gap:4px;min-height:30px;padding:0 10px;margin:4px 0 0 8px;border-radius:15px;
+  border:1px dashed #b9ae98!important;background:transparent!important;color:#5a6256!important;font-size:13px;font-weight:600;box-shadow:none!important;vertical-align:middle;white-space:nowrap}
+.notify-toggle.done{border:1px solid #2c654a!important;background:#e3efe6!important;color:#2c654a!important}
+.assignment-heading>.notify-toggle{margin-left:0;margin-top:6px;align-self:flex-start;width:auto!important;flex:0 0 auto}
+section.outline-block>.notify-toggle{margin:6px 0 0}
+.directing-view .assignment-card .notify-toggle{display:none}
+.notify-dialog .notify-count{margin:0 0 6px;font-weight:600;color:#28666c}
+.notify-list{list-style:none;margin:0;padding:0}
+.notify-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 2px;border-bottom:1px solid #e6dccb}
+.notify-who{display:flex;flex-direction:column;min-width:0}
+.notify-who strong{font-size:17px}
+.notify-who span{font-size:13px;color:#5a6256}
+.notify-row .notify-toggle{min-height:40px;padding:0 14px;margin:0;font-size:14px}
