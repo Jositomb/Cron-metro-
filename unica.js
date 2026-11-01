@@ -368,6 +368,13 @@
     addToMenu('Durante la reunión',b);
   });
 
+  /* ================= Forzar actualización ================= */
+  if(!home)safe('forzar',()=>{
+    const b=el('button','','Forzar actualización');b.type='button';
+    b.onclick=()=>{location.href='actualizar.html'};
+    addToMenu('Copias y datos',b);
+  });
+
   /* ================= 6. Reloj TOTAL por secciones ================= */
   function segmentsWeekday(){
     const segs=[];let acc=(state.leadInMin||0)*60000,group='opening';

@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 50
+# Mi Presidencia · versión 51
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,13 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v50**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v51**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Corrección de la v51 (importante)
+- **Por qué Safari no se actualizaba:** la publicación de GitHub (`update-guide.py`) solo copiaba archivos .html, .js, .css, .json, .svg y .webmanifest. Los iconos .png de la v49 no se publicaban, el sistema sin conexión no podía guardarlos y rechazaba toda la actualización. Los navegadores que ya tenían la app instalada, como Safari, se quedaban en la versión anterior.
+- **Corregido:** `update-guide.py` publica también los .png. Además, si en el futuro faltara un archivo opcional (un icono), la actualización se instalará igual, las páginas se piden siempre recién publicadas y nunca se mezclan archivos de dos versiones.
+- **Nueva página `actualizar.html`** (también en Opciones › Copias y datos › Forzar actualización). Borra solo la copia sin conexión, nunca tus datos, y abre la versión publicada.
 
 ## Novedades de la v50
 - **Actualización automática y segura.** Al publicar una versión nueva, la app se actualiza sola en cuanto no hay ningún cronómetro en marcha ni nada a medio editar, también en una pestaña de Safari que se quedó abierta. Si hay una reunión en curso, espera a que termine y en Opciones indica «se aplicará al terminar la reunión».

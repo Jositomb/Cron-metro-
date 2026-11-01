@@ -90,7 +90,7 @@ def main():
     if not weeks or not any(w<=today.isoformat()<= (dt.date.fromisoformat(w)+dt.timedelta(days=6)).isoformat() for w in weeks):raise ValueError('Current week missing; publication cancelled')
     public=ROOT/'_site';public.mkdir(exist_ok=True)
     for p in ROOT.iterdir():
-        if p.is_file() and p.suffix in ['.html','.js','.css','.json','.svg','.webmanifest']:shutil.copy2(p,public/p.name)
+        if p.is_file() and p.suffix in ['.html','.js','.css','.json','.svg','.webmanifest','.png']:shutil.copy2(p,public/p.name)
     dest=public
     for key,week in weeks.items():(dest/('guide-'+key+'.json')).write_text(json.dumps(week,ensure_ascii=False),encoding='utf-8')
     (dest/'guide-index.json').write_text(json.dumps({'schema':1,'updated':dt.datetime.now(dt.timezone.utc).isoformat(),'weeks':[{'week':w,'label':v['label']} for w,v in sorted(weeks.items())]},ensure_ascii=False),encoding='utf-8')
