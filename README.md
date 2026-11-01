@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 49
+# Mi Presidencia · versión 50
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,12 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v49**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v50**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v50
+- **Actualización automática y segura.** Al publicar una versión nueva, la app se actualiza sola en cuanto no hay ningún cronómetro en marcha ni nada a medio editar, también en una pestaña de Safari que se quedó abierta. Si hay una reunión en curso, espera a que termine y en Opciones indica «se aplicará al terminar la reunión».
+- **Una vez, para pasar a la v50 en Safari:** cierra del todo la pestaña de la app (en el selector de pestañas, desliza para cerrarla) y vuelve a abrir el enlace. Si aún sale la versión anterior, ciérrala y ábrela otra vez. A partir de la v50 ya no hará falta.
 
 ## Novedades de la v49
 **Funciones propias**
