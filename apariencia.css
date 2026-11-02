@@ -130,3 +130,4 @@ body.has-action-bar .bigclock{z-index:1000}
 .guided-save{flex:1;background:var(--v48-teal)!important;color:#fff!important;border:0!important}
 .guided-skip,.guided-close{background:transparent!important;border:1px solid var(--v48-line)!important;color:var(--v48-teal)!important;box-shadow:none!important}
 .guided-close{width:100%;margin-top:10px}
+@media (max-width:560px){.action-bar:has(.action-time[hidden]) .action-info{flex-basis:100%}}

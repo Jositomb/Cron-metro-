@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 54
+# Mi Presidencia · versión 55
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,16 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v54**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v55**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v55 · el TOTAL desde el principio
+- **«Empezar reunión».** Antes de empezar, la barra de abajo (en Dirigir) muestra «Empezar reunión · Canción y oración inicial». Pone en marcha solo el reloj TOTAL, que así cuenta desde la canción.
+- Mientras suena la canción, la barra indica «Canción y oración» y ofrece «Iniciar» la introducción cuando toque.
+- El ritmo («vamos a tiempo / retraso») cuenta esos minutos. Si no tenías ninguno configurado, se ponen 5 (canción y oración); puedes cambiarlo en Opciones › Organizar asignaciones.
+- En Opciones, «Iniciar total» ahora se llama «Empezar reunión (canción y oración)».
+- Lo mismo en el fin de semana: «Empezar reunión» y después «Iniciar» el discurso.
+- Si prefieres no cronometrar la canción, puedes seguir empezando directamente por la introducción desde su tarjeta.
 
 ## Novedades de la v54 · que no te pierdas
 - **Deslizar entre asignaciones viene desactivado.** Un roce lateral ya no te cambia de tarjeta. Si lo quieres, actívalo en Opciones › Durante la reunión › Deslizar entre asignaciones. Aun así, pide un deslizamiento claro.

@@ -55,6 +55,10 @@
           m={...m,phase:'FIN',primary:'Finalizar reunión',intent:'finish',act:()=>document.getElementById('finishWeekend').click(),canPause:false};
         }
         if(weekend.ended)m={...m,phase:'REUNIÓN FINALIZADA',primary:'',canPause:false,running:false};
+        else if(weekend.total.started===null&&!weekend.total.elapsed&&!weekend.talk.elapsed&&!weekend.watchtower.elapsed&&!weekend.talk.done)
+          m={...m,phase:'ANTES DE EMPEZAR',title:'Canción y oración inicial',who:weekend.talk?.song||'',limit:0,elapsed:0,running:false,primary:'Empezar reunión',intent:'start',act:()=>window.startWholeMeeting(),canPause:false};
+        else if(weekend.total.started!==null&&!weekend.talk.elapsed&&weekend.talk.started===null&&!weekend.talk.done)
+          m={...m,phase:'CANCIÓN Y ORACIÓN · después',limit:weekend.talk.min*60000,elapsed:0,running:false};
         m.weekendId=id;
       }
       current=m;
@@ -64,6 +68,7 @@
       const warning=hasLimit&&!over&&m.running&&remaining<=(m.warnAt||Math.min(60000,m.limit/4));
       phase.textContent=m.phase+(m.who?' · '+m.who:'');
       title.textContent=m.title;
+      time.hidden=/^ANTES DE EMPEZAR/.test(m.phase||'');
       time.textContent=hasLimit?(over?'+':'')+mmss(Math.abs(remaining)):mmss(m.elapsed);
       bar.dataset.level=over?'over':warning?'warning':m.running?'running':'idle';
       primary.textContent=m.primary||'';

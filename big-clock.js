@@ -43,6 +43,26 @@
   close.onclick=shut;
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)shut()});
   window.openBigClock=open;
+  // v55 · Empezar la reunión (canción y oración) sin iniciar aún ninguna asignación.
+  const startTotalOriginal=weekday?document.getElementById('startTotal').onclick:null;
+  if(weekday){
+    const b=document.getElementById('startTotal');
+    b.textContent='Empezar reunión (canción y oración)';
+    b.onclick=()=>window.startWholeMeeting();
+  }
+  window.startWholeMeeting=()=>{
+    if(weekday){
+      if(state.total.started!==null)return;
+      const first=value(state.total)===0;
+      if(first&&!state.leadInMin){state.leadInMin=5}
+      startTotalOriginal();
+      if(first)try{announce('Reunión en marcha: canción y oración inicial. Inicia la introducción cuando empiece.')}catch(e){}
+    }else if(weekendPage){
+      if(weekend.total.started!==null||weekend.ended)return;
+      weekend.total.started=Date.now();
+      weekendSave();weekendPaint();
+    }
+  };
   window.MeetingAction={model:o=>model(o),guard:fn=>tapGuard(fn),weekday,weekendPage,setWeekendId:id=>{weekendId=id}};
 
   // Datos de lo que se muestra, según la página.
@@ -60,6 +80,14 @@
       const nextI=upcomingIndex();
       if(i===null){
         const n=state.parts[nextI??0];
+        const fresh=state.total.started===null&&value(state.total,now)===0&&!state.endedAt&&!state.parts.some(p=>p.done||value(p,now)>0);
+        if(fresh&&!opts.noStartMeeting)return {phase:'ANTES DE EMPEZAR',title:'Canción y oración inicial',who:state.meeting?.openingSong||'',limit:0,elapsed:0,running:false,
+          index:null,primary:'Empezar reunión',intent:'start',act:()=>window.startWholeMeeting?.(),canPause:false,next:n?'Después: '+numberedPartTitle(state.parts,nextI??0):'',startMeeting:true};
+        if(state.total.started!==null){
+          const lead=(state.leadInMin||0)*60000,t=value(state.total,now);
+          return {phase:'CANCIÓN Y ORACIÓN · después',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:n?.participant||'',limit:lead,elapsed:Math.min(t,lead||t),running:true,
+            index:nextI??0,primary:n?'Iniciar'+(n.participant?' a '+n.participant:''):'',intent:'start',act:()=>startPart(nextI??0),canPause:false,next:'',sub:'Reunión: '+mmss(t)};
+        }
         return {phase:'PREPARADA',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:n?.participant||'',limit:(n?.min||0)*60000,elapsed:0,running:false,
           index:nextI??0,primary:n?'Iniciar':'',intent:'start',act:()=>startPart(nextI??0),canPause:false,next:''};
       }
