@@ -1,5 +1,7 @@
 """Download Spanish meeting workbooks from jw.org into the Pages artifact.
 No credentials or third-party services. Fail closed if content structure changes.
+v56: un fallo al leer la guía YA NO cancela la publicación de la app. Se publica siempre la app
+y se añaden solo las semanas de la guía que se hayan podido validar.
 """
 import datetime as dt
 import html
@@ -75,23 +77,37 @@ def parse(raw,url,year):
         out.append({'title':p['title'],'min':p['min'],'section':section if section!=previous else '', 'kind':kind,'guideText':content,'guideUrl':url,'lesson':p['lesson'],'lessonUrl':p['lessonUrl']});previous=section
     out.append({'title':'Palabras de conclusión','min':closing,'section':'','kind':'conclusion','role':'conclusion','guideText':'','guideUrl':url})
     return {'schema':1,'week':monday.isoformat(),'label':label,'source':url,'parts':out,'meeting':{**songs,'middleSongPosition':'living'}}
-def main():
-    today=dt.date.today();anchor=today-dt.timedelta(days=today.weekday());start=anchor.month if anchor.month%2 else anchor.month-1;weeks={}
-    for offset in [0,2]:
+def warn(message):
+    print('::warning::'+message)
+def collect_weeks(today):
+    anchor=today-dt.timedelta(days=today.weekday());start=anchor.month if anchor.month%2 else anchor.month-1;weeks={}
+    for offset in [-2,0,2]:
         m=start+offset;year=anchor.year+(m-1)//12;m=(m-1)%12+1
         index=f'{BASE}/es/biblioteca/guia-actividades-reunion-testigos-jehova/{MONTHS[m-1]}-{MONTHS[m]}-{year}-mwb/'
         try:page=download(index)
-        except Exception:
-            if offset==0:raise
-            continue
+        except Exception as e:
+            warn(f'No se pudo descargar {index}: {e}');continue
         links={urljoin(index,html.unescape(h)) for h in re.findall(r'href=["\']([^"\']+)["\']',page) if 'Vida-y-Ministerio-Cristianos-' in h and 'guia-actividades' in urljoin(index,h)}
         for url in sorted(links):
-            week=parse(download(url),url,year);weeks[week['week']]=week;time.sleep(.25)
-    if not weeks or not any(w<=today.isoformat()<= (dt.date.fromisoformat(w)+dt.timedelta(days=6)).isoformat() for w in weeks):raise ValueError('Current week missing; publication cancelled')
+            try:
+                week=parse(download(url),url,year);weeks[week['week']]=week
+            except Exception as e:
+                warn(f'Semana omitida ({url}): {e}')
+            time.sleep(.25)
+    return weeks
+def main():
+    today=dt.date.today()
+    try:weeks=collect_weeks(today)
+    except Exception as e:
+        warn(f'Guía no disponible: {e}');weeks={}
+    if not any(w<=today.isoformat()<= (dt.date.fromisoformat(w)+dt.timedelta(days=6)).isoformat() for w in weeks):
+        warn('La guía de esta semana no se ha podido validar. Se publica la app igualmente; la guía se cargará en una próxima ejecución.')
     public=ROOT/'_site';public.mkdir(exist_ok=True)
     for p in ROOT.iterdir():
         if p.is_file() and p.suffix in ['.html','.js','.css','.json','.svg','.webmanifest','.png']:shutil.copy2(p,public/p.name)
     dest=public
+    if not weeks:
+        print('App publicada sin guía nueva (se mantiene el índice del repositorio).');return
     for key,week in weeks.items():(dest/('guide-'+key+'.json')).write_text(json.dumps(week,ensure_ascii=False),encoding='utf-8')
     (dest/'guide-index.json').write_text(json.dumps({'schema':1,'updated':dt.datetime.now(dt.timezone.utc).isoformat(),'weeks':[{'week':w,'label':v['label']} for w,v in sorted(weeks.items())]},ensure_ascii=False),encoding='utf-8')
     print(f'Validated {len(weeks)} weeks from jw.org; Pages artifact ready.')

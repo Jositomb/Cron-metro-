@@ -168,3 +168,6 @@ body.has-action-bar .back-to-current{bottom:calc(96px + env(safe-area-inset-bott
   padding:12px 18px;border-radius:14px;background:#293b38;color:#fff;font-size:15px;font-weight:600;box-shadow:0 10px 30px #0004;text-align:center}
 .v54-toast[hidden]{display:none}
 body.has-back-to-current #runningStrip,body.has-back-to-current .consulting-label{display:none!important}
+
+/* v56 · Inicio limpio: sin avisos de «continuar» en las tarjetas */
+.portal-card .session-status,.continue-meeting{display:none!important}

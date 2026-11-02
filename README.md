@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 55
+# Mi Presidencia · versión 56
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,13 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v55**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v56**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Corrección de la v56 (importante)
+- **Por qué no llegaban las versiones nuevas:** la publicación de GitHub descarga antes la guía de jw.org y, si no podía leer la del bimestre actual, cancelaba toda la publicación, también la de la app. Desde el lunes 2 de noviembre necesita la guía de noviembre-diciembre, así que las v54 y v55 no llegaron a publicarse.
+- **Corregido** en `update-guide.py`: la app se publica siempre. La guía se añade solo si se ha podido leer (también se intenta con la del bimestre anterior). Si falla, en Actions sale un aviso amarillo, no un error rojo.
+- **Inicio limpio:** ya no aparecen «Continuar mi reunión», «Preparación guardada · continuar» ni «Reunión en curso · continuar» en la pantalla de inicio.
 
 ## Novedades de la v55 · el TOTAL desde el principio
 - **«Empezar reunión».** Antes de empezar, la barra de abajo (en Dirigir) muestra «Empezar reunión · Canción y oración inicial». Pone en marcha solo el reloj TOTAL, que así cuenta desde la canción.
