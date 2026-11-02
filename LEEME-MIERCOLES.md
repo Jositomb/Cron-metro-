@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 53
+# Mi Presidencia · versión 54
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -62,3 +62,8 @@ En Preparar, toca «Avisar» junto al nombre cuando hayas avisado a esa persona:
 
 ## Resaltar la lección (v53)
 Pega el texto de la lección en la parte del estudiante y desliza el Apple Pencil sobre las ideas clave. Elige el color con los círculos. Toca un resaltado para quitarlo. Sin Pencil, activa «Con el dedo».
+
+## Si te pierdes (v54)
+- Pulsa el botón oscuro «↩ Volver a…» de abajo: te lleva a la asignación en curso.
+- O toca el nombre en la barra inferior.
+- Si pulsaste algo por error, usa «Deshacer».

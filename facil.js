@@ -214,14 +214,14 @@
     let start=null;
     const blocked=t=>t.closest?.('canvas,textarea,input,select,.ink-pad,[contenteditable],.lesson-inline-text,dialog');
     view.addEventListener('touchstart',e=>{
-      if(!directing()||e.touches.length!==1||blocked(e.target)){start=null;return}
+      if(!directing()||!document.body.classList.contains('swipe-on')||e.touches.length!==1||blocked(e.target)){start=null;return}
       const t=e.touches[0];start={x:t.clientX,y:t.clientY,at:Date.now()};
     },{passive:true});
     view.addEventListener('touchend',e=>{
       if(!start)return;
       const t=e.changedTouches[0],dx=t.clientX-start.x,dy=t.clientY-start.y,quick=Date.now()-start.at<700;
       start=null;
-      if(!quick||Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.8)return;
+      if(!quick||Math.abs(dx)<110||Math.abs(dx)<Math.abs(dy)*2.5)return;
       const i=viewedIndex();
       if(i<0)return;
       const to=dx<0?i+1:i-1;

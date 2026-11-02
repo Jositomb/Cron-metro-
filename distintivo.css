@@ -156,3 +156,15 @@ body.mark-finger-on .lesson-inline-text.markable{touch-action:none;-webkit-user-
 .mark-undo:disabled{opacity:.4}
 .directing-view .mark-toolbar{display:none}
 body.atril-oscuro .lesson-mark{filter:none}
+
+/* ---------- v54 · No perderse ---------- */
+.back-to-current{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:61;max-width:calc(100vw - 32px);
+  min-height:48px;padding:0 20px;border-radius:24px;border:0!important;background:#1f4f57!important;color:#fff!important;font-size:15px;font-weight:700;
+  box-shadow:0 8px 24px #1f4f5755!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.back-to-current[hidden]{display:none}
+body.has-action-bar .back-to-current{bottom:calc(96px + env(safe-area-inset-bottom))}
+@media (max-width:560px){body.has-action-bar .back-to-current{bottom:calc(128px + env(safe-area-inset-bottom));font-size:14px}}
+.v54-toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:1200;max-width:calc(100vw - 32px);
+  padding:12px 18px;border-radius:14px;background:#293b38;color:#fff;font-size:15px;font-weight:600;box-shadow:0 10px 30px #0004;text-align:center}
+.v54-toast[hidden]{display:none}
+body.has-back-to-current #runningStrip,body.has-back-to-current .consulting-label{display:none!important}

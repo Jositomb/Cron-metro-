@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 53
+# Mi Presidencia · versión 54
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,16 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v53**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v54**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v54 · que no te pierdas
+- **Deslizar entre asignaciones viene desactivado.** Un roce lateral ya no te cambia de tarjeta. Si lo quieres, actívalo en Opciones › Durante la reunión › Deslizar entre asignaciones. Aun así, pide un deslizamiento claro.
+- **«↩ Volver a…» siempre a mano.** Con la reunión en marcha, si consultas otra tarjeta aparece un botón fijo abajo que te devuelve a la asignación en curso (o a la siguiente).
+- **El gesto «atrás» de Safari no te saca de la reunión** mientras está en marcha; avisa de que sigues en ella. Desde el icono de la pantalla de inicio ese gesto no existe.
+- **«‹ Inicio» pregunta** si la reunión está en marcha (los relojes nunca se detienen al salir).
+- **Iniciar fuera de orden pide confirmación:** si con la reunión en marcha pulsas «Iniciar asignación» en una tarjeta que no es la siguiente, pregunta antes.
+- Recuerda: la barra inferior sigue siempre el orden del programa, y «Deshacer» revierte el último cambio de cronómetro.
 
 ## Novedades de la v53
 - **Resaltar la lección con el Apple Pencil.** En las partes de estudiantes, desliza el Pencil sobre el texto de la lección que has pegado y queda resaltado como con un rotulador, ajustado a palabras completas. Hay tres colores (amarillo, verde y rosa). Toca un resaltado para quitarlo; tienes también «Deshacer» y «Quitar todo».
