@@ -171,3 +171,8 @@ body.has-back-to-current #runningStrip,body.has-back-to-current .consulting-labe
 
 /* v56 · Inicio limpio: sin avisos de «continuar» en las tarjetas */
 .portal-card .session-status,.continue-meeting{display:none!important}
+
+/* v57 · En Dirigir hay espacio al final para subir la siguiente asignación y que se quede ahí
+   (antes la página cabía justa y el iPad «rebotaba» devolviéndola abajo). */
+body.directing-view main{padding-bottom:calc(92vh + env(safe-area-inset-bottom))!important}
+.atril-next .next-intro{display:block;margin-top:8px;font-family:var(--serif);font-size:calc(var(--outline-font,18px) + 1px);line-height:1.45;color:#293b38;text-align:left;font-weight:400;white-space:normal}

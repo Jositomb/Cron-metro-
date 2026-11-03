@@ -94,7 +94,17 @@
         box.classList.toggle('already-started',p.started!==null||p.done||value(p)>0);
       });
     }
-    paint();heartbeat(paint,1000);
+    // v57 · La tarjeta «Después» muestra también la frase para presentar la siguiente parte.
+    function paintNext(){
+      const card=document.querySelector('.atril-next');if(!card)return;
+      const i=state.parts.findIndex(p=>p.id===sectionViewedId)+1,p=state.parts[i];
+      let line=card.querySelector('.next-intro');
+      const text=p?((p.presentation||'').trim()||transitionFor(i)):'';
+      if(!text){line?.remove();return}
+      if(!line){line=el('span','next-intro');card.append(line)}
+      if(line.textContent!==text)line.textContent=text;
+    }
+    paint();paintNext();heartbeat(paint,1000);heartbeat(paintNext,500);
   });
 
   /* ================= 2. Ayuda para recuperar tiempo ================= */

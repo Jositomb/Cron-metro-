@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 56
+# Mi Presidencia · versión 57
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,12 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v56**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v57**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v57
+- **La pantalla ya no rebota en Dirigir.** En el iPad, la página de Dirigir cabía justa en la pantalla: al subirla para ver la siguiente asignación, el iPad la devolvía abajo. Ahora hay espacio al final y la tarjeta «Después» se puede subir hasta arriba y se queda ahí.
+- **«Después» muestra la frase para presentar** la siguiente parte (la tuya o la sugerida), para leerla con antelación sin abrir nada.
 
 ## Corrección de la v56 (importante)
 - **Por qué no llegaban las versiones nuevas:** la publicación de GitHub descarga antes la guía de jw.org y, si no podía leer la del bimestre actual, cancelaba toda la publicación, también la de la app. Desde el lunes 2 de noviembre necesita la guía de noviembre-diciembre, así que las v54 y v55 no llegaron a publicarse.
