@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 58
+# Mi Presidencia · versión 59
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,13 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v58**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v59**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v59
+- **Nombres en rojo** y más grandes: participantes en la cabecera de cada parte, y presidente, oraciones, acompañante y lector. En el fin de semana, discursante, conductor y lector.
+- **Estudiante y acompañante juntos:** «Ana López y María Ruiz» en la cabecera y en la barra de abajo. Con la preparación bloqueada no se repite el acompañante más abajo.
+- **La siguiente parte se abre por arriba.** Al pulsar Fin o «Fin del consejo», la siguiente se abre con su título y su cronómetro a la vista, justo debajo de la franja fija. Antes podía quedarse a media tarjeta (en el consejo), porque solo se desplazaba lo mínimo y porque se recuperaba la posición de lectura de la preparación. Durante la reunión ya no se recupera esa posición.
 
 ## Novedades de la v58 · tras la primera reunión real
 - **Se quita el modo Dirigir.** Hay una sola vista: se ven todas las secciones y se va abriendo la parte que toca; al pasar a la siguiente, la anterior se cierra.

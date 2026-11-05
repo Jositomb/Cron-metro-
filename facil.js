@@ -83,7 +83,7 @@
     info.onclick=()=>{
       if(weekday){
         const i=Number.isInteger(current?.index)?current.index:state.focusIndex;
-        if(Number.isInteger(i)&&sectionRows[i]){openSectionRow(i);updateSections();sectionRows[i].card.scrollIntoView?.({block:'start',behavior:'auto'})}
+        if(Number.isInteger(i)&&sectionRows[i]){openSectionRow(i);updateSections();scrollCardTop(sectionRows[i].card)}
       }else{
         const card=document.getElementById((current?.weekendId||'talk')+'Card');
         if(card){card.open=true;card.scrollIntoView?.({block:'start',behavior:'auto'})}
@@ -233,7 +233,7 @@
       if(!state.parts[to]||!sectionRows[to])return;
       openSectionRow(to);
       updateSections();
-      sectionRows[to].card.scrollIntoView?.({block:'start',behavior:'auto'});
+      scrollCardTop(sectionRows[to].card);
       const card=sectionRows[to].card;
       card.classList.remove('swipe-in-left','swipe-in-right');
       void card.offsetWidth;

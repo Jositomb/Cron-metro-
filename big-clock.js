@@ -5,6 +5,7 @@
   const weekendPage=typeof weekendValidate==='function';
   if(!weekday&&!weekendPage)return;
   const mmss=ms=>{const s=Math.floor(Math.max(0,ms)/1000);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+  const withCompanion=x=>x&&x.participant?x.participant+(x.companion?' y '+x.companion:''):'';
   function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n}
 
   const box=el('div','bigclock');
@@ -73,7 +74,7 @@
       const v=Number.isInteger(opts.viewIndex)?state.parts[opts.viewIndex]:null;
       if(v&&!busy&&opts.viewIndex!==state.focusIndex&&!v.done){
         const ve=value(v,now);
-        return {phase:ve>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,opts.viewIndex),who:v.participant||'',limit:v.min*60000,elapsed:ve,running:false,
+        return {phase:ve>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,opts.viewIndex),who:withCompanion(v),limit:v.min*60000,elapsed:ve,running:false,
           primary:ve>0?'Continuar':'Iniciar'+(v.participant?' a '+v.participant:''),intent:'start',act:()=>startPart(opts.viewIndex),canPause:false,next:''};
       }
       const i=Number.isInteger(state.focusIndex)&&state.parts[state.focusIndex]?state.focusIndex:null;
@@ -85,10 +86,10 @@
           index:null,primary:'Empezar reunión',intent:'start',act:()=>window.startWholeMeeting?.(),canPause:false,next:n?'Después: '+numberedPartTitle(state.parts,nextI??0):'',startMeeting:true};
         if(state.total.started!==null){
           const lead=(state.leadInMin||0)*60000,t=value(state.total,now);
-          return {phase:'CANCIÓN Y ORACIÓN · después',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:n?.participant||'',limit:lead,elapsed:Math.min(t,lead||t),running:true,
+          return {phase:'CANCIÓN Y ORACIÓN · después',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:withCompanion(n),limit:lead,elapsed:Math.min(t,lead||t),running:true,
             index:nextI??0,primary:n?'Iniciar'+(n.participant?' a '+n.participant:''):'',intent:'start',act:()=>startPart(nextI??0),canPause:false,next:'',sub:'Reunión: '+mmss(t)};
         }
-        return {phase:'PREPARADA',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:n?.participant||'',limit:(n?.min||0)*60000,elapsed:0,running:false,
+        return {phase:'PREPARADA',title:n?numberedPartTitle(state.parts,nextI??0):'Reunión',who:withCompanion(n),limit:(n?.min||0)*60000,elapsed:0,running:false,
           index:nextI??0,primary:n?'Iniciar':'',intent:'start',act:()=>startPart(nextI??0),canPause:false,next:''};
       }
       const p=state.parts[i],elapsed=value(p,now),counselOn=p.done&&p.after?.started!==null,
@@ -97,14 +98,14 @@
       const nextText=n?'Después: '+numberedPartTitle(state.parts,nextI)+(n.participant?' · '+n.participant:''):'Después: canción final y oración';
       if(p.done){
         const t=value(p.after,now);
-        if(counsel&&counselOn)return {phase:'CONSEJO',title:numberedPartTitle(state.parts,i),who:p.participant||'',limit:p.adviceMin*60000,elapsed:t,running:true,
+        if(counsel&&counselOn)return {phase:'CONSEJO',title:numberedPartTitle(state.parts,i),who:withCompanion(p),limit:p.adviceMin*60000,elapsed:t,running:true,
           index:i,warnAt:15000,primary:'Finalizar consejo',intent:'finish',act:()=>finishCounsel(i),canPause:false,next:nextText,sub:'Asignación: '+mmss(elapsed)};
-        if(n)return {phase:'SIGUIENTE',title:numberedPartTitle(state.parts,nextI),who:n.participant||'',index:nextI,limit:n.min*60000,elapsed:0,running:false,
+        if(n)return {phase:'SIGUIENTE',title:numberedPartTitle(state.parts,nextI),who:withCompanion(n),index:nextI,limit:n.min*60000,elapsed:0,running:false,
           primary:'Iniciar'+(n.participant?' a '+n.participant:''),intent:'start',act:()=>startPart(nextI),canPause:false,next:'Anterior: '+p.title+' · '+mmss(elapsed)};
         return {phase:'FIN DEL PROGRAMA',title:'Canción final y oración',who:'',limit:0,elapsed:value(state.total,now),running:state.total.started!==null,
           primary:state.total.started!==null?'Finalizar reunión':'',intent:'finish',act:()=>{shut();$('stopTotal').onclick()},canPause:false,next:''};
       }
-      return {phase:p.started!==null?'EN CURSO':elapsed>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,i),who:p.participant||'',index:i,limit:p.min*60000,elapsed,running:p.started!==null,
+      return {phase:p.started!==null?'EN CURSO':elapsed>0?'EN PAUSA':'PREPARADA',title:numberedPartTitle(state.parts,i),who:withCompanion(p),index:i,limit:p.min*60000,elapsed,running:p.started!==null,
         primary:p.started!==null?'Finalizar asignación':elapsed>0?'Continuar':'Iniciar',intent:p.started!==null?'finish':'start',act:()=>p.started!==null?finishPart(i):startPart(i),
         canPause:p.started!==null,doPause:()=>pausePart(i),next:nextText};
     }

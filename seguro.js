@@ -75,7 +75,7 @@
     back.onclick=()=>{
       const t=Number(back.dataset.index);if(!sectionRows[t])return;
       openSectionRow(t);updateSections();
-      sectionRows[t].card.scrollIntoView?.({block:'start',behavior:'auto'});
+      scrollCardTop(sectionRows[t].card);
       paint();
     };
     paint();heartbeat(paint,400);

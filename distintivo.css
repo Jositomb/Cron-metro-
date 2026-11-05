@@ -209,3 +209,13 @@ body.has-action-bar main{padding-bottom:calc(75vh + env(safe-area-inset-bottom))
   .assignment-controls>button.v58-start,.assignment-controls>button.v58-end{width:auto!important;flex:1 1 calc(50% - 4px);min-width:0}
   .assignment-controls>button:not(.v58-start):not(.v58-end){width:auto!important;min-width:0!important;white-space:normal!important;line-height:1.15;flex:1 1 calc(50% - 4px);min-height:38px!important;font-size:13px!important;padding:0 8px!important}
 }
+
+/* ================= v59 · Nombres bien visibles ================= */
+:root{--name-red:#a3283a}
+.assignment-meta:not(.is-placeholder){color:var(--name-red)!important;font-weight:700!important;font-size:19px!important;letter-spacing:0}
+section.outline-block:is([data-outline-key=chairman],[data-outline-key=openingPrayer],[data-outline-key=closingPrayer],[data-outline-key=companion],[data-outline-key=reader]) .outline-value:not(.is-placeholder){color:var(--name-red)!important;font-weight:700!important}
+.weekend-detail:is(.weekend-detail-speaker,.weekend-detail-conductor,.weekend-detail-reader,.weekend-detail-nextSpeaker)>div{color:var(--name-red);font-weight:700;font-size:1.1em}
+.action-phase{color:var(--v48-muted)}
+/* El acompañante ya aparece junto al estudiante: con la preparación bloqueada no se repite abajo */
+.prep-locked section.outline-block[data-outline-key=companion]{display:none!important}
+body.atril-oscuro .assignment-meta:not(.is-placeholder){color:#a3283a!important}

@@ -80,6 +80,7 @@
         const p=state.parts[i];if(!p)return;
         if(state.parts.some((x,j)=>j!==i&&x.started!==null)&&!confirm('¿Terminar la asignación en curso e iniciar esta?'))return;
         startPart(i);
+        setTimeout(paint,0);
       });
       end.onclick=()=>guarded(()=>{
         const p=state.parts[i];if(!p)return;
@@ -91,6 +92,7 @@
           finishCounsel(i);
           previewNextPart();
         }
+        setTimeout(paint,0);
       });
       controls.prepend(start,end);
       return {start,end};

@@ -47,3 +47,15 @@ function roundInk(ink){
   if(!Array.isArray(ink))return ink;
   return ink.map(s=>Array.isArray(s)?s.map(p=>Array.isArray(p)?[Math.round(p[0]*1e4)/1e4,Math.round(p[1]*1e4)/1e4]:p):s);
 }
+
+// v59 · Lleva una tarjeta a la parte de arriba de la pantalla, justo debajo de la franja fija,
+// para ver su título y su cronómetro (antes solo se desplazaba lo mínimo y quedaba a media tarjeta).
+function scrollCardTop(card){
+  if(!card||document.visibilityState!=='visible')return;
+  const go=()=>{
+    const bar=document.querySelector('.presidencia-bar');
+    const offset=(bar?bar.offsetHeight:0)+12;
+    window.scrollTo({top:Math.max(0,window.scrollY+card.getBoundingClientRect().top-offset),behavior:'auto'});
+  };
+  go();requestAnimationFrame(go);setTimeout(go,120);
+}
