@@ -67,6 +67,7 @@
     }
     return (thanks+enter+s).replace(/\s+/g,' ').trim();
   }
+  if(weekday)window.transitionFor=i=>{try{return transitionFor(i)}catch(e){return ''}};
   if(weekday)safe('frases',()=>{
     function paint(){
       sectionRows.forEach((r,i)=>{

@@ -54,7 +54,7 @@ function scrollCardTop(card){
   if(!card||document.visibilityState!=='visible')return;
   const go=()=>{
     const bar=document.querySelector('.presidencia-bar');
-    const offset=(bar?bar.offsetHeight:0)+12;
+    const offset=(bar&&getComputedStyle(bar).position==='sticky'?bar.offsetHeight:0)+12;
     window.scrollTo({top:Math.max(0,window.scrollY+card.getBoundingClientRect().top-offset),behavior:'auto'});
   };
   go();requestAnimationFrame(go);setTimeout(go,120);

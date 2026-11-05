@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 59
+# Mi Presidencia · versión 60
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,22 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v59**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v60**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v60 · más clara
+**Más fácil de usar**
+- **Sin repeticiones.** Desaparece la franja de arriba «Viendo / En curso». La barra de abajo es el resumen de la reunión, y arriba solo quedan el candado y Programa.
+- **Solo «Inicio» y «Fin» a la vista**, bien grandes. Pausa, Deshacer, Reiniciar y Reloj grande están en el botón «⋯».
+- **El reloj muestra en grande lo que queda** («QUEDAN 02:57», o «EXCESO +00:15») y debajo «Llevas 00:03 de 3 min». También en el fin de semana.
+- **«Empezar reunión» bloquea sola la preparación.** Si necesitas cambiar algo, toca «🔒 Bloqueada».
+- **«A continuación»** dentro de la parte actual trae la frase para presentar la siguiente.
+
+**Apariencia**
+- La parte actual es una tarjeta elevada con el color de su sección; las demás, una lista fina de una línea con el nombre en rojo.
+- Las partes terminadas salen atenuadas y con su tiempo real («✓ 10:24»).
+- Cabeceras de sección más finas y sin cajas dentro de cajas.
+- Reloj más grande (156 px en iPad), con dígitos grandes y el anillo en el color de la sección.
 
 ## Novedades de la v59
 - **Nombres en rojo** y más grandes: participantes en la cabecera de cada parte, y presidente, oraciones, acompañante y lector. En el fin de semana, discursante, conductor y lector.

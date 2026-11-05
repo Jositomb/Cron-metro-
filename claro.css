@@ -1,0 +1,100 @@
+/* v60 · Más claro: menos repeticiones, la parte actual destacada y el resto como lista fina.
+   Mismo beige cálido, verde azulado y colores de sección. */
+:root{--tone-opening:#28666c;--tone-treasures:#46606f;--tone-teaching:#8a6526;--tone-living:#8b4559}
+
+/* ---------- Sin repeticiones: la barra de abajo es el resumen ---------- */
+.presidencia-bar .meeting-locator,#runningStrip,.consulting-label,.atril-next{display:none!important}
+.presidencia-bar{justify-content:flex-end;gap:8px}
+
+/* ---------- Cabeceras de sección más finas ---------- */
+.meeting-section>summary{min-height:40px!important;padding:8px 16px!important;font-size:12px!important;letter-spacing:.12em!important;border-radius:10px!important;margin:14px 0 6px!important}
+
+/* ---------- Partes cerradas: lista fina de una línea ---------- */
+.assignment-card:not([open]){background:transparent!important;border:0!important;border-bottom:1px solid #e1d7c5!important;border-radius:0!important;box-shadow:none!important;margin:0 4px!important;padding:0!important}
+.assignment-card:not([open])>summary{min-height:52px!important;padding:10px 6px!important;display:flex!important;align-items:center!important;gap:12px!important;border:0!important}
+.assignment-card:not([open]) .assignment-heading{display:flex!important;flex-direction:row!important;align-items:baseline!important;flex-wrap:wrap;gap:4px 12px;flex:1;min-width:0}
+.assignment-card:not([open]) .assignment-title{font-size:17px!important;font-weight:600!important;color:#293b38!important}
+.assignment-card:not([open]) .assignment-meta:not(.is-placeholder){font-size:16px!important}
+.assignment-card:not([open]) .assignment-meta.is-placeholder,.assignment-card:not([open]) .notify-toggle{display:none!important}
+.assignment-card:not([open]) .assignment-badge{margin-left:auto;font-size:13px!important;font-weight:600;color:#5a6256;white-space:nowrap;text-align:right}
+.assignment-card.part-done:not([open]){opacity:.55}
+.assignment-card.part-done:not([open]) .assignment-badge{color:#2c654a}
+
+/* ---------- Parte abierta: tarjeta elevada con el color de su sección ---------- */
+.assignment-card[open]{background:#fffaf2!important;border:0!important;border-left:5px solid var(--card-tone,var(--tone-opening))!important;border-radius:18px!important;
+  box-shadow:0 12px 34px #59482b1f,0 1px 0 #fff inset!important;margin:12px 0 18px!important}
+.assignment-card[data-section-tone=treasures]{--card-tone:var(--tone-treasures)}
+.assignment-card[data-section-tone=teaching]{--card-tone:var(--tone-teaching)}
+.assignment-card[data-section-tone=living]{--card-tone:var(--tone-living)}
+.assignment-card[open]>summary{border-bottom:1px solid #eadfcd!important}
+
+/* ---------- Sin cajas dentro de cajas ---------- */
+.assignment-timing{background:transparent!important;border:0!important;box-shadow:none!important}
+.assignment-card[open] .lesson-panel{background:#f6efe2!important;border:0!important;box-shadow:none!important}
+
+/* ---------- Anillo del reloj más grande y dígitos grandes ---------- */
+.assignment-counters>div{width:156px!important;height:156px!important;min-width:156px}
+.assignment-counters>div>strong{font-size:44px!important;letter-spacing:-.02em}
+.assignment-counters>div>small{font-size:11px!important;letter-spacing:.12em!important}
+.assignment-counters>span{font-size:14px!important}
+.tone-ring circle{stroke-width:3.6}
+@media (max-width:560px){
+  .assignment-counters>div{width:128px!important;height:128px!important;min-width:128px}
+  .assignment-counters>div>strong{font-size:36px!important}
+}
+.assignment-card.warning .assignment-counters strong{color:#80580c}
+.assignment-card.over .assignment-counters strong{color:#a13d48}
+
+/* Fin de semana: dígitos grandes igual */
+.weekend-dial strong{font-size:40px!important}
+
+/* ---------- Botón «⋯» con lo secundario ---------- */
+.v60-more{position:relative;display:inline-block}
+.v60-more>summary{list-style:none;display:inline-flex;align-items:center;justify-content:center;min-width:52px;min-height:52px;border-radius:26px;border:1px solid #c8bea9;
+  background:transparent;color:#28666c;font-size:22px;font-weight:700;cursor:pointer;user-select:none}
+.v60-more>summary::-webkit-details-marker{display:none}
+.v60-more[open]>summary{background:#28666c;color:#fff;border-color:#28666c}
+.v60-more-box{position:absolute;right:0;top:calc(100% + 8px);z-index:40;display:flex;flex-direction:column;gap:6px;min-width:190px;padding:10px;border-radius:16px;
+  background:#fffaf2;border:1px solid #d6cbb6;box-shadow:0 14px 34px #59482b33}
+.v60-more-box>button{width:100%!important;justify-content:flex-start!important;min-height:44px!important;border-radius:12px!important;font-size:15px!important;padding:0 12px!important}
+.v60-more-box>button[hidden]{display:none!important}
+.assignment-controls{align-items:center}
+
+/* Inicio y Fin: los protagonistas */
+.assignment-controls>button.v58-start,.assignment-controls>button.v58-end{min-height:56px!important;font-size:18px!important;min-width:120px}
+@media (max-width:560px){
+  .assignment-controls>button.v58-start,.assignment-controls>button.v58-end{flex:1 1 0!important;min-width:0}
+  .assignment-controls>.v60-more{flex:0 0 auto}
+}
+
+/* ---------- «A continuación» con la frase para presentar ---------- */
+.v60-next-intro{margin:6px 0 2px;font-family:var(--serif,Georgia,serif);font-size:calc(var(--outline-font,18px) + 1px);line-height:1.45;color:#293b38}
+.assignment-next{background:#f3efe4;border-radius:14px;padding:12px 16px!important;border:0!important}
+
+/* ---------- Disposición del reloj (ajustada a los tamaños nuevos) ---------- */
+.outline-mode .assignment-counters>div,.outline-mode .advice-dial{flex:0 0 auto!important}
+@media (min-width:561px){
+  .outline-mode .assignment-timing{grid-template-columns:minmax(0,1fr)!important;justify-items:center;gap:12px!important;padding:6px 0!important}
+  .outline-mode .assignment-timing>.part-state{justify-self:center!important}
+  .outline-mode .assignment-counters{grid-column:1!important;grid-row:2!important;margin:0!important;align-items:center!important}
+  .outline-mode .assignment-timing>.assignment-advice{grid-column:1!important;grid-row:2!important}
+  .outline-mode .assignment-timing>.assignment-controls{grid-column:1!important;grid-row:3!important;width:100%;display:flex!important;flex-wrap:nowrap!important;justify-content:center!important;gap:10px!important}
+  .outline-mode .assignment-timing>.preview-hint{grid-row:4!important;justify-self:center}
+  .assignment-controls>button.v58-start,.assignment-controls>button.v58-end{flex:1 1 0!important;min-width:0!important}
+  .outline-mode .assignment-counters>span{max-width:none!important;text-align:center}
+}
+@media (max-width:560px){
+  .outline-mode .assignment-timing{grid-template-columns:128px minmax(0,1fr)!important}
+  .outline-mode .assignment-timing>.assignment-controls{grid-column:1/-1!important;grid-row:3!important;display:flex!important;flex-wrap:nowrap!important;gap:8px!important}
+  .outline-mode .assignment-counters>span{max-width:none!important}
+}
+
+/* ---------- Franja de arriba discreta (ya no repite la parte actual) ---------- */
+.presidencia-bar{position:static!important;background:transparent!important;border:0!important;box-shadow:none!important;min-height:0!important;padding:0!important;margin:0 0 10px!important}
+.v60-more-box{z-index:70}
+.v60-more-box>button{background:transparent!important;border:1px solid #d6cbb6!important;color:#28666c!important;box-shadow:none!important}
+.v60-more-box>button.reset-inline{color:#a13d48!important;border-color:#e3c3c6!important}
+@media (max-width:560px){
+  .v60-more-box{position:fixed;left:12px;right:12px;top:auto;bottom:calc(150px + env(safe-area-inset-bottom));z-index:1100;padding:12px;border-radius:18px;box-shadow:0 18px 50px #2b231a55}
+  .v60-more-box>button{min-height:50px!important;font-size:16px!important}
+}
