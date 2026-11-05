@@ -42,7 +42,7 @@
     }
     let current=null;
     function paint(){
-      const visible=(directing()||(window.meetingRunning&&window.meetingRunning()))&&!document.body.classList.contains('bigclock-open');
+      const visible=!document.body.classList.contains('bigclock-open'); // v58: siempre visible (ya no hay modo Dirigir)
       bar.hidden=!visible;
       document.body.classList.toggle('has-action-bar',visible);
       if(!visible){document.querySelectorAll('.bar-target').forEach(n=>n.classList.remove('bar-target'));return}
@@ -219,7 +219,7 @@
     let start=null;
     const blocked=t=>t.closest?.('canvas,textarea,input,select,.ink-pad,[contenteditable],.lesson-inline-text,dialog');
     view.addEventListener('touchstart',e=>{
-      if(!directing()||!document.body.classList.contains('swipe-on')||e.touches.length!==1||blocked(e.target)){start=null;return}
+      if(!document.body.classList.contains('swipe-on')||e.touches.length!==1||blocked(e.target)){start=null;return}
       const t=e.touches[0];start={x:t.clientX,y:t.clientY,at:Date.now()};
     },{passive:true});
     view.addEventListener('touchend',e=>{

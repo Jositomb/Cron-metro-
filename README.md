@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 57
+# Mi Presidencia · versión 58
 
 Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de semana. Funciona sin conexión y guarda todo en el propio dispositivo.
 
@@ -9,8 +9,16 @@ Cronómetro y bosquejo para presidir la reunión de entre semana y la de fin de 
 1. Antes de nada, exporta una copia desde Opciones › Copia de seguridad.
 2. Sube **todos** los archivos del ZIP a la raíz del repositorio, sustituyendo los anteriores. Respecto a la v45 hay archivos nuevos: `heartbeat.js`, `robust.js`, `big-clock.js`, `facil.js`, `unica.js`, `mejoras.css`, `apariencia.css`, `distintivo.css`, `nueva-version.py` y los iconos `icon-180.png`, `icon-192.png` e `icon-512.png`.
 3. Deja el workflow de GitHub donde está. Espera a que termine la publicación (marca verde en Actions).
-4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v57**.
+4. Cierra todas las ventanas de la aplicación y vuelve a abrirla. En Opciones debe aparecer **v58**.
 5. No borres los datos del navegador: tus preparaciones, programas y trazos se conservan y se convierten solos.
+
+## Novedades de la v58 · tras la primera reunión real
+- **Se quita el modo Dirigir.** Hay una sola vista: se ven todas las secciones y se va abriendo la parte que toca; al pasar a la siguiente, la anterior se cierra.
+- **🔓 Bloquear preparación** (arriba, donde estaba Preparar/Dirigir). Al bloquear se ocultan y se desactivan todos los lápices, «Añadir…», «Avisar», editores y opciones de preparar o borrar, para que no haya sorpresas. Se recuerda en cada dispositivo. Toca «🔒 Bloqueada» para desbloquear.
+- **Cronómetro con «Inicio» y «Fin».** Dos botones claros en cada parte. Al pulsar Fin se abre ya la siguiente parte; en las de estudiantes aparece «Fin del consejo» y, al pulsarlo, se abre la siguiente. En el fin de semana también se llaman Inicio y Fin.
+- **Consejo rápido y colores de subrayado** se ven siempre (estaban ocultos en Dirigir), también con la preparación bloqueada.
+- **Cuaderno del Pencil rehecho:** dibuja solo el tramo nuevo (más fluido), aprovecha todos los puntos del lápiz y admite 20 000 puntos por estudiante (antes 6 000: se llenaba a mitad del consejo y dejaba de escribir). Tus notas anteriores se conservan.
+- La barra de abajo («Empezar reunión», tiempo y siguiente paso) está siempre visible.
 
 ## Novedades de la v57
 - **La pantalla ya no rebota en Dirigir.** En el iPad, la página de Dirigir cabía justa en la pantalla: al subirla para ver la siguiente asignación, el iPad la devolvía abajo. Ahora hay espacio al final y la tarjeta «Después» se puede subir hasta arriba y se queda ahí.

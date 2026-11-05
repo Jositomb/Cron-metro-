@@ -86,9 +86,9 @@
     if(!weekday)return;
     const view=document.getElementById('sectionView');if(!view)return;
     view.addEventListener('click',e=>{
-      const btn=e.target.closest?.('.assignment-controls>button:first-child');
+      const btn=e.target.closest?.('.assignment-controls>.v58-start,.assignment-controls>button:first-child');
       if(!btn||state.total.started===null)return;
-      if(!/^(Iniciar|Continuar)/.test(btn.textContent.trim()))return;
+      if(!/^(Inicio|Iniciar|Continuar)/.test(btn.textContent.trim()))return;
       const card=btn.closest('.assignment-card'),i=sectionRows.findIndex(r=>r.card===card);
       if(i<0)return;
       let expected=null;try{expected=window.MeetingAction?.model()?.index}catch(err){}

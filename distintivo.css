@@ -176,3 +176,36 @@ body.has-back-to-current #runningStrip,body.has-back-to-current .consulting-labe
    (antes la página cabía justa y el iPad «rebotaba» devolviéndola abajo). */
 body.directing-view main{padding-bottom:calc(92vh + env(safe-area-inset-bottom))!important}
 .atril-next .next-intro{display:block;margin-top:8px;font-family:var(--serif);font-size:calc(var(--outline-font,18px) + 1px);line-height:1.45;color:#293b38;text-align:left;font-weight:400;white-space:normal}
+
+/* ================= v58 · Más sencilla ================= */
+/* Sin modo Dirigir: el selector Preparar/Dirigir desaparece y en su lugar está el candado */
+.presidencia-bar .mode-menu{display:none!important}
+.lock-toggle{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #c8bea9!important;background:#f8f1e5!important;color:#28666c!important;font-weight:700;font-size:14px;white-space:nowrap;box-shadow:none!important}
+.lock-toggle[aria-pressed=true]{background:#28666c!important;color:#fff!important;border-color:#28666c!important}
+@media (max-width:520px){.lock-toggle{padding:0 10px;font-size:13px}}
+
+/* Preparación bloqueada: se oculta y desactiva todo lo de editar */
+.prep-locked .inline-part-editor,.prep-locked .outline-empty,.prep-locked .weekend-edit,.prep-locked .editor-extra,
+.prep-locked .lesson-inline-editor,.prep-locked .lesson-inline-text.empty,.prep-locked .empty-toggle,
+.prep-locked section.outline-block.is-empty,.prep-locked .notify-toggle,.prep-locked .intro-use,.prep-locked .touch-edit.is-placeholder,
+.prep-locked .assignment-notes,.prep-locked .notify-menu,.prep-locked #edit,.prep-locked #newMeeting,.prep-locked #guideOpen,.prep-locked #weeksOpen,
+.prep-locked #toolsMenu .clarity-tool,.prep-locked .menu-group-danger{display:none!important}
+.prep-locked .touch-edit{pointer-events:none}
+.prep-locked .touch-edit::after{display:none!important}
+.prep-locked .assignment-meta{font-size:17px!important;font-weight:600!important}
+
+/* Botones Inicio y Fin */
+.v58-hidden{display:none!important}
+.assignment-controls>button.v58-start,.assignment-controls>button.v58-end{min-height:52px!important;min-width:110px;padding:0 20px!important;border-radius:26px!important;font-size:17px!important;font-weight:700!important;
+  display:inline-flex!important;align-items:center;justify-content:center;box-shadow:none!important;border:1px solid #c8bea9!important;background:transparent!important;color:#8a8f84!important}
+.assignment-controls>button.v58-start.is-next{background:#28666c!important;color:#fff!important;border-color:#28666c!important}
+.assignment-controls>button.v58-end.is-live{background:#7d3341!important;color:#fff!important;border-color:#7d3341!important}
+.assignment-controls>.v58-start:disabled,.assignment-controls>.v58-end:disabled{opacity:.55}
+
+/* Espacio al final para poder subir cualquier tarjeta y que se quede (antes solo en Dirigir) */
+body.has-action-bar main{padding-bottom:calc(75vh + env(safe-area-inset-bottom))!important}
+@media (max-width:560px){
+  .assignment-controls{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+  .assignment-controls>button.v58-start,.assignment-controls>button.v58-end{width:auto!important;flex:1 1 calc(50% - 4px);min-width:0}
+  .assignment-controls>button:not(.v58-start):not(.v58-end){width:auto!important;min-width:0!important;white-space:normal!important;line-height:1.15;flex:1 1 calc(50% - 4px);min-height:38px!important;font-size:13px!important;padding:0 8px!important}
+}

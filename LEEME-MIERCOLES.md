@@ -1,4 +1,4 @@
-# Mi Presidencia · versión 57
+# Mi Presidencia · versión 58
 
 ## Actualizar
 Exporta primero una copia de seguridad desde Opciones. Sube los archivos de este ZIP a la raíz del repositorio sustituyendo los anteriores. Mantén el workflow de GitHub en su ruta actual. Espera a que la publicación termine y cierra todas las ventanas de la aplicación antes de abrir de nuevo.
@@ -70,3 +70,9 @@ Pega el texto de la lección en la parte del estudiante y desliza el Apple Penci
 
 ## Al empezar (v55)
 Cuando empiece la canción inicial, pulsa «Empezar reunión» en la barra de abajo. Al terminar la oración, pulsa «Iniciar» para las Palabras de introducción.
+
+## Cómo se usa desde la v58
+1. Prepara la reunión y pulsa «🔓 Bloquear» arriba cuando esté lista.
+2. Al empezar la canción, pulsa «Empezar reunión» en la barra de abajo.
+3. En cada parte: «Inicio» al empezar y «Fin» al terminar. Se abre sola la siguiente.
+4. En las partes de estudiantes, marca el consejo rápido mientras hablan y, tras «Fin», da el consejo y pulsa «Fin del consejo».

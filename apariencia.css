@@ -97,7 +97,7 @@ body.has-action-bar .bigclock{z-index:1000}
 
 /* ---------- Deslizar entre asignaciones ---------- */
 .swipe-hint{display:none;margin:0 0 8px;font-size:13px;color:var(--v48-muted);text-align:center}
-@media (hover:none){.directing-view.swipe-on .swipe-hint{display:block}}
+@media (hover:none){.swipe-on .swipe-hint{display:block}}
 @keyframes v48-in-left{from{transform:translateX(28px);opacity:.4}to{transform:none;opacity:1}}
 @keyframes v48-in-right{from{transform:translateX(-28px);opacity:.4}to{transform:none;opacity:1}}
 .swipe-in-left{animation:v48-in-left .22s ease-out}
